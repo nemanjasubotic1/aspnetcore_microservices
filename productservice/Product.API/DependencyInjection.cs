@@ -27,7 +27,7 @@ public static class DependencyInjection
         {
             options.Connection(configuration.GetConnectionString("DefaultConnection")!);
 
-            options.Schema.For<Category>().Identity(l => l.Id);
+            options.Schema.For<Category>().Identity(l => l.Id).SoftDeleted();
             options.Schema.For<Product>().Identity(l => l.Id).Index(l => l.CategoryId);
 
         }).UseLightweightSessions();

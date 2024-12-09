@@ -5,5 +5,6 @@ namespace ProductCategory.API.Data;
 
 public interface ICategoryRepository : IRepository<Category>
 {
-    Task Update(Guid categoryId, Category category);
+    Task Update(Category category);
+    Task<List<Category>> GetAllCategoriesWithProduts(CancellationToken cancellationToken, int? pageNumber = null, int? pageSize = null);
 }

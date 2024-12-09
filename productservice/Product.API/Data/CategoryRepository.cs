@@ -13,14 +13,28 @@ public class CategoryRepository : Repository<Category>, ICategoryRepository
         _session = session;
     }
 
-    public async Task Update(Guid categoryId, Category category)
+    public async Task<List<Category>> GetAllCategoriesWithProduts(CancellationToken cancellationToken, int? pageNumber = null, int? pageSize = null)
     {
-        var categoryFromDb = await _session.LoadAsync<Category>(categoryId);
+        var categories = await GetAllAsync<Category>(pageNumber ?? 1, pageSize ?? 1, cancellationToken);
 
-        categoryFromDb.Name = category.Name;
-        categoryFromDb.Description = category.Description;
+        var allProducts = await _session.Query<Product>().ToListAsync(cancellationToken);
 
-        _session.Store(categoryFromDb);
+        var productDictionary = allProducts.GroupBy(l => l.CategoryId).ToDictionary(l => l.Key, l => l.ToList());
+
+        foreach (var category in categories)
+        {
+            if (productDictionary.TryGetValue(category.Id, out var products))
+            {
+                category.Products.AddRange(products);
+            }
+        }
+
+        return categories.ToList();
+    }
+
+    public async Task Update(Category category)
+    {
+        _session.Update(category);
         await _session.SaveChangesAsync();
     }
 }

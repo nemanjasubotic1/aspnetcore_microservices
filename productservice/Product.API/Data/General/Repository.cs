@@ -1,9 +1,10 @@
 ﻿using Marten;
-using System.Linq.Expressions;
+using Marten.Pagination;
+using ProductCategory.API.Models;
 
 namespace ProductCategory.API.Data.General;
 
-public class Repository<T> : IRepository<T> where T : class
+public class Repository<T> : IRepository<T> where T : IBaseModel
 {
     private readonly IDocumentSession _session;
     public Repository(IDocumentSession session)
@@ -17,33 +18,28 @@ public class Repository<T> : IRepository<T> where T : class
         await _session.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<IEnumerable<T>> GetAllAsync<TInclude>(Expression<Func<T, object>>? includeExpression = null, List<TInclude>? includeList = null, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<T>> GetAllAsync<TInclude>(int? pageNumber = null, int? pageSize = null, CancellationToken cancellationToken = default) 
     {
-        var query = _session.Query<T>();
+        var listOfT = _session.Query<T>();
 
-        if (includeExpression != null && includeList != null)
-        {
-            query = query.Include(includeExpression, includeList);    
-        }
-  
-        return await query.ToListAsync(cancellationToken);
+        return await listOfT.ToPagedListAsync(pageNumber ?? 1, pageSize ?? 1, cancellationToken);
     }
 
-    public async Task<T> GetAsync<TInclude>(Expression<Func<T, bool>> filter, Expression<Func<T, object>>? includeExpression = null, List<TInclude>? includeList = null, CancellationToken cancellationToken = default)
+    public async Task<T> GetAsync(Guid Id, CancellationToken cancellationToken = default)
     {
-        var query = _session.Query<T>().Where(filter);
-
-        if (includeExpression != null && includeList != null)
+        var query = await _session.LoadAsync<T>(Id, cancellationToken);
+      
+        if (query == null)
         {
-            query = query.Include(includeExpression, includeList);
+            return default(T);
         }
 
-        return await query.FirstOrDefaultAsync();
+        return query;
     }
 
-    public async Task RemoveAsync(T entity, CancellationToken cancellationToken = default)
+    public async Task RemoveAsync(Guid Id, CancellationToken cancellationToken = default)
     {
-       _session.Delete<T>(entity);
+       _session.Delete<T>(Id);
         await _session.SaveChangesAsync(cancellationToken);
     }
 }

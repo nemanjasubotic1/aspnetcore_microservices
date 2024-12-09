@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
+﻿using GeneralUsing.Exceptions.CustomExceptionHandlers;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Xml.Linq;
 
 namespace GeneralUsing.Exceptions
 {
@@ -20,11 +22,17 @@ namespace GeneralUsing.Exceptions
 
             (string Detail, string Title, int StatusCode) = exception switch
             {
+                NotFoundException =>
+                (
+                    exception.Message,
+                    exception.GetType().Name,
+                    httpContext.Response.StatusCode = StatusCodes.Status400BadRequest
+                ),
                 _ =>
                 (
-                exception.Message,
-                exception.GetType().Name,
-                httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError
+                    exception.Message,
+                    exception.GetType().Name,
+                    httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError
                 )
             };
 

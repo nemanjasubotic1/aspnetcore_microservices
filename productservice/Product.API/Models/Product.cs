@@ -1,6 +1,6 @@
 ﻿namespace ProductCategory.API.Models;
 
-public class Product
+public class Product : IBaseModel
 {
     public Guid Id { get; set; }
     public string Name { get; set; } = string.Empty;
