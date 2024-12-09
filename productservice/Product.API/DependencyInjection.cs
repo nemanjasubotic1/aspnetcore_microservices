@@ -35,6 +35,7 @@ public static class DependencyInjection
         services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 
         services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<IProductRepository, ProductRepository>();
 
         services.AddExceptionHandler<CustomExceptionHandler>();
 

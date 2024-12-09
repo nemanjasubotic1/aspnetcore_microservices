@@ -22,7 +22,7 @@ public class CreateCategoryEndpoint : ICarterModule
 
             var response = result.Adapt<CreateCategoryResponse>();
 
-            return Results.Created($"/product/{response.Id}", response);
+            return Results.Created($"/category/{response.Id}", response);
         });
     }
 }

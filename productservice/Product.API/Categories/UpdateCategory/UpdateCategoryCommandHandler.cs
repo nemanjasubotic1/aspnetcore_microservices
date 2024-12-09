@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 using GeneralUsing.CQRS;
+using GeneralUsing.Exceptions.CustomExceptionHandlers;
 using Mapster;
 using ProductCategory.API.Data;
-using ProductCategory.API.Exceptions;
 using ProductCategory.API.Models;
 
 namespace ProductCategory.API.Categories.UpdateCategory;
@@ -28,7 +28,7 @@ public class UpdateCategoryCommandHandler(ICategoryRepository categoryRepository
 
         if (categoryFromDb == null)
         {
-            throw new CategoryNotFoundException($"Category with id {request.Id} dont exist.");
+            throw new NotFoundException($"Entity with id {request.Id} dont exist.");
         }
 
         var category = request.Adapt<Category>();

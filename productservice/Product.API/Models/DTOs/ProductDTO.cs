@@ -1,13 +1,13 @@
-﻿namespace ProductCategory.API.Models;
+﻿namespace ProductCategory.API.Models.DTOs;
 
-public class Product : IBaseModel
+public class ProductDTO
 {
     public Guid Id { get; set; }
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
-    public decimal Price{ get; set; }
+    public decimal Price { get; set; }
     public string? ImageUrl { get; set; }
     public DateOnly YearOfProduction { get; set; }
     public Guid CategoryId { get; set; }
-    public string Category { get; set; }
+    public Category Category { get; set; }
 }
