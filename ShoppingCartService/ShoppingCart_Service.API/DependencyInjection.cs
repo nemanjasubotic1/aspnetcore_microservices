@@ -2,6 +2,7 @@
 using FluentValidation;
 using GeneralUsing.Exceptions;
 using GeneralUsing.MediatorPipelineBehaviors;
+using Integration.AzureServiceBusSender;
 using Marten;
 using ShoppingCart_Service.API.Data;
 using ShoppingCart_Service.API.Models;
@@ -44,6 +45,8 @@ public static class DependencyInjection
         });
        
         services.AddExceptionHandler<CustomExceptionHandler>();
+
+        services.AddScoped<IMessageService, MessageService>();
 
         return services;
     }

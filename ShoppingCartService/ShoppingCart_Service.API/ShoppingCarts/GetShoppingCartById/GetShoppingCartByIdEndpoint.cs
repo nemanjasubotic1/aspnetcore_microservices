@@ -1,5 +1,4 @@
 ﻿using Carter;
-using GeneralUsing.CQRS;
 using Mapster;
 using MediatR;
 using ShoppingCart_Service.API.Models.DTOs;

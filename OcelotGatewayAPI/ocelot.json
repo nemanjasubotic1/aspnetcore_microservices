@@ -101,6 +101,46 @@
       ],
       "UpstreamPathTemplate": "/product/{id}",
       "UpstreamHttpMethod": [ "Delete" ]
+    },
+
+    // Shopping Cart
+
+
+    {
+      "DownstreamPathTemplate": "/shoppingcart/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5011
+        }
+      ],
+      "UpstreamPathTemplate": "/shoppingcart/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/shoppingcart",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5011
+        }
+      ],
+      "UpstreamPathTemplate": "/shoppingcart",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/shoppingcart/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5011
+        }
+      ],
+      "UpstreamPathTemplate": "/shoppingcart/{id}",
+      "UpstreamHttpMethod": [ "Delete" ]
     }
 
   ],
