@@ -16,7 +16,7 @@ public class GetAllCategoriesQueryHandler(ICategoryRepository categoryRepository
     public async Task<GetAllCategoriesResult> Handle(GetAllCategoriesQuery request, CancellationToken cancellationToken)
     {
 
-        var listOfCategories = await categoryRepository.GetAllCategoriesWithProduts(cancellationToken, request.pageNumber, request.pageSize);
+        var listOfCategories = await categoryRepository.GetAllCategoriesWithProducts(cancellationToken, request.pageNumber, request.pageSize);
 
         return new GetAllCategoriesResult(listOfCategories);
     }

@@ -4,12 +4,13 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>10b2b985-4c7c-40a0-b49e-540541738b3a</UserSecretsId>
+    <UserSecretsId>4e1075c0-06f9-4b7c-ac01-c70462398673</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Carter" Version="8.2.0" />
+    <PackageReference Include="Carter" Version="8.1.0" />
     <PackageReference Include="Marten" Version="7.33.3" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.10" />
     <PackageReference Include="Scrutor" Version="5.0.2" />
   </ItemGroup>
 

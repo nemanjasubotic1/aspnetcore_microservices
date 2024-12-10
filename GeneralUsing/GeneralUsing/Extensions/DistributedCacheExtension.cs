@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
-using System.Text.Json.Serialization;
 
 namespace GeneralUsing.Extensions;
 public static class DistributedCacheExtension
@@ -10,11 +9,11 @@ public static class DistributedCacheExtension
     {
         var options = new DistributedCacheEntryOptions();
 
-        options.AbsoluteExpirationRelativeToNow = absoluteExpireTime ?? TimeSpan.FromSeconds(120);
+        options.AbsoluteExpirationRelativeToNow = absoluteExpireTime ?? TimeSpan.FromSeconds(60);
 
         var jsonData = JsonConvert.SerializeObject(data);
 
-        await cache.SetStringAsync(key, jsonData, cancellationToken);
+        await cache.SetStringAsync(key, jsonData, options, cancellationToken);
     }
 
     public static async Task<T> GetRecordAsync<T>(this IDistributedCache cache, string key, CancellationToken cancellationToken = default)

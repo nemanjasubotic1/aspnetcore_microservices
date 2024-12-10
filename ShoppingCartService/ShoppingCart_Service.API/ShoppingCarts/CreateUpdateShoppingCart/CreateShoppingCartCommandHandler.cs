@@ -1,0 +1,66 @@
+﻿using FluentValidation;
+using GeneralUsing.CQRS;
+using ShoppingCart_Service.API.Data;
+using ShoppingCart_Service.API.Models;
+using ShoppingCart_Service.API.Models.DTOs;
+
+namespace ShoppingCart_Service.API.ShoppingCarts.CreateUpdateShoppingCart;
+
+public record CreateShoppingCartCommand(ShoppingCartDTO ShoppingCartDTO) : ICommand<CreateShoppingCartResult>;
+public record CreateShoppingCartResult(Guid Id);
+
+public class CreateShoppingCartCommandValidator : AbstractValidator<CreateShoppingCartCommand>
+{
+    public CreateShoppingCartCommandValidator()
+    {
+        RuleFor(l => l.ShoppingCartDTO.CartItems).NotEmpty().WithMessage("Cart Items are required");
+    }
+}
+
+// TODO CartItem Validator
+
+public class CreateShoppingCartCommandHandler(IShoppingCartRepository shoppingCartRepository) : ICommandHandler<CreateShoppingCartCommand, CreateShoppingCartResult>
+{
+    public async Task<CreateShoppingCartResult> Handle(CreateShoppingCartCommand request, CancellationToken cancellationToken)
+    {
+        var cartFromDb = await shoppingCartRepository.GetShoppingCartByUserIdAsync(request.ShoppingCartDTO.UserId, cancellationToken);
+
+        // cart for this user dont exist, create new cart and populate it with items
+        if (cartFromDb.UserId == null)
+        {
+            var cart = new ShoppingCart
+            {
+                UserId = request.ShoppingCartDTO.UserId,
+                CartItems = request.ShoppingCartDTO.CartItems,
+                Discount = request.ShoppingCartDTO.Discount,
+            };
+
+            await shoppingCartRepository.CreateShoppingCart(cart);
+
+            return new CreateShoppingCartResult(cart.Id);
+        }
+        // cart for this user exists, just add items quantity or add new items
+        else
+        {
+            foreach (var item in request.ShoppingCartDTO.CartItems)
+            {
+                var existingItem = cartFromDb.CartItems.FirstOrDefault(l => l.Id == item.Id);
+
+                // item exists in cart, update quantity
+                if (existingItem != null)
+                {
+                    existingItem.Quantity += item.Quantity;
+                }
+                // item dont exist in cart, add new item
+                else
+                {
+                    cartFromDb.CartItems.Add(item);
+                }
+            }
+
+            await shoppingCartRepository.UpdateShoppingCart(cartFromDb, cancellationToken);
+        }
+
+        return new CreateShoppingCartResult(cartFromDb.Id);
+    }
+}

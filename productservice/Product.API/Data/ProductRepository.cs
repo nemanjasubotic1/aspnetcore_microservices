@@ -16,9 +16,10 @@ public class ProductRepository : Repository<Product>, IProductRepository
 
     public async Task<List<Product>> GetAllProductsWithCategory(CancellationToken cancellationToken, int? pageNumber = null, int? pageSize = null)
     {
-        var allProducts = await _session.Query<Product>().ToPagedListAsync(pageNumber ?? 1, pageSize ?? 1, cancellationToken);
+        var allProducts = await GetAllAsync<Product>(filter: null, isPaged: true, pageNumber ?? 1, pageSize ?? 1, cancellationToken);
 
-        var categoryIds = allProducts.Select(x => x.CategoryId).Distinct().ToList();    
+        var categoryIds = allProducts.Select(x => x.CategoryId).Distinct().ToList();
+
         var categories = await _session.Query<Category>().Where(l => categoryIds.Contains(l.Id)).ToListAsync();
 
         var categoryDictionary = categories.ToDictionary(l => l.Id);

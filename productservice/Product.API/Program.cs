@@ -1,7 +1,5 @@
-using GeneralUsing.Exceptions;
 using Marten;
 using ProductCategory.API;
-using ProductCategory.API.Data;
 using ProductCategory.API.InitialData;
 
 var builder = WebApplication.CreateBuilder(args);

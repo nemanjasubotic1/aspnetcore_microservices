@@ -7,15 +7,14 @@ namespace ProductCategory.API.Data;
 public class CategoryRepository : Repository<Category>, ICategoryRepository
 {
     private readonly IDocumentSession _session;
-
     public CategoryRepository(IDocumentSession session) : base(session)
     {
         _session = session;
     }
 
-    public async Task<List<Category>> GetAllCategoriesWithProduts(CancellationToken cancellationToken, int? pageNumber = null, int? pageSize = null)
+    public async Task<List<Category>> GetAllCategoriesWithProducts(CancellationToken cancellationToken, int? pageNumber = null, int? pageSize = null)
     {
-        var categories = await GetAllAsync<Category>(pageNumber ?? 1, pageSize ?? 1, cancellationToken);
+        var categories = await GetAllAsync<Category>(filter:null, isPaged: true, pageNumber ?? 1, pageSize ?? 1, cancellationToken);
 
         var allProducts = await _session.Query<Product>().ToListAsync(cancellationToken);
 
