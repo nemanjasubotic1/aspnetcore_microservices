@@ -10,10 +10,10 @@ public static class ApplicationBuilderExtensions
 
     public static IApplicationBuilder UseAzureServiceBusConsumer(this IApplicationBuilder app)
     {
-        ServiceBusConsumer = app.ApplicationServices.GetService<IServiceBusConsumer>();
+        ServiceBusConsumer = app.ApplicationServices.GetService<IServiceBusConsumer>()!;
 
         var hostApplicationLife = app.ApplicationServices.GetService<IHostApplicationLifetime>();
-        hostApplicationLife.ApplicationStarted.Register(OnStart);
+        hostApplicationLife!.ApplicationStarted.Register(OnStart);
         hostApplicationLife.ApplicationStopped.Register(OnStop);
 
         return app;

@@ -1,8 +1,6 @@
-﻿
-using Azure.Messaging.ServiceBus;
+﻿using Azure.Messaging.ServiceBus;
 using EmailService.API.Models.DTOs;
 using EmailService.API.Services;
-using Microsoft.EntityFrameworkCore.Storage.Json;
 using Newtonsoft.Json;
 using System.Text;
 
@@ -66,8 +64,4 @@ public class ServiceBusConsumer : IServiceBusConsumer
         Console.WriteLine(args.Exception.ToString());
         return Task.CompletedTask;
     }
-
-   
-
- 
 }
