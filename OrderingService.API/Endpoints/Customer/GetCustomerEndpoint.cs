@@ -1,8 +1,7 @@
 ﻿using Carter;
-using GeneralUsing.CQRS;
 using Mapster;
 using MediatR;
-using OrderingService.Application.Customers.Commands.GetCustomerById;
+using OrderingService.Application.Customers.Queries.GetCustomerById;
 using OrderingService.Application.DTOs;
 
 namespace OrderingService.API.Endpoints.Customer;

@@ -1,7 +1,8 @@
 ﻿using GeneralUsing.CQRS;
 using Mapster;
 using MediatR;
-using OrderingService.Application.Customers.Commands.GetCustomerById;
+using OrderingService.Application.Customers.Commands.CreateCustomer;
+using OrderingService.Application.Customers.Queries.GetCustomerById;
 using OrderingService.Application.Data;
 using OrderingService.Application.DTOs;
 using OrderingService.Domain;
@@ -15,18 +16,18 @@ public class CreateOrderCommandHandler(IAppDbContext dbContext, ISender sender) 
     {
         var orderHeader = new OrderHeader();
 
-        var customerQuery = await sender.Send(new GetCustomerByIdQuery(command.OrderHeaderDTO.CustomerId));
-
+        var customerQuery = await sender.Send(new GetCustomerByUserIdQuery(command.CustomerDTO.UserId));
 
         if (customerQuery != null && customerQuery.DoesExist && customerQuery.Customer != null)
         {
-
-            orderHeader = await CreateNewOrder(command.OrderHeaderDTO, true, customerQuery.Customer);
+            orderHeader = await CreateNewOrder(command.OrderHeaderDTO, customerQuery.Customer);
         }
         else
         {
-            // create new customer first ??
-            orderHeader = await CreateNewOrder(command.OrderHeaderDTO, false);
+            // create new customer first 
+            var result = await sender.Send(new CreateCustomerCommand(command.CustomerDTO));
+
+            orderHeader = await CreateNewOrder(command.OrderHeaderDTO, result.Customer);
         }
 
         dbContext.OrderHeaders.Add(orderHeader);
@@ -52,7 +53,7 @@ public class CreateOrderCommandHandler(IAppDbContext dbContext, ISender sender) 
 
     }
 
-    private async Task<OrderHeader> CreateNewOrder(OrderHeaderDTO orderHeaderDTO, bool DoesExistCustomer = false, Customer? customer = null)
+    private async Task<OrderHeader> CreateNewOrder(OrderHeaderDTO orderHeaderDTO, Customer customer)
     {
         var billingAddress = new Address
         {
@@ -75,10 +76,10 @@ public class CreateOrderCommandHandler(IAppDbContext dbContext, ISender sender) 
 
 
         var orderHeader = OrderHeader.Create(
-            customerId: orderHeaderDTO.CustomerId,
             address: billingAddress,
             orderStatus: OrderStatus.Pending,
-            payment: payment
+            payment: payment,
+            customerId: customer.Id
             );
 
 
@@ -96,12 +97,9 @@ public class CreateOrderCommandHandler(IAppDbContext dbContext, ISender sender) 
             }
         }
 
-        if (DoesExistCustomer && customer != null)
-        {
-            customer.NumberOfOrders++;
-            customer.LastOrder = DateTime.Now;
-            customer.SpentMoney += orderHeader.TotalPrice;
-        }
+        customer.NumberOfOrders++;
+        customer.LastOrder = DateTime.Now;
+        customer.SpentMoney += orderHeader.TotalPrice;
 
         return orderHeader;
     }

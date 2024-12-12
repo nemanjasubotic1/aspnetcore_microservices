@@ -1,5 +1,7 @@
 ﻿using GeneralUsing.CQRS;
+using Mapster;
 using OrderingService.Application.Data;
+using OrderingService.Application.DTOs;
 using OrderingService.Domain.Models;
 
 namespace OrderingService.Application.Customers.Commands.CreateCustomer;
@@ -19,7 +21,7 @@ public class CreateCustomerCommandHandler(IAppDbContext dbContext) : ICommandHan
         dbContext.Customers.Add(customer);
         await dbContext.SaveChangesAsync(cancellationToken);
 
-        return new CreateCustomerResult(customer.Id);
+        return new CreateCustomerResult(customer);
 
     }
 }

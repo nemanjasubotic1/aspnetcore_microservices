@@ -5,7 +5,7 @@ using OrderingService.Application.Data;
 using OrderingService.Application.DTOs;
 using OrderingService.Domain.Models;
 
-namespace OrderingService.Application.Customers.Commands.GetCustomerById;
+namespace OrderingService.Application.Customers.Queries.GetCustomerById;
 public class GetCustomerByIdQueryHandler(IAppDbContext dbContext) : IQueryHandler<GetCustomerByIdQuery, GetCustomerByIdResult>
 {
     public async Task<GetCustomerByIdResult> Handle(GetCustomerByIdQuery request, CancellationToken cancellationToken)
