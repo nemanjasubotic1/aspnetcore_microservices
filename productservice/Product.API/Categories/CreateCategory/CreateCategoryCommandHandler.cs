@@ -31,6 +31,6 @@ public class CreateCategoryCommandHandler(ICategoryRepository categoryRepository
 
         await categoryRepository.CreateAsync(category);
 
-        return new CustomApiResponse(category.Id, true);
+        return new CustomApiResponse(category.Id);
     }
 }

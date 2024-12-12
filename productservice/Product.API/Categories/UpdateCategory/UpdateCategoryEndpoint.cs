@@ -3,19 +3,20 @@ using FluentValidation;
 using GeneralUsing.CQRS;
 using Mapster;
 using MediatR;
+using ProductCategory.API.Models.DTOs;
 
 namespace ProductCategory.API.Categories.UpdateCategory;
 
-public record UpdateCategoryRequest(Guid Id, string Name, string Description) : ICommand<CustomApiResponse>;
+public record UpdateCategoryRequest(CategoryDTO CategoryDTO) : ICommand<CustomApiResponse>;
 //public record UpdateCategoryResponse(Guid Id);
 
 public class UpdateCategoryEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPut("/category/{Id}", async (Guid Id, UpdateCategoryRequest request, ISender sender) =>
+        app.MapPut("/category", async (UpdateCategoryRequest request, ISender sender) =>
         {
-            var command = request.Adapt<UpdateCategoryCommand>();
+            var command = new UpdateCategoryCommand(request.CategoryDTO);
 
             var result = await sender.Send(command);
 

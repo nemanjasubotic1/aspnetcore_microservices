@@ -11,6 +11,5 @@ public class CategoryModel
 
 // wrapper models
 
-//public record GetAllCategoriesResult(IEnumerable<CategoryModel> Categories, List<string> Errors);
-
 public record CreateCategoryRequest(CategoryModel CategoryDTO);
+public record UpdateCategoryRequest(CategoryModel CategoryDTO);

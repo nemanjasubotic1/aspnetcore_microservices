@@ -20,8 +20,6 @@ public class CategoryController : Controller
     [HttpGet]
     public async Task<IActionResult> CreateCategory()
     {
-
-
         return View();
     }
 
@@ -48,19 +46,39 @@ public class CategoryController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> UpdateCategory(int? categoryId)
+    public async Task<IActionResult> UpdateCategory(Guid? categoryId)
     {
+        var apiResponse = await _categoryService.GetCategoryById(categoryId);
 
+        if (!apiResponse.IsSuccessStatusCode)
+            return BadRequest(apiResponse);
 
-        return View();
+        var categoryResponse = apiResponse.Content;
+
+        var jsonResponseList = JsonConvert.DeserializeObject<CategoryModel>(Convert.ToString(categoryResponse.Result));
+
+        return View(jsonResponseList);
     }
 
     [HttpPost]
     public async Task<IActionResult> UpdateCategory(CategoryModel categoryModel)
     {
+        var categoryRequest = new UpdateCategoryRequest(categoryModel);
 
+        var apiResponse = await _categoryService.UpdateCategory(categoryRequest);
 
-        return View();
+        if (!apiResponse.IsSuccessStatusCode)
+        {
+            var errorResponse = apiResponse.Error.Content;
+
+            ModelState.AddModelError("", errorResponse ?? "Error occured");
+
+            return View(categoryModel);
+        }
+
+        Console.WriteLine(apiResponse.Content);
+
+        return RedirectToAction(nameof(Index));
     }
 
     [HttpGet]
