@@ -2,7 +2,6 @@
 using BasketECommerce.Web.Services.ProductCategory;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Runtime.CompilerServices;
 
 namespace BasketECommerce.Web.Controllers;
 public class CategoryController : Controller
@@ -22,7 +21,6 @@ public class CategoryController : Controller
     {
         return View();
     }
-
 
     [HttpPost]
     public async Task<IActionResult> CreateCategory(CategoryModel categoryModel)
@@ -82,19 +80,30 @@ public class CategoryController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> DeleteCategory(int? categoryId)
+    public async Task<IActionResult> DeleteCategory(Guid? categoryId)
     {
+        var apiResponse = await _categoryService.GetCategoryById(categoryId);
 
+        if (!apiResponse.IsSuccessStatusCode)
+            return BadRequest(apiResponse);
 
-        return View();
+        var categoryResponse = apiResponse.Content;
+
+        var jsonResponseList = JsonConvert.DeserializeObject<CategoryModel>(Convert.ToString(categoryResponse.Result));
+
+        return View(jsonResponseList);
     }
 
     [HttpPost]
-    public async Task<IActionResult> DeleteCategory(CategoryModel categoryModel)
+    [ActionName(nameof(DeleteCategory))]
+    public async Task<IActionResult> DeleteCategoryPOST(Guid? id)
     {
+        var apiResponse = await _categoryService.DeleteCategory(id);
 
+        if (!apiResponse.IsSuccessStatusCode)
+            return BadRequest(apiResponse);
 
-        return View();
+        return RedirectToAction(nameof(Index));
     }
 
 

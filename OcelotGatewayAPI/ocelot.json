@@ -52,7 +52,7 @@
       "UpstreamHttpMethod": [ "Put" ]
     },
     {
-      "DownstreamPathTemplate": "/category",
+      "DownstreamPathTemplate": "/category/{id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {

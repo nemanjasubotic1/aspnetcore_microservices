@@ -21,7 +21,7 @@ function dataToTable() {
                 "render": function (data) {
                     return `<div class="w-75 btn-group text-center">
                             <a href="/Category/UpdateCategory?categoryId=${data}"" class="btn btn-outline-info mx-2">
-                            <i class="bi bi-pencil-square"></i> Update
+                            <i class="bi bi-pencil-square"></i> Edit
                             </a>
                             <a href="/Category/DeleteCategory?categoryId=${data}"" class="btn btn-outline-danger mx-2">
                             <i class="bi bi-trash3"></i> Delete

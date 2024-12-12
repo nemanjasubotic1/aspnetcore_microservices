@@ -20,5 +20,9 @@ public interface ICategoryService
 
     [Put("/category")]
     Task<ApiResponse<CustomApiResponse>> UpdateCategory(UpdateCategoryRequest request);
+    
+    [Delete("/category/{Id}")]
+    Task<ApiResponse<CustomApiResponse>> DeleteCategory(Guid? id);
+
 
 }
