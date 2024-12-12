@@ -37,6 +37,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderingService.API", "Orde
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderingService.Application", "OrderingService.Application\OrderingService.Application.csproj", "{2C763043-6251-4D96-9462-FC9BE871CAB4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebProject", "WebProject", "{D8C0AF3E-5215-44F6-ACE3-DFE18E50F2D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasketECommerce.Web", "Services\WebProject\BasketECommerce.Web\BasketECommerce.Web.csproj", "{D4F74A14-623E-4A35-A67C-FD340E4A2AE1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +87,10 @@ Global
 		{2C763043-6251-4D96-9462-FC9BE871CAB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C763043-6251-4D96-9462-FC9BE871CAB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C763043-6251-4D96-9462-FC9BE871CAB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4F74A14-623E-4A35-A67C-FD340E4A2AE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4F74A14-623E-4A35-A67C-FD340E4A2AE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4F74A14-623E-4A35-A67C-FD340E4A2AE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4F74A14-623E-4A35-A67C-FD340E4A2AE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -102,5 +110,6 @@ Global
 		{45E6B0E7-2A90-426F-A20E-8B836F706A9C} = {E47B974B-5266-4BFD-93B2-33D212342AC3}
 		{E14F6C9A-1A6F-4E54-BA2F-D06A93F4F796} = {E47B974B-5266-4BFD-93B2-33D212342AC3}
 		{2C763043-6251-4D96-9462-FC9BE871CAB4} = {E47B974B-5266-4BFD-93B2-33D212342AC3}
+		{D4F74A14-623E-4A35-A67C-FD340E4A2AE1} = {D8C0AF3E-5215-44F6-ACE3-DFE18E50F2D5}
 	EndGlobalSection
 EndGlobal

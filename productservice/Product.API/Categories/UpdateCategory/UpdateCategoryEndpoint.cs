@@ -6,10 +6,8 @@ using MediatR;
 
 namespace ProductCategory.API.Categories.UpdateCategory;
 
-public record UpdateCategoryRequest(Guid Id, string Name, string Description) : ICommand<UpdateCategoryResponse>;
-public record UpdateCategoryResponse(Guid Id);
-
-
+public record UpdateCategoryRequest(Guid Id, string Name, string Description) : ICommand<CustomApiResponse>;
+//public record UpdateCategoryResponse(Guid Id);
 
 public class UpdateCategoryEndpoint : ICarterModule
 {
@@ -21,9 +19,9 @@ public class UpdateCategoryEndpoint : ICarterModule
 
             var result = await sender.Send(command);
 
-            var response = result.Adapt<UpdateCategoryResponse>();
+            //var response = result.Adapt<UpdateCategoryResponse>();
 
-            return Results.Ok(response);
+            return Results.Ok(result);
 
         });
     }

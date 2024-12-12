@@ -9,8 +9,8 @@ using ProductCategory.API.Models.DTOs;
 namespace ProductCategory.API.Categories.UpdateCategory;
 
 
-public record UpdateProductCommand(ProductDTO ProductDTO) : ICommand<UpdateProductResult>;
-public record UpdateProductResult(Guid Id);
+public record UpdateProductCommand(ProductDTO ProductDTO) : ICommand<CustomApiResponse>;
+//public record UpdateProductResult(Guid Id);
 
 public class UpdateProductCommandValidator : AbstractValidator<UpdateProductCommand>
 {
@@ -21,9 +21,9 @@ public class UpdateProductCommandValidator : AbstractValidator<UpdateProductComm
     }
 }
 
-public class UpdateProductCommandHandler(IProductRepository productRepository) : ICommandHandler<UpdateProductCommand, UpdateProductResult>
+public class UpdateProductCommandHandler(IProductRepository productRepository) : ICommandHandler<UpdateProductCommand, CustomApiResponse>
 {
-    public async Task<UpdateProductResult> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
+    public async Task<CustomApiResponse> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
     {
         var productFromDb = await productRepository.GetAsync(request.ProductDTO.Id, cancellationToken);
 
@@ -36,6 +36,6 @@ public class UpdateProductCommandHandler(IProductRepository productRepository) :
 
         await productRepository.Update(product);
 
-        return new UpdateProductResult(request.ProductDTO.Id);
+        return new CustomApiResponse(request.ProductDTO.Id);
     }
 }

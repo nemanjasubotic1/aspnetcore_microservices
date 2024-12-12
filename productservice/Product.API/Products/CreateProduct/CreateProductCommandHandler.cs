@@ -7,12 +7,12 @@ using System.Linq.Expressions;
 
 namespace ProductCategory.API.Products.CreateProduct;
 
-public record CreateProductCommand(ProductDTO ProductDTO) : ICommand<CreateProductResult>;
-public record CreateProductResult(Guid Id);
+public record CreateProductCommand(ProductDTO ProductDTO) : ICommand<CustomApiResponse>;
+//public record CreateProductResult(Guid Id);
 
-public class CreateProductCommandHandler(IProductRepository productRepository) : ICommandHandler<CreateProductCommand, CreateProductResult>
+public class CreateProductCommandHandler(IProductRepository productRepository) : ICommandHandler<CreateProductCommand, CustomApiResponse>
 {
-    public async Task<CreateProductResult> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+    public async Task<CustomApiResponse> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
         var product = new Product
         {
@@ -26,7 +26,7 @@ public class CreateProductCommandHandler(IProductRepository productRepository) :
 
         await productRepository.CreateAsync(product);
 
-        return new CreateProductResult(product.Id);
+        return new CustomApiResponse(product.Id);
 
     }
 }

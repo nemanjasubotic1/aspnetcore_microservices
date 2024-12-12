@@ -5,7 +5,7 @@ using MediatR;
 namespace ProductCategory.API.Categories.DeleteCategory;
 
 //public record DeleteCategoryRequest(Guid Id);
-public record DeleteProductResponse(bool IsSuccess);
+//public record DeleteProductResponse(bool IsSuccess);
 
 public class DeleteProductEndpoint : ICarterModule
 {
@@ -15,9 +15,9 @@ public class DeleteProductEndpoint : ICarterModule
         {
             var result = await sender.Send(new DeleteProductCommand(id));
 
-            var response = result.Adapt<DeleteProductResponse>();
+            //var response = result.Adapt<DeleteProductResponse>();
 
-            return Results.Ok(response);
+            return Results.Ok(result);
 
         });
     }

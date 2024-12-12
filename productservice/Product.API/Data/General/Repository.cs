@@ -31,7 +31,7 @@ public class Repository<T> : IRepository<T> where T : IBaseModel
 
         if (isPaged)
         {
-            return await listOfT.ToPagedListAsync(pageNumber ?? 1, pageSize ?? 1, cancellationToken);
+            return await listOfT.ToPagedListAsync(pageNumber ?? 1, pageSize ?? 10, cancellationToken);
         }
 
         return await listOfT.ToListAsync();

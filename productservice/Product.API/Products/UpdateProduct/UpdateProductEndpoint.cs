@@ -7,8 +7,8 @@ using ProductCategory.API.Models.DTOs;
 
 namespace ProductCategory.API.Categories.UpdateCategory;
 
-public record UpdateProductRequest(ProductDTO ProductDTO) : ICommand<UpdateProductResponse>;
-public record UpdateProductResponse(Guid Id);
+public record UpdateProductRequest(ProductDTO ProductDTO);
+//public record UpdateProductResponse(Guid Id);
 
 
 public class UpdateProductEndpoint : ICarterModule
@@ -21,9 +21,9 @@ public class UpdateProductEndpoint : ICarterModule
 
             var result = await sender.Send(command);
 
-            var response = result.Adapt<UpdateProductResponse>();
+            //var response = result.Adapt<UpdateProductResponse>();
 
-            return Results.Ok(response);
+            return Results.Ok(result);
 
         });
     }

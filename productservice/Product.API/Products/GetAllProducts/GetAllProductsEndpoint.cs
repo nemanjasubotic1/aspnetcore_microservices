@@ -6,7 +6,7 @@ using ProductCategory.API.Models;
 namespace ProductCategory.API.Products.GetAllProducts;
 
 public record GetAllProductsRequest(int? pageNumber = 1, int? pageSize = 1);
-public record GetAllProductsResponse(IEnumerable<Product> Products);
+//public record GetAllProductsResponse(IEnumerable<Product> Products);
 
 public class GetAllProductsEndpoint : ICarterModule
 {
@@ -18,9 +18,9 @@ public class GetAllProductsEndpoint : ICarterModule
 
             var result = await sender.Send(query);
 
-            var response = result.Adapt<GetAllProductsResponse>();
+            //var response = result.Adapt<GetAllProductsResponse>();
 
-            return Results.Ok(response);
+            return Results.Ok(result);
         });
     }
 }

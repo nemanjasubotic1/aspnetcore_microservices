@@ -19,7 +19,17 @@ public class FluentValidationBehavior<TRequest, TResponse> : IPipelineBehavior<T
         var failures = validationResults.Where(l => l.Errors.Any()).SelectMany(l => l.Errors).ToList();
 
         if (failures.Any())
+        {
+            var responseType = typeof(TResponse);
+
+            if (responseType.GetProperty("Errors") != null)
+            {
+                var response = Activator.CreateInstance(responseType, default, false, failures);
+                return (TResponse)response;
+            }
+
             throw new ValidationException(failures);
+        }
 
         return await next();
     }

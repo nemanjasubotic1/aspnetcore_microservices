@@ -5,8 +5,8 @@ using ProductCategory.API.Models;
 
 namespace ProductCategory.API.Categories.GetAllCategories;
 
-public record GetAllCategoriesRequest(int? PageNumber = 1, int? PageSize = 1);
-public record GetAllCategoriesResponse(IEnumerable<Category> Categories);
+public record GetAllCategoriesRequest(int? PageNumber = 1, int? PageSize = 10);
+//public record GetAllCategoriesResponse(IEnumerable<Category> Categories);
 
 public class GetAllCategoriesEnpoint : ICarterModule
 {
@@ -18,9 +18,9 @@ public class GetAllCategoriesEnpoint : ICarterModule
 
             var result = await sender.Send(query);
 
-            var response = result.Adapt<GetAllCategoriesResponse>();
+            //var response = result.Adapt<GetAllCategoriesResponse>();
 
-            return Results.Ok(response);
+            return Results.Ok(result);
         });
     }
 }
