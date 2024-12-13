@@ -79,6 +79,18 @@
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
+      "DownstreamPathTemplate": "/product/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5010
+        }
+      ],
+      "UpstreamPathTemplate": "/product/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
       "DownstreamPathTemplate": "/product",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -91,7 +103,7 @@
       "UpstreamHttpMethod": [ "Post" ]
     },
     {
-      "DownstreamPathTemplate": "/product/{id}",
+      "DownstreamPathTemplate": "/product",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -99,7 +111,7 @@
           "Port": 5010
         }
       ],
-      "UpstreamPathTemplate": "/product/{id}",
+      "UpstreamPathTemplate": "/product",
       "UpstreamHttpMethod": [ "Put" ]
     },
     {

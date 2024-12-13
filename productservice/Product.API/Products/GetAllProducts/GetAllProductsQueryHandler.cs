@@ -4,7 +4,7 @@ using ProductCategory.API.Models;
 
 namespace ProductCategory.API.Products.GetAllProducts;
 
-public record GetAllProductsQuery(int? pageNumber = 1, int? pageSize = 1) : IQuery<CustomApiResponse>;
+public record GetAllProductsQuery(int? pageNumber = 1, int? pageSize = 10) : IQuery<CustomApiResponse>;
 //public record GetAllProductsResult(IEnumerable<Product> Products);
 
 

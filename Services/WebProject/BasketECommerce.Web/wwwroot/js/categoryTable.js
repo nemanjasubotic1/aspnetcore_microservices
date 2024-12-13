@@ -18,6 +18,7 @@ function dataToTable() {
             {
 
                 data: "id",
+                "className": "text-center",
                 "render": function (data) {
                     return `<div class="w-75 btn-group text-center">
                             <a href="/Category/UpdateCategory?categoryId=${data}"" class="btn btn-outline-info mx-2">

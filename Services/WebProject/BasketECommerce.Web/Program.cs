@@ -12,6 +12,12 @@ builder.Services.AddRefitClient<ICategoryService>()
         config.BaseAddress = new Uri(builder.Configuration["ApiSettings:GatewayAddress"]!);
     });
 
+builder.Services.AddRefitClient<IProductService>()
+    .ConfigureHttpClient(config =>
+    {
+        config.BaseAddress = new Uri(builder.Configuration["ApiSettings:GatewayAddress"]!);
+    });
+
 
 var app = builder.Build();
 

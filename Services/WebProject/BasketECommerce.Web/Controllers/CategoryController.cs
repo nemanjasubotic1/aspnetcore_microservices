@@ -1,6 +1,7 @@
 ﻿using BasketECommerce.Web.Models.ProductCategory;
 using BasketECommerce.Web.Services.ProductCategory;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
 
 namespace BasketECommerce.Web.Controllers;
@@ -17,7 +18,7 @@ public class CategoryController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> CreateCategory()
+    public IActionResult CreateCategory()
     {
         return View();
     }
@@ -52,6 +53,13 @@ public class CategoryController : Controller
             return BadRequest(apiResponse);
 
         var categoryResponse = apiResponse.Content;
+
+        if (categoryResponse == null || !categoryResponse.IsSuccess)
+        {
+            TempData["error"] = "Error occured.";
+
+            return RedirectToAction(nameof(Index));
+        }
 
         var jsonResponseList = JsonConvert.DeserializeObject<CategoryModel>(Convert.ToString(categoryResponse.Result));
 
@@ -89,6 +97,13 @@ public class CategoryController : Controller
 
         var categoryResponse = apiResponse.Content;
 
+        if (categoryResponse == null || !categoryResponse.IsSuccess)
+        {
+            TempData["error"] = "Error occured.";
+
+            return RedirectToAction(nameof(Index));
+        }
+
         var jsonResponseList = JsonConvert.DeserializeObject<CategoryModel>(Convert.ToString(categoryResponse.Result));
 
         return View(jsonResponseList);
@@ -96,9 +111,9 @@ public class CategoryController : Controller
 
     [HttpPost]
     [ActionName(nameof(DeleteCategory))]
-    public async Task<IActionResult> DeleteCategoryPOST(Guid? id)
+    public async Task<IActionResult> DeleteCategoryPOST(Guid? categoryId)
     {
-        var apiResponse = await _categoryService.DeleteCategory(id);
+        var apiResponse = await _categoryService.DeleteCategory(categoryId);
 
         if (!apiResponse.IsSuccessStatusCode)
             return BadRequest(apiResponse);

@@ -5,7 +5,7 @@ using ProductCategory.API.Models;
 
 namespace ProductCategory.API.Products.GetAllProducts;
 
-public record GetAllProductsRequest(int? pageNumber = 1, int? pageSize = 1);
+public record GetAllProductsRequest(int? pageNumber = 1, int? pageSize = 10);
 //public record GetAllProductsResponse(IEnumerable<Product> Products);
 
 public class GetAllProductsEndpoint : ICarterModule

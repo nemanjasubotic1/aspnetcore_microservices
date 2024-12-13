@@ -13,8 +13,8 @@ public class CreateCustomerCommandHandler(IAppDbContext dbContext) : ICommandHan
         {
             UserId = command.CustomerDTO.UserId,
             Username = command.CustomerDTO.Username,
-            FirstName = command.CustomerDTO.FirstName,
-            LastName = command.CustomerDTO.LastName,
+            Name = command.CustomerDTO.Name,
+            //LastName = command.CustomerDTO.LastName,
             EmailAddress = command.CustomerDTO.EmailAddress,
         };
 

@@ -4,7 +4,7 @@ using MediatR;
 using OrderingService.Application.Customers.Queries.GetCustomerById;
 using OrderingService.Application.DTOs;
 
-namespace OrderingService.API.Endpoints.Customer;
+namespace OrderingService.API.Endpoints.Customers;
 
 //public record GetCustomerByIdRequest(Guid Id);
 public record GetCustomerByIdResponse(bool DoesExist, CustomerDTO? CustomerDTO = null);

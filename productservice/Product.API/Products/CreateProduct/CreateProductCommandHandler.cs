@@ -1,14 +1,21 @@
-﻿using GeneralUsing.CQRS;
-using Marten;
+﻿using FluentValidation;
+using GeneralUsing.CQRS;
 using ProductCategory.API.Data;
 using ProductCategory.API.Models;
 using ProductCategory.API.Models.DTOs;
-using System.Linq.Expressions;
 
 namespace ProductCategory.API.Products.CreateProduct;
 
 public record CreateProductCommand(ProductDTO ProductDTO) : ICommand<CustomApiResponse>;
 //public record CreateProductResult(Guid Id);
+
+public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
+{
+    public CreateProductCommandValidator()
+    {
+        RuleFor(l => l.ProductDTO.CategoryId).NotEmpty().WithMessage("The Category is requied");
+    }
+}
 
 public class CreateProductCommandHandler(IProductRepository productRepository) : ICommandHandler<CreateProductCommand, CustomApiResponse>
 {

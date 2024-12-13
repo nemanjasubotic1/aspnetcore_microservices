@@ -1,0 +1,62 @@
+﻿@model ProductVM
+
+
+<div class="w-100 card border-0 p-4">
+    <div class="card-header bg-warning bg-gradient py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Delete Product</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body border p-4">
+        <form method="post" class="row" >
+            <input asp-for="ProductModel.Id" hidden />
+            <div class="p-3">
+                <div asp-validation-summary="ModelOnly"></div>
+                <div class="form-floating py-1 col-12">
+                    <input asp-for="ProductModel.Name" class="form-control border shadow" readonly/>
+                    <label asp-for="ProductModel.Name" class="ms-2"></label>
+                    <span asp-validation-for="ProductModel.Name" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    <input asp-for="ProductModel.Description" class="form-control border shadow" readonly />
+                    <label asp-for="ProductModel.Description" class="ms-2"></label>
+                    <span asp-validation-for="ProductModel.Description" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    <input asp-for="ProductModel.Price" class="form-control border shadow" readonly />
+                    <label asp-for="ProductModel.Price" class="ms-2"></label>
+                    <span asp-validation-for="ProductModel.Price" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    <input asp-for="ProductModel.ImageUrl" class="form-control border shadow" readonly />
+                    <label asp-for="ProductModel.ImageUrl" class="ms-2"></label>
+                    <span asp-validation-for="ProductModel.ImageUrl" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1 col-12">
+                    <select asp-for="ProductModel.CategoryId" asp-items="Model.CategoryItems" class="form-control border shadow">
+                        <option disabled>-Select category-</option>
+                    </select>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-danger w-100">
+                            <i class="bi bi-check-circle"></i> Delete
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Product" asp-action="Index" class="btn btn-secondary w-100">
+                            <i class="bi bi-x-circle"></i> Return to home
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+}

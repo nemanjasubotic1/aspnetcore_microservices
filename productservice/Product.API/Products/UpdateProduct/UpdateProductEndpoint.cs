@@ -15,7 +15,7 @@ public class UpdateProductEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPut("/product/{Id}", async (Guid Id, UpdateProductRequest request, ISender sender) =>
+        app.MapPut("/product", async (UpdateProductRequest request, ISender sender) =>
         {
             var command = new UpdateProductCommand(request.ProductDTO);
 

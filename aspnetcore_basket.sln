@@ -41,6 +41,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebProject", "WebProject", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasketECommerce.Web", "Services\WebProject\BasketECommerce.Web\BasketECommerce.Web.csproj", "{D4F74A14-623E-4A35-A67C-FD340E4A2AE1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AuthenticationService", "AuthenticationService", "{AD3DE05E-3B4B-49B6-B858-B8B29F37F4F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService.API", "Services\AuthenticationService\AuthService.API\AuthService.API.csproj", "{B9BCBB6D-512C-4DAA-BB2D-E01E22195F72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +95,10 @@ Global
 		{D4F74A14-623E-4A35-A67C-FD340E4A2AE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4F74A14-623E-4A35-A67C-FD340E4A2AE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4F74A14-623E-4A35-A67C-FD340E4A2AE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9BCBB6D-512C-4DAA-BB2D-E01E22195F72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9BCBB6D-512C-4DAA-BB2D-E01E22195F72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9BCBB6D-512C-4DAA-BB2D-E01E22195F72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9BCBB6D-512C-4DAA-BB2D-E01E22195F72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -111,5 +119,7 @@ Global
 		{E14F6C9A-1A6F-4E54-BA2F-D06A93F4F796} = {E47B974B-5266-4BFD-93B2-33D212342AC3}
 		{2C763043-6251-4D96-9462-FC9BE871CAB4} = {E47B974B-5266-4BFD-93B2-33D212342AC3}
 		{D4F74A14-623E-4A35-A67C-FD340E4A2AE1} = {D8C0AF3E-5215-44F6-ACE3-DFE18E50F2D5}
+		{AD3DE05E-3B4B-49B6-B858-B8B29F37F4F0} = {7EE51E23-EFC0-4B38-90DB-99B2DEB928C3}
+		{B9BCBB6D-512C-4DAA-BB2D-E01E22195F72} = {AD3DE05E-3B4B-49B6-B858-B8B29F37F4F0}
 	EndGlobalSection
 EndGlobal
