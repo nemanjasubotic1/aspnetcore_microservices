@@ -165,6 +165,34 @@
       ],
       "UpstreamPathTemplate": "/shoppingcart/{id}",
       "UpstreamHttpMethod": [ "Delete" ]
+    },
+
+    // AUTHENTICATION
+
+
+    {
+      "DownstreamPathTemplate": "/userauth/login",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5014
+        }
+      ],
+      "UpstreamPathTemplate": "/userauth/login",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/userauth/register",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5014
+        }
+      ],
+      "UpstreamPathTemplate": "/userauth/register",
+      "UpstreamHttpMethod": [ "Post" ]
     }
 
   ],

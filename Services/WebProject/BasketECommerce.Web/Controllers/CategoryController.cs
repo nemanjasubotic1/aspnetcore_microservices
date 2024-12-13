@@ -1,10 +1,13 @@
 ﻿using BasketECommerce.Web.Models.ProductCategory;
 using BasketECommerce.Web.Services.ProductCategory;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
 
 namespace BasketECommerce.Web.Controllers;
+
+[Authorize]
 public class CategoryController : Controller
 {
     private readonly ICategoryService _categoryService;
@@ -16,6 +19,7 @@ public class CategoryController : Controller
     {
         return View();
     }
+
 
     [HttpGet]
     public IActionResult CreateCategory()

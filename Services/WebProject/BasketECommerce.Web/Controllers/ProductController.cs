@@ -4,7 +4,6 @@ using BasketECommerce.Web.Services.ProductCategory;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
-using System.ComponentModel;
 using static BasketECommerce.Web.Models.ProductCategory.ProductModel;
 
 namespace BasketECommerce.Web.Controllers;

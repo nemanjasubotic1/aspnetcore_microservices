@@ -1,4 +1,6 @@
+using BasketECommerce.Web.Services.AuthenticationService;
 using BasketECommerce.Web.Services.ProductCategory;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Refit;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +19,30 @@ builder.Services.AddRefitClient<IProductService>()
     {
         config.BaseAddress = new Uri(builder.Configuration["ApiSettings:GatewayAddress"]!);
     });
+
+builder.Services.AddRefitClient<IAuthService>()
+    .ConfigureHttpClient(config =>
+    {
+        config.BaseAddress = new Uri(builder.Configuration["ApiSettings:GatewayAddress"]!);
+    });
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+
+        options.Cookie.HttpOnly = true;
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+
+        options.LoginPath = $"/Authentication/Login";
+        options.LogoutPath = $"/Authentication/Logout";
+        options.AccessDeniedPath = $"/Authentication/AccessDenied";
+
+        options.SlidingExpiration = true;
+    });
+
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddScoped<ITokenProvider, TokenProvider>();
 
 
 var app = builder.Build();
