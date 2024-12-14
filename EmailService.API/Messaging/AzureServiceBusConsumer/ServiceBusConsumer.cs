@@ -1,6 +1,6 @@
 ﻿using Azure.Messaging.ServiceBus;
 using EmailService.API.Models.DTOs;
-using EmailService.API.Services;
+using EmailService.API.Services.ShoppingCartEmail;
 using Newtonsoft.Json;
 using System.Text;
 

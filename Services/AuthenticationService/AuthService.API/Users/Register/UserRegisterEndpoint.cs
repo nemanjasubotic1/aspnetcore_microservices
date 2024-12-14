@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthService.API.Users.Register;
 
-public record UserRegisterRequest(RegistrationRequestDTO RegistrationRequestDTO);
+public record UserRegisterRequest(RegistrationDTO RegistrationRequestDTO);
 
 
 public class UserRegisterEndpoint : ICarterModule

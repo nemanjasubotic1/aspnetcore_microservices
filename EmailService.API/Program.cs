@@ -2,7 +2,9 @@ using EmailService.API.Data;
 using EmailService.API.Extensions;
 using EmailService.API.FactoryAppDbContext;
 using EmailService.API.Messaging.AzureServiceBusConsumer;
-using EmailService.API.Services;
+using EmailService.API.Messaging.RabbitMQMessageConsumer;
+using EmailService.API.Services.RegistrationNotification;
+using EmailService.API.Services.ShoppingCartEmail;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +28,9 @@ builder.Services.AddSingleton<IAppDbContextFactory>(provider =>
 
 builder.Services.AddSingleton<IServiceBusConsumer, ServiceBusConsumer>();
 builder.Services.AddSingleton<IShoppingCartEmailService, ShoppingCartEmailService>();
+builder.Services.AddSingleton<IRegistrationNotify, RegistrationNotify>();
+
+builder.Services.AddHostedService<RabbitMQAuthConsumer>();
 
 var app = builder.Build();
 

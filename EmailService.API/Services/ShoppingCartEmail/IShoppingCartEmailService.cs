@@ -1,6 +1,6 @@
 ﻿using EmailService.API.Models.DTOs;
 
-namespace EmailService.API.Services;
+namespace EmailService.API.Services.ShoppingCartEmail;
 
 public interface IShoppingCartEmailService
 {

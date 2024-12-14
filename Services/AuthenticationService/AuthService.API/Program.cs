@@ -15,6 +15,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+
 builder.Services.AddCarter();
 
 builder.Services.AddMediatR(config =>

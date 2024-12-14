@@ -65,7 +65,7 @@ public class AuthenticationService : IAuthenticationService
         return loginResponseDTO;
     }
 
-    public async Task<string> Register(RegistrationRequestDTO registrationRequestDTO)
+    public async Task<string> Register(RegistrationDTO registrationRequestDTO)
     {
         ApplicationUser applicationUser = new()
         {

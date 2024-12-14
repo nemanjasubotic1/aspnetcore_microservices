@@ -1,6 +1,6 @@
 ﻿namespace AuthService.API.Models.DTOs;
 
-public class RegistrationRequestDTO
+public class RegistrationDTO
 {
     public string Name { get; set; }
     public string Email { get; set; }

@@ -3,10 +3,11 @@ using AuthService.API.Services.IServices;
 using FluentValidation;
 using FluentValidation.Results;
 using GeneralUsing.CQRS;
+using Integration.RabbitMQSender;
 
 namespace AuthService.API.Users.Register;
 
-public record UserRegisterCommand(RegistrationRequestDTO RegistrationRequestDTO) : ICommand<CustomApiResponse>;
+public record UserRegisterCommand(RegistrationDTO RegistrationRequestDTO) : ICommand<CustomApiResponse>;
 
 
 public class UserRegisterCommandValidator : AbstractValidator<UserRegisterCommand>
@@ -20,7 +21,8 @@ public class UserRegisterCommandValidator : AbstractValidator<UserRegisterComman
 }
 
 
-public class UserRegisterCommandHandler(IAuthenticationService _authenticationService) : ICommandHandler<UserRegisterCommand, CustomApiResponse>
+public class UserRegisterCommandHandler(IAuthenticationService _authenticationService, 
+    IRabbitMQMessageSender messageSender, IConfiguration configuration) : ICommandHandler<UserRegisterCommand, CustomApiResponse>
 {
 
     public async Task<CustomApiResponse> Handle(UserRegisterCommand request, CancellationToken cancellationToken)
@@ -32,8 +34,19 @@ public class UserRegisterCommandHandler(IAuthenticationService _authenticationSe
             return new CustomApiResponse(null, false, [new ValidationFailure("", errorMessage)]);
         }
 
+        var registrationData = new
+        {
+            Email = request.RegistrationRequestDTO.Email,
+            Name = request.RegistrationRequestDTO.Name,
+        };
+
+        var queueName = "emailregistration";
+
+        await messageSender.SendMessage(registrationData, queueName);
+
+
         // TODO RabittMQ to send message with registration
-        
+
         return new CustomApiResponse();
     }
 }

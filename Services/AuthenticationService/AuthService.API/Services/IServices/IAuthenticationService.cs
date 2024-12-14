@@ -4,6 +4,6 @@ namespace AuthService.API.Services.IServices;
 
 public interface IAuthenticationService
 {
-    Task<string> Register(RegistrationRequestDTO registrationRequestDTO);
+    Task<string> Register(RegistrationDTO registrationRequestDTO);
     Task<LoginResponseDTO> Login(LoginRequestDTO loginRequestDTO);
 }

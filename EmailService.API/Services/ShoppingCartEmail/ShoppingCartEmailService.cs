@@ -1,10 +1,9 @@
-﻿
-using EmailService.API.FactoryAppDbContext;
+﻿using EmailService.API.FactoryAppDbContext;
 using EmailService.API.Models;
 using EmailService.API.Models.DTOs;
 using Mapster;
 
-namespace EmailService.API.Services;
+namespace EmailService.API.Services.ShoppingCartEmail;
 
 public class ShoppingCartEmailService : IShoppingCartEmailService
 {
