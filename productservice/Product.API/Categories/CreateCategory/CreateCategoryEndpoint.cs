@@ -21,7 +21,7 @@ public class CreateCategoryEndpoint : ICarterModule
             var command = new CreateCategoryCommand(request.CategoryDTO);
 
             var result = await sender.Send(command);
-            
+
             //var response = result.Adapt<CreateCategoryResponse>();
 
             if (result.Errors != null && result.Errors.Any())
@@ -30,6 +30,11 @@ public class CreateCategoryEndpoint : ICarterModule
             }
 
             return Results.Created("/category", result);
-        });
+        }).RequireAuthorization(policy => policy.RequireRole("Admin"))
+        .WithName("CreateCategory")
+        .Produces<CustomApiResponse>(StatusCodes.Status201Created)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .WithSummary("Create Category")
+        .WithDescription("Serve for creating category object");
     }
 }

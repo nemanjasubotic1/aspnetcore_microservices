@@ -7,7 +7,7 @@ namespace ShoppingCart_Service.API.ShoppingCarts.GetShoppingCartById;
 
 
 //public record GetShoppingCartByIdRequest(Guid Id);
-public record GetShoppingCartByIdResponse(ShoppingCartDTO ShoppingCartDTO);
+//public record GetShoppingCartByIdResponse(ShoppingCartDTO ShoppingCartDTO);
 
 public class GetShoppingCartByIdEndpoint : ICarterModule
 {
@@ -19,9 +19,9 @@ public class GetShoppingCartByIdEndpoint : ICarterModule
 
             var result = await sender.Send(query);
 
-            var response = new GetShoppingCartByIdResponse(result.ShoppingCartDTO);
+            //var response = new GetShoppingCartByIdResponse(result.ShoppingCartDTO);
 
-            return Results.Ok(response);
+            return Results.Ok(result);
         });
     }
 }

@@ -25,6 +25,11 @@ public class UpdateProductEndpoint : ICarterModule
 
             return Results.Ok(result);
 
-        });
+        }).RequireAuthorization(policy => policy.RequireRole("Admin"))
+        .WithName("UpdateProduct")
+        .Produces<CustomApiResponse>(StatusCodes.Status201Created)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .WithSummary("UpdateProduct")
+        .WithDescription("Serve for updating single product");
     }
 }

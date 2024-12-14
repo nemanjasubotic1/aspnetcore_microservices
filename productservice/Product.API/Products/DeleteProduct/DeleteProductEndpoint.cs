@@ -19,6 +19,11 @@ public class DeleteProductEndpoint : ICarterModule
 
             return Results.Ok(result);
 
-        });
+        }).RequireAuthorization(policy => policy.RequireRole("Admin"))
+        .WithName("DeleteProduct")
+        .Produces<CustomApiResponse>(StatusCodes.Status201Created)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .WithSummary("UpdateProduct")
+        .WithDescription("Serve for deleting single product");
     }
 }

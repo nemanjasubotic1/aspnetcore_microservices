@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Primitives;
-
-namespace BasketECommerce.Web.Services.AuthenticationService;
+﻿namespace BasketECommerce.Web.Services.AuthenticationService;
 
 public class TokenProvider : ITokenProvider
 {

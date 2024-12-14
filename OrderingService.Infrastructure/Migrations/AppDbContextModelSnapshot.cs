@@ -136,7 +136,6 @@ namespace OrderingService.Infrastructure.Migrations
                                 .HasColumnType("nvarchar(50)");
 
                             b1.Property<string>("Country")
-                                .IsRequired()
                                 .HasMaxLength(50)
                                 .HasColumnType("nvarchar(50)");
 
@@ -155,12 +154,10 @@ namespace OrderingService.Infrastructure.Migrations
                                 .HasColumnType("nvarchar(50)");
 
                             b1.Property<string>("State")
-                                .IsRequired()
                                 .HasMaxLength(50)
                                 .HasColumnType("nvarchar(50)");
 
                             b1.Property<string>("ZipCode")
-                                .IsRequired()
                                 .HasMaxLength(50)
                                 .HasColumnType("nvarchar(50)");
                         });
@@ -170,7 +167,6 @@ namespace OrderingService.Infrastructure.Migrations
                             b1.IsRequired();
 
                             b1.Property<string>("CVV")
-                                .IsRequired()
                                 .HasMaxLength(3)
                                 .HasColumnType("nvarchar(3)");
 
@@ -179,12 +175,10 @@ namespace OrderingService.Infrastructure.Migrations
                                 .HasColumnType("nvarchar(50)");
 
                             b1.Property<string>("CardNumber")
-                                .IsRequired()
                                 .HasMaxLength(24)
                                 .HasColumnType("nvarchar(24)");
 
                             b1.Property<string>("Expiration")
-                                .IsRequired()
                                 .HasMaxLength(10)
                                 .HasColumnType("nvarchar(10)");
                         });

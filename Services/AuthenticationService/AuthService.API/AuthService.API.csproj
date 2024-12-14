@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\GeneralUsing\GeneralUsing\GeneralUsing.csproj" />
+    <ProjectReference Include="..\..\..\Integration\Integration.csproj" />
   </ItemGroup>
 
 </Project>

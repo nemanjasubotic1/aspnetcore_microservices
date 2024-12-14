@@ -8,7 +8,7 @@ using OrderingService.Domain.Models;
 namespace OrderingService.API.Endpoints.Customers;
 
 public record CreateCustomerRequest(CustomerDTO CustomerDTO);
-public record CreateCustomerResponse(Customer Customer);
+//public record CreateCustomerResponse(Customer Customer);
 
 
 public class CreateCustomerEndpoint : ICarterModule
@@ -21,9 +21,9 @@ public class CreateCustomerEndpoint : ICarterModule
 
             var result = await sender.Send(commad);
 
-            var response = result.Adapt<CreateCustomerResponse>();
+            //var response = result.Adapt<CreateCustomerResponse>();
 
-            return Results.Created($"/customer/{response.Customer.Id}", response);
+            return Results.Created($"/customer/", result);
 
         });
     }

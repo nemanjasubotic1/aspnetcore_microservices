@@ -30,8 +30,7 @@ public static class DependencyInjection
         {
             options.Connection(configuration.GetConnectionString("DefaultConnection")!);
 
-            options.Schema.For<ShoppingCart>().Identity(l => l.Id);
-            options.Schema.For<CartItem>().Identity(l => l.Id);
+            options.Schema.For<ShoppingCart>().Identity(l => l.Id).SoftDeleted();
 
         }).UseLightweightSessions();
 

@@ -24,6 +24,11 @@ public class UpdateCategoryEndpoint : ICarterModule
 
             return Results.Ok(result);
 
-        });
+        }).RequireAuthorization(policy => policy.RequireRole("Admin"))
+        .WithName("UpdateCategory")
+        .Produces<CustomApiResponse>(StatusCodes.Status201Created)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .WithSummary("UpdateCategory")
+        .WithDescription("Serve for updating single category");
     }
 }

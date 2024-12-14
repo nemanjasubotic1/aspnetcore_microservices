@@ -5,9 +5,9 @@ using OrderingService.Application.DTOs;
 using OrderingService.Domain.Models;
 
 namespace OrderingService.Application.Customers.Commands.CreateCustomer;
-public class CreateCustomerCommandHandler(IAppDbContext dbContext) : ICommandHandler<CreateCustomerCommand, CreateCustomerResult>
+public class CreateCustomerCommandHandler(IAppDbContext dbContext) : ICommandHandler<CreateCustomerCommand, CustomApiResponse>
 {
-    public async Task<CreateCustomerResult> Handle(CreateCustomerCommand command, CancellationToken cancellationToken)
+    public async Task<CustomApiResponse> Handle(CreateCustomerCommand command, CancellationToken cancellationToken)
     {
         var customer = new Customer
         {
@@ -21,7 +21,7 @@ public class CreateCustomerCommandHandler(IAppDbContext dbContext) : ICommandHan
         dbContext.Customers.Add(customer);
         await dbContext.SaveChangesAsync(cancellationToken);
 
-        return new CreateCustomerResult(customer);
+        return new CustomApiResponse(Result: customer);
 
     }
 }

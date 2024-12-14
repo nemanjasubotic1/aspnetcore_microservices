@@ -10,3 +10,5 @@ public class ShoppingCartModel
     public decimal Discount { get; set; }
     public decimal CartTotal => CartItems.Sum(l => l.Price * l.Quantity);
 }
+
+

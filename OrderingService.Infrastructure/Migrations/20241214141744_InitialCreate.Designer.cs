@@ -13,8 +13,8 @@ using OrderingService.Infrastructure.Data;
 namespace OrderingService.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241213054510_InitMigration")]
-    partial class InitMigration
+    [Migration("20241214141744_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -139,7 +139,6 @@ namespace OrderingService.Infrastructure.Migrations
                                 .HasColumnType("nvarchar(50)");
 
                             b1.Property<string>("Country")
-                                .IsRequired()
                                 .HasMaxLength(50)
                                 .HasColumnType("nvarchar(50)");
 
@@ -158,12 +157,10 @@ namespace OrderingService.Infrastructure.Migrations
                                 .HasColumnType("nvarchar(50)");
 
                             b1.Property<string>("State")
-                                .IsRequired()
                                 .HasMaxLength(50)
                                 .HasColumnType("nvarchar(50)");
 
                             b1.Property<string>("ZipCode")
-                                .IsRequired()
                                 .HasMaxLength(50)
                                 .HasColumnType("nvarchar(50)");
                         });
@@ -173,7 +170,6 @@ namespace OrderingService.Infrastructure.Migrations
                             b1.IsRequired();
 
                             b1.Property<string>("CVV")
-                                .IsRequired()
                                 .HasMaxLength(3)
                                 .HasColumnType("nvarchar(3)");
 
@@ -182,12 +178,10 @@ namespace OrderingService.Infrastructure.Migrations
                                 .HasColumnType("nvarchar(50)");
 
                             b1.Property<string>("CardNumber")
-                                .IsRequired()
                                 .HasMaxLength(24)
                                 .HasColumnType("nvarchar(24)");
 
                             b1.Property<string>("Expiration")
-                                .IsRequired()
                                 .HasMaxLength(10)
                                 .HasColumnType("nvarchar(10)");
                         });

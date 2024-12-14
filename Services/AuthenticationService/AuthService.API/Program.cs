@@ -7,6 +7,7 @@ using AuthService.API.Utility;
 using Carter;
 using FluentValidation;
 using GeneralUsing.MediatorPipelineBehaviors;
+using Integration.RabbitMQSender;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -44,6 +45,8 @@ builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("ApiSett
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+
+builder.Services.AddScoped<IRabbitMQMessageSender, RabbitMQMessageSender>();
 
 var app = builder.Build();
 

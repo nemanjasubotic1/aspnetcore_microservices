@@ -42,18 +42,23 @@ public class CachedShoppingCartRepository : IShoppingCartRepository
 
     public async Task<ShoppingCart> GetShoppingCartByUserIdAsync(string userId, CancellationToken cancellationToken = default)
     {
-        var cachedCart = await _cache.GetRecordAsync<ShoppingCart>(userId, cancellationToken);
+        //var cachedCart = await _cache.GetRecordAsync<ShoppingCart>(userId, cancellationToken);
 
-        if (cachedCart != null)
-        {
-            return cachedCart;
-        }
+        //if (cachedCart != null)
+        //{
+        //    return cachedCart;
+        //}
 
         var shoppingCart = await _repository.GetShoppingCartByUserIdAsync(userId, cancellationToken);
 
-        await _cache.SetRecordAsync<ShoppingCart>(userId, shoppingCart, null, cancellationToken);
+        //await _cache.SetRecordAsync<ShoppingCart>(userId, shoppingCart, null, cancellationToken);
 
         return shoppingCart;
+    }
+
+    public Task<bool> RemoveItemFromShoppingCart(Guid itemId, string userId, CancellationToken cancellationToken = default)
+    {
+        return _repository.RemoveItemFromShoppingCart(itemId, userId, cancellationToken);
     }
 
     public async Task<bool> RemoveShoppingCart(Guid cartId, CancellationToken cancellationToken = default)

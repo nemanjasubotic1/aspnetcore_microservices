@@ -6,7 +6,7 @@ using ShoppingCart_Service.API.Models.DTOs;
 namespace ShoppingCart_Service.API.ShoppingCarts.EmailShoppingCart;
 
 public record EmailShoppingCartRequest(ShoppingCartDTO ShoppingCartDTO);
-public record EmailShoppingCartResponse(bool IsSucces);
+//public record EmailShoppingCartResponse(bool IsSucces);
 
 public class EmailShoppingCartEndpoint : ICarterModule
 {
@@ -18,9 +18,9 @@ public class EmailShoppingCartEndpoint : ICarterModule
 
             var result = await sender.Send(command);
 
-            var response = result.Adapt<EmailShoppingCartResponse>();
+            //var response = result.Adapt<EmailShoppingCartResponse>();
 
-            return Results.Ok(response);
+            return Results.Ok(result);
         });
     }
 }

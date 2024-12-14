@@ -6,8 +6,8 @@ using ShoppingCart_Service.API.Models.DTOs;
 
 namespace ShoppingCart_Service.API.ShoppingCarts.CreateUpdateShoppingCart;
 
-public record CreateShoppingCartCommand(ShoppingCartDTO ShoppingCartDTO) : ICommand<CreateShoppingCartResult>;
-public record CreateShoppingCartResult(Guid Id);
+public record CreateShoppingCartCommand(ShoppingCartDTO ShoppingCartDTO) : ICommand<CustomApiResponse>;
+//public record CreateShoppingCartResult(Guid Id);
 
 public class CreateShoppingCartCommandValidator : AbstractValidator<CreateShoppingCartCommand>
 {
@@ -19,9 +19,9 @@ public class CreateShoppingCartCommandValidator : AbstractValidator<CreateShoppi
 
 // TODO CartItem Validator
 
-public class CreateShoppingCartCommandHandler(IShoppingCartRepository shoppingCartRepository) : ICommandHandler<CreateShoppingCartCommand, CreateShoppingCartResult>
+public class CreateShoppingCartCommandHandler(IShoppingCartRepository shoppingCartRepository) : ICommandHandler<CreateShoppingCartCommand, CustomApiResponse>
 {
-    public async Task<CreateShoppingCartResult> Handle(CreateShoppingCartCommand request, CancellationToken cancellationToken)
+    public async Task<CustomApiResponse> Handle(CreateShoppingCartCommand request, CancellationToken cancellationToken)
     {
         var cartFromDb = await shoppingCartRepository.GetShoppingCartByUserIdAsync(request.ShoppingCartDTO.UserId, cancellationToken);
 
@@ -37,7 +37,7 @@ public class CreateShoppingCartCommandHandler(IShoppingCartRepository shoppingCa
 
             await shoppingCartRepository.CreateShoppingCart(cart);
 
-            return new CreateShoppingCartResult(cart.Id);
+            return new CustomApiResponse(cart.Id);
         }
         // cart for this user exists, just add items quantity or add new items
         else
@@ -61,6 +61,6 @@ public class CreateShoppingCartCommandHandler(IShoppingCartRepository shoppingCa
             await shoppingCartRepository.UpdateShoppingCart(cartFromDb, cancellationToken);
         }
 
-        return new CreateShoppingCartResult(cartFromDb.Id);
+        return new CustomApiResponse(cartFromDb.Id);
     }
 }

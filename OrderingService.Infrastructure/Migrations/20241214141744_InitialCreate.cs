@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OrderingService.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitMigration : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -41,16 +41,16 @@ namespace OrderingService.Infrastructure.Migrations
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "Draft"),
                     TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     BillingAddress_AddressLine = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    BillingAddress_Country = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    BillingAddress_Country = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     BillingAddress_EmailAddress = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     BillingAddress_FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     BillingAddress_LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    BillingAddress_State = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    BillingAddress_ZipCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Payment_CVV = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false),
+                    BillingAddress_State = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    BillingAddress_ZipCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Payment_CVV = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: true),
                     Payment_CardName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Payment_CardNumber = table.Column<string>(type: "nvarchar(24)", maxLength: 24, nullable: false),
-                    Payment_Expiration = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Payment_CardNumber = table.Column<string>(type: "nvarchar(24)", maxLength: 24, nullable: true),
+                    Payment_Expiration = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },

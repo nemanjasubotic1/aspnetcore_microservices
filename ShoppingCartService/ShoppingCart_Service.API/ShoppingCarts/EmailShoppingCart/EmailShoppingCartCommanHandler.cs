@@ -6,19 +6,19 @@ using ShoppingCart_Service.API.Models.DTOs;
 
 namespace ShoppingCart_Service.API.ShoppingCarts.EmailShoppingCart;
 
-public record EmailShoppingCartCommand(ShoppingCartDTO ShoppingCartDTO) : ICommand<EmailShoppingCartResult>;
-public record EmailShoppingCartResult(bool IsSucces);
+public record EmailShoppingCartCommand(ShoppingCartDTO ShoppingCartDTO) : ICommand<CustomApiResponse>;
+//public record EmailShoppingCartResult(bool IsSucces);
 
 
 public class EmailShoppingCartCommanHandler(IShoppingCartRepository shoppingCartRepository, IMessageService messageService
-    , IConfiguration configuration) : ICommandHandler<EmailShoppingCartCommand, EmailShoppingCartResult>
+    , IConfiguration configuration) : ICommandHandler<EmailShoppingCartCommand, CustomApiResponse>
 {
     string topicName = configuration["TopicsAndQueueNames:ShoppingCartTopic"]!;
 
-    public async Task<EmailShoppingCartResult> Handle(EmailShoppingCartCommand command, CancellationToken cancellationToken)
+    public async Task<CustomApiResponse> Handle(EmailShoppingCartCommand command, CancellationToken cancellationToken)
     {
         await messageService.PublishMessage(command.ShoppingCartDTO, topicName);
 
-        return new EmailShoppingCartResult(true);
+        return new CustomApiResponse();
     }
 }

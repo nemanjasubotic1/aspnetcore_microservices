@@ -3,15 +3,15 @@ using ShoppingCart_Service.API.Data;
 
 namespace ShoppingCart_Service.API.ShoppingCarts.DeleteShoppingCart;
 
-public record DeleteShoppingCartCommand(Guid Id) : ICommand<DeleteShoppingCartResult>;
-public record DeleteShoppingCartResult(bool IsSuccess);
+public record DeleteShoppingCartCommand(Guid Id) : ICommand<CustomApiResponse>;
+//public record DeleteShoppingCartResult(bool IsSuccess);
 
-public class DeleteShoppingCartCommandHandler(IShoppingCartRepository shoppingCartRepository) : ICommandHandler<DeleteShoppingCartCommand, DeleteShoppingCartResult>
+public class DeleteShoppingCartCommandHandler(IShoppingCartRepository shoppingCartRepository) : ICommandHandler<DeleteShoppingCartCommand, CustomApiResponse>
 {
-    public async Task<DeleteShoppingCartResult> Handle(DeleteShoppingCartCommand request, CancellationToken cancellationToken)
+    public async Task<CustomApiResponse> Handle(DeleteShoppingCartCommand request, CancellationToken cancellationToken)
     {
         var isDeleted = await shoppingCartRepository.RemoveShoppingCart(request.Id, cancellationToken);
 
-        return new DeleteShoppingCartResult(isDeleted);
+        return new CustomApiResponse(isDeleted);
     }
 }

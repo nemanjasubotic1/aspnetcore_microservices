@@ -1,15 +1,11 @@
 ﻿using Carter;
-using GeneralUsing.CQRS;
-using Mapster;
 using MediatR;
-using Microsoft.Identity.Client;
-using OrderingService.Application.DTOs;
 using OrderingService.Application.Orders.Queries.GetOrderByCustomerId;
 
 namespace OrderingService.API.Endpoints.Order;
 
 //public record GetOrderByCustomerIdQuery(Guid CustomerId) : IQuery<GetOrderByCustimerIdResult>;
-public record GetOrderByCustimerIdResponse(OrderHeaderDTO? OrderHeaderDTO = null);
+//public record GetOrderByCustimerIdResponse(OrderHeaderDTO? OrderHeaderDTO = null);
 
 public class GetOrderByCustomerIdEndpoint : ICarterModule
 {
@@ -19,9 +15,13 @@ public class GetOrderByCustomerIdEndpoint : ICarterModule
         {
             var result = await sender.Send(new GetOrderByCustomerIdQuery(CustomerId));
 
-            var response = new GetOrderByCustimerIdResponse(result.OrderHeaderDTO);
 
-            return Results.Ok(response);
+            if (result.Errors != null && result.Errors.Any())
+            {
+                return Results.BadRequest(result.Errors.Select(l => l.ErrorMessage));
+            }
+
+            return Results.Ok(result);
 
         });
     }

@@ -43,6 +43,32 @@ public class ShoppingCartRepository : IShoppingCartRepository
         return shoppingCart;
     }
 
+    public async Task<bool> RemoveItemFromShoppingCart(Guid itemId, string userId, CancellationToken cancellationToken = default)
+    {
+        var shoppingCart = await _session.Query<ShoppingCart>().Where(l => l.UserId == userId).FirstOrDefaultAsync();
+
+        if (shoppingCart == null)
+            return false;
+
+        var itemFromCart = shoppingCart.CartItems.FirstOrDefault(l => l.Id == itemId);
+
+        shoppingCart.CartItems.Remove(itemFromCart);
+
+        if (shoppingCart.CartItems.Count == 0)
+        {
+            await RemoveShoppingCart(shoppingCart.Id, cancellationToken);
+
+            return true;
+        }
+
+        _session.Update<ShoppingCart>(shoppingCart);
+
+        await _session.SaveChangesAsync(cancellationToken);
+
+        return true;
+
+    }
+
     public async Task<bool> RemoveShoppingCart(Guid cartId, CancellationToken cancellationToken = default)
     {
         var cart = await GetShoppingCartByIdAsync(cartId, cancellationToken);

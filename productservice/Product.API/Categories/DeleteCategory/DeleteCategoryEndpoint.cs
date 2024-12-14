@@ -19,6 +19,11 @@ public class DeleteCategoryEndpoint : ICarterModule
 
             return Results.Ok(result);
 
-        });
+        }).RequireAuthorization(policy => policy.RequireRole("Admin"))
+        .WithName("DeleteCategory")
+        .Produces<CustomApiResponse>(StatusCodes.Status201Created)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .WithSummary("DeleteCategory")
+        .WithDescription("Serve for getting deleting category");
     }
 }

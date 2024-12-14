@@ -1,6 +1,7 @@
 ﻿using GeneralUsing.CQRS;
 using Mapster;
 using MediatR;
+using Newtonsoft.Json;
 using OrderingService.Application.Customers.Commands.CreateCustomer;
 using OrderingService.Application.Customers.Queries.GetCustomerById;
 using OrderingService.Application.Data;
@@ -10,9 +11,9 @@ using OrderingService.Domain.Models;
 using OrderingService.Domain.ValueModels;
 
 namespace OrderingService.Application.Orders.Commands.CreateOrder;
-public class CreateOrderCommandHandler(IAppDbContext dbContext, ISender sender) : ICommandHandler<CreateOrderCommand, CreateOrderResult>
+public class CreateOrderCommandHandler(IAppDbContext dbContext, ISender sender) : ICommandHandler<CreateOrderCommand, CustomApiResponse>
 {
-    public async Task<CreateOrderResult> Handle(CreateOrderCommand command, CancellationToken cancellationToken)
+    public async Task<CustomApiResponse> Handle(CreateOrderCommand command, CancellationToken cancellationToken)
     {
         var orderHeader = new OrderHeader();
 
@@ -25,9 +26,13 @@ public class CreateOrderCommandHandler(IAppDbContext dbContext, ISender sender) 
         else
         {
             // create new customer first 
-            var result = await sender.Send(new CreateCustomerCommand(command.CustomerDTO));
+            var newCustomerCommand = await sender.Send(new CreateCustomerCommand(command.CustomerDTO));
 
-            orderHeader = await CreateNewOrder(command.OrderHeaderDTO, result.Customer);
+            var customerFromDb = newCustomerCommand.Result as Customer;
+
+            //var customer = JsonConvert.DeserializeObject<Customer>(customerFromDb);
+
+            orderHeader = await CreateNewOrder(command.OrderHeaderDTO, customerFromDb);
         }
 
         dbContext.OrderHeaders.Add(orderHeader);
@@ -49,7 +54,7 @@ public class CreateOrderCommandHandler(IAppDbContext dbContext, ISender sender) 
             Console.WriteLine(e.Message.ToString());
         }
 
-        return new CreateOrderResult(orderHeader.Id);
+        return new CustomApiResponse(orderHeader.Id);
 
     }
 
@@ -57,21 +62,21 @@ public class CreateOrderCommandHandler(IAppDbContext dbContext, ISender sender) 
     {
         var billingAddress = new Address
         {
-            FirstName = orderHeaderDTO.BillingAddress.FirstName,
-            LastName = orderHeaderDTO.BillingAddress.LastName,
-            EmailAddress = orderHeaderDTO.BillingAddress.EmailAddress,
-            AddressLine = orderHeaderDTO.BillingAddress.AddressLine,
-            Country = orderHeaderDTO.BillingAddress.Country,
-            State = orderHeaderDTO.BillingAddress.State,
-            ZipCode = orderHeaderDTO.BillingAddress.ZipCode,
+            FirstName = orderHeaderDTO.FirstName,
+            LastName = orderHeaderDTO.LastName,
+            EmailAddress = orderHeaderDTO.EmailAddress,
+            AddressLine = orderHeaderDTO.AddressLine,
+            Country = orderHeaderDTO.Country,
+            State = orderHeaderDTO.State,
+            ZipCode = orderHeaderDTO.ZipCode,
         };
 
         var payment = new Payment
         {
-            CardName = orderHeaderDTO.Payment.CardName,
-            CardNumber = orderHeaderDTO.Payment.CardNumber,
-            Expiration = orderHeaderDTO.Payment.Expiration,
-            CVV = orderHeaderDTO.Payment.CVV,
+            CardName = orderHeaderDTO.CardName,
+            CardNumber = orderHeaderDTO.CardNumber,
+            Expiration = orderHeaderDTO.Expiration,
+            CVV = orderHeaderDTO.CVV,
         };
 
 

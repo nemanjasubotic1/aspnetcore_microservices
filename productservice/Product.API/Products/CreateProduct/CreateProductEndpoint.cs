@@ -25,6 +25,11 @@ public class CreateProductEndpoint : ICarterModule
 
             return Results.Created($"/product", result);
 
-        });
+        }).RequireAuthorization(policy => policy.RequireRole("Admin"))
+        .WithName("CreateProduct")
+        .Produces<CustomApiResponse>(StatusCodes.Status201Created)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .WithSummary("CreateProduct")
+        .WithDescription("Serve for creating single product");
     }
 }

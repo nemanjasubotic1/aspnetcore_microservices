@@ -22,7 +22,6 @@ app.UseHttpsRedirection();
 
 app.UseProductServices();
 
-
 app.Run();
 
 

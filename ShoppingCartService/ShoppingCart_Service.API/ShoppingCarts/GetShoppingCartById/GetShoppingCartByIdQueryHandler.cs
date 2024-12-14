@@ -6,13 +6,13 @@ using ShoppingCart_Service.API.Models.DTOs;
 
 namespace ShoppingCart_Service.API.ShoppingCarts.GetShoppingCartById;
 
-public record GetShoppingCartByIdQuery(Guid Id) : IQuery<GetShoppingCartByIdResult>;
-public record GetShoppingCartByIdResult(ShoppingCartDTO ShoppingCartDTO);
+public record GetShoppingCartByIdQuery(Guid Id) : IQuery<CustomApiResponse>;
+//public record GetShoppingCartByIdResult(ShoppingCartDTO ShoppingCartDTO);
 
 
-public class GetShoppingCartByIdQueryHandler(IShoppingCartRepository shoppingCartRepository) : IQueryHandler<GetShoppingCartByIdQuery, GetShoppingCartByIdResult>
+public class GetShoppingCartByIdQueryHandler(IShoppingCartRepository shoppingCartRepository) : IQueryHandler<GetShoppingCartByIdQuery, CustomApiResponse>
 {
-    public async Task<GetShoppingCartByIdResult> Handle(GetShoppingCartByIdQuery query, CancellationToken cancellationToken)
+    public async Task<CustomApiResponse> Handle(GetShoppingCartByIdQuery query, CancellationToken cancellationToken)
     {
         var shoppingCart = await shoppingCartRepository.GetShoppingCartByIdAsync(query.Id, cancellationToken);
 
@@ -21,6 +21,6 @@ public class GetShoppingCartByIdQueryHandler(IShoppingCartRepository shoppingCar
             throw new NotFoundException($"The cart with id {query.Id} was not found");
         }
 
-        return new GetShoppingCartByIdResult(shoppingCart.Adapt<ShoppingCartDTO>());
+        return new CustomApiResponse(shoppingCart.Adapt<ShoppingCartDTO>());
     }
 }

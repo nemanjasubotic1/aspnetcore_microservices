@@ -89,8 +89,7 @@ public class AuthenticationController : Controller
         // authentication cookie, adding claims from the token
         var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
 
-        identity.AddClaim(new Claim(JwtRegisteredClaimNames.Sub, jwtToken.Claims.FirstOrDefault(l => l.Type == JwtRegisteredClaimNames.Sub)!.Value));
-
+        identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, jwtToken.Claims.FirstOrDefault(l => l.Type == JwtRegisteredClaimNames.Sub).Value));
         identity.AddClaim(new Claim(ClaimTypes.Role, jwtToken.Claims.FirstOrDefault(l => l.Type == "role").Value));
         identity.AddClaim(new Claim(ClaimTypes.Name, jwtToken.Claims.FirstOrDefault(l => l.Type == JwtRegisteredClaimNames.Name).Value));
         identity.AddClaim(new Claim(ClaimTypes.Email, jwtToken.Claims.FirstOrDefault(l => l.Type == JwtRegisteredClaimNames.Email).Value));

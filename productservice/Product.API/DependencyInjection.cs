@@ -1,6 +1,7 @@
 ﻿using Carter;
 using FluentValidation;
 using GeneralUsing.Exceptions;
+using GeneralUsing.Extensions;
 using GeneralUsing.MediatorPipelineBehaviors;
 using Marten;
 using ProductCategory.API.Data;
@@ -12,6 +13,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddProductServices(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddAppAuthentication(configuration);
 
         services.AddCarter();
 
@@ -39,6 +41,9 @@ public static class DependencyInjection
 
         services.AddExceptionHandler<CustomExceptionHandler>();
 
+
+        services.AddAuthorization();
+
         return services;
     }
 
@@ -47,6 +52,9 @@ public static class DependencyInjection
         app.MapCarter();
 
         app.UseExceptionHandler(options => { });
+
+        app.UseAuthentication();
+        app.UseAuthorization();
 
         return app;
     }

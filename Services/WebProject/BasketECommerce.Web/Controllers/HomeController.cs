@@ -2,20 +2,28 @@ using BasketECommerce.Web.Models;
 using BasketECommerce.Web.Models.ProductCategory;
 using BasketECommerce.Web.Models.ShoppingCart;
 using BasketECommerce.Web.Services.ProductCategory;
+using BasketECommerce.Web.Services.ShoppingCart;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Refit;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace BasketECommerce.Web.Controllers;
+
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    
     private readonly IProductService _productService;
-    public HomeController(ILogger<HomeController> logger, IProductService productService)
+
+    private readonly IShoppingCartService _shoppingCartService;
+
+    public HomeController(ILogger<HomeController> logger, IProductService productService, IShoppingCartService shoppingCartService)
     {
         _logger = logger;
         _productService = productService;
+        _shoppingCartService = shoppingCartService;
     }
 
     public async Task<IActionResult> Index()
@@ -61,15 +69,41 @@ public class HomeController : Controller
         return View(cartItemModel);
     }
 
-
-
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> Details(CartItemModel cartItemModel)
     {
-        
+        var claimsIdentity = (ClaimsIdentity)User.Identity!;
+        var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
+        ShoppingCartModel model = new()
+        {
+            Discount = 0,
+            UserId = claim.Value,
+            CartItems =
+            {
+                cartItemModel
+            }
+        };
 
-        return View(cartItemModel);
+        var shoppingCartRequest = new CreateShoppingCartRequest(model);
+
+        var apiResponse = await _shoppingCartService.CreateShoppingCart(shoppingCartRequest);
+
+        if (!apiResponse.IsSuccessStatusCode && apiResponse.Content == null)
+        {
+            var errorResponse = apiResponse.Error.Content;
+
+            TempData["error"] = "Error occured.";
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        int numberOfShoppingCartItems = await SD.GetNumberOfCartItems(_shoppingCartService, claim);
+
+        HttpContext.Session.SetInt32(SD.SessionCart, numberOfShoppingCartItems);
+
+        return RedirectToAction(nameof(Index));
     }
 
 

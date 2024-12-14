@@ -21,6 +21,11 @@ public class GetAllProductsEndpoint : ICarterModule
             //var response = result.Adapt<GetAllProductsResponse>();
 
             return Results.Ok(result);
-        });
+        })
+        .WithName("GetAllProducts")
+        .Produces<CustomApiResponse>(StatusCodes.Status201Created)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .WithSummary("GetAllProducts")
+        .WithDescription("Serve for getting all products");
     }
 }

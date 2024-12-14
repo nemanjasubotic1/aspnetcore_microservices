@@ -7,7 +7,7 @@ using OrderingService.Application.DTOs;
 namespace OrderingService.API.Endpoints.Customers;
 
 //public record GetCustomerByIdRequest(Guid Id);
-public record GetCustomerByIdResponse(bool DoesExist, CustomerDTO? CustomerDTO = null);
+//public record GetCustomerByIdResponse(bool DoesExist, CustomerDTO? CustomerDTO = null);
 
 public class GetCustomerEndpoint : ICarterModule
 {
@@ -18,9 +18,9 @@ public class GetCustomerEndpoint : ICarterModule
 
             var query = await sender.Send(new GetCustomerByIdQuery(Id));
 
-            var response = query.Adapt<GetCustomerByIdResponse>();
+            //var response = query.Adapt<GetCustomerByIdResponse>();
 
-            return Results.Ok(response);
+            return Results.Ok(query);
 
         });
     }

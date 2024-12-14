@@ -1,13 +1,14 @@
-﻿using GeneralUsing.CQRS;
+﻿using FluentValidation.Results;
+using GeneralUsing.CQRS;
 using Mapster;
 using OrderingService.Application.Data;
 using OrderingService.Domain.Models;
 
 namespace OrderingService.Application.Customers.Commands.UpdateCustomerCommand;
 
-public class UpdateCustomerCommandHandler(IAppDbContext dbContext) : ICommandHandler<UpdateCustomerCommand, UpdateCustomerCommandResult>
+public class UpdateCustomerCommandHandler(IAppDbContext dbContext) : ICommandHandler<UpdateCustomerCommand, CustomApiResponse>
 {
-    public async Task<UpdateCustomerCommandResult> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
+    public async Task<CustomApiResponse> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
     {
         var customer = request.CustomerDTO.Adapt<Customer>();
 
@@ -19,10 +20,10 @@ public class UpdateCustomerCommandHandler(IAppDbContext dbContext) : ICommandHan
         }
         catch (Exception)
         {
-            return new UpdateCustomerCommandResult(false);
+            return new CustomApiResponse(null, false, [new ValidationFailure("", "Something went wrong with update")]);
         }
 
-        return new UpdateCustomerCommandResult(true);
+        return new CustomApiResponse(null, true);
     }
 }
 

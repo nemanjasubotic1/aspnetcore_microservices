@@ -21,6 +21,11 @@ public class GetAllCategoriesEnpoint : ICarterModule
             //var response = result.Adapt<GetAllCategoriesResponse>();
 
             return Results.Ok(result);
-        });
+        }).RequireAuthorization(policy => policy.RequireRole("Admin"))
+        .WithName("GetCateogries")
+        .Produces<CustomApiResponse>(StatusCodes.Status201Created)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .WithSummary("GetCateogries")
+        .WithDescription("Serve for getting all categories");
     }
 }

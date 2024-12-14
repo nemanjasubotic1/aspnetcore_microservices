@@ -6,9 +6,8 @@ using OrderingService.Application.Orders.Commands.CreateOrder;
 
 namespace OrderingService.API.Endpoints.Order;
 
-
 public record CreateOrderRequest(OrderHeaderDTO OrderHeaderDTO, CustomerDTO CustomerDTO);
-public record CreateOrderResponse(Guid Id);
+//public record CreateOrderResponse(Guid Id);
 
 
 public class CreateOrderEndpoint : ICarterModule
@@ -21,9 +20,9 @@ public class CreateOrderEndpoint : ICarterModule
 
             var result = await sender.Send(command);
 
-            var response = result.Adapt<CreateOrderResponse>();
+            //var response = result.Adapt<CreateOrderResponse>();
 
-            return Results.Created($"/order/{response.Id}", response);
+            return Results.Created($"/order/", result);
 
         });
     }
