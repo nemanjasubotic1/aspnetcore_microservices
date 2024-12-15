@@ -11,7 +11,7 @@ public class CreateCustomerCommandHandler(IAppDbContext dbContext) : ICommandHan
     {
         var customer = new Customer
         {
-            UserId = command.CustomerDTO.UserId,
+            Id = command.CustomerDTO.Id,
             Username = command.CustomerDTO.Username,
             Name = command.CustomerDTO.Name,
             //LastName = command.CustomerDTO.LastName,

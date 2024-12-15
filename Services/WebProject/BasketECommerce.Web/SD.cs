@@ -9,6 +9,9 @@ public static class SD
 {
     public static string SessionCart = "SessionShoppingCart";
 
+    public static string Admin_Role = "Admin";
+    public static string Customer_Role = "Customer";
+
     public enum OrderStatus
     {
         Draft, Pending, Completed, Canceled

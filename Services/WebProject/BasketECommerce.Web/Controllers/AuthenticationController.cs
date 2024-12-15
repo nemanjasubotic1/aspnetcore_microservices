@@ -59,9 +59,35 @@ public class AuthenticationController : Controller
         return LocalRedirect(loginRequestDTO.ReturnUrl);
     }
 
-    public IActionResult Register()
+    public IActionResult Register(string? returnUrl = null)
     {
-        return View();
+        returnUrl ??= Url.Content("~/");
+
+        RegistrationRequestDTO registrationRequestDTO = new();
+
+        registrationRequestDTO.ReturnUrl = returnUrl;
+
+        return View(registrationRequestDTO);
+    }
+
+
+    [HttpPost]
+    public async Task<IActionResult> Register(RegistrationRequestDTO registrationRequestDTO)
+    {
+        var authRequest = new UserRegisterRequest(registrationRequestDTO);
+
+        var apiResponse = await _authService.Register(authRequest);
+
+        if (!apiResponse.IsSuccessStatusCode)
+        {
+            var errorResponse = apiResponse.Error.Content;
+
+            TempData["error"] = errorResponse ?? "Error occured";
+
+            return RedirectToAction(nameof(Register));
+        }
+
+        return !string.IsNullOrEmpty(registrationRequestDTO.ReturnUrl) ? LocalRedirect(registrationRequestDTO.ReturnUrl) : RedirectToAction(nameof(Login));
     }
 
     public async Task<IActionResult> Logout()

@@ -9,11 +9,11 @@ using System.ComponentModel.DataAnnotations;
 namespace OrderingService.Application.Orders.Queries.GetOrderByCustomerId;
 
 
-public class GetOrderByCustomerIdQueryHandler(IAppDbContext dbContext) : IQueryHandler<GetOrderByCustomerIdQuery, CustomApiResponse>
+public class GetOrderByUserIdQueryHandler(IAppDbContext dbContext) : IQueryHandler<GetOrderByUserIdQuery, CustomApiResponse>
 {
-    public async Task<CustomApiResponse> Handle(GetOrderByCustomerIdQuery request, CancellationToken cancellationToken)
+    public async Task<CustomApiResponse> Handle(GetOrderByUserIdQuery request, CancellationToken cancellationToken)
     {
-        var orderFromDb = await dbContext.OrderHeaders.FirstOrDefaultAsync(l => l.CustomerId == request.CustomerId);
+        var orderFromDb = await dbContext.OrderHeaders.FirstOrDefaultAsync(l => l.CustomerId == request.UserId);
 
         if (orderFromDb == null)
         {

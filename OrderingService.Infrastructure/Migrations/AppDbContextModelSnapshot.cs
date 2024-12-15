@@ -26,7 +26,6 @@ namespace OrderingService.Infrastructure.Migrations
             modelBuilder.Entity("OrderingService.Domain.Models.Customer", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("CreatedAt")
@@ -54,9 +53,6 @@ namespace OrderingService.Infrastructure.Migrations
 
                     b.Property<decimal>("SpentMoney")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Username")
                         .IsRequired()

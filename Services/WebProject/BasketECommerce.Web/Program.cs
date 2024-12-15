@@ -33,7 +33,7 @@ builder.Services.AddRefitClient<IShoppingCartService>()
         config.BaseAddress = new Uri(builder.Configuration["ApiSettings:GatewayAddress"]!);
     }).AddHttpMessageHandler<AuthenticatedHttpClientHandler>();
 
-builder.Services.AddRefitClient<IOrderingService>()
+    builder.Services.AddRefitClient<IOrderingService>()
     .ConfigureHttpClient(config =>
     {
         config.BaseAddress = new Uri(builder.Configuration["ApiSettings:GatewayAddress"]!);
@@ -60,7 +60,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(60);
+    options.IdleTimeout = TimeSpan.FromMinutes(15);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });

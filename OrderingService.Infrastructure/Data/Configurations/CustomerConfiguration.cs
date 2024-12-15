@@ -9,9 +9,10 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
     {
         builder.HasKey(l => l.Id);
 
+        builder.Property(l => l.Id).ValueGeneratedNever();
+
         builder.Property(l => l.Username).IsRequired();
         builder.Property(l => l.Name).IsRequired();
-        //builder.Property(l => l.LastName).IsRequired();
         builder.Property(l => l.EmailAddress).IsRequired();
     }
 }

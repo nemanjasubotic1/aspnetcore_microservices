@@ -79,16 +79,9 @@ public class AuthenticationService : IAuthenticationService
 
         var userExist = await _db.ApplicationUsers.FirstOrDefaultAsync(l => l.Email.ToLower() == registrationRequestDTO.Email.ToLower());
 
-        var roleExist = await _roleManager.RoleExistsAsync(registrationRequestDTO.RoleName);
-
         if (userExist != null)
         {
             return $"Error encountered, user with email {registrationRequestDTO.Email} already exist";
-        }
-
-        if (!roleExist)
-        {
-            return $"Error encountered, role {registrationRequestDTO.RoleName} dont exist";
         }
 
         try

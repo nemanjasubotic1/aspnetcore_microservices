@@ -17,7 +17,7 @@ public class CreateOrderCommandHandler(IAppDbContext dbContext, ISender sender) 
     {
         var orderHeader = new OrderHeader();
 
-        var customerQuery = await sender.Send(new GetCustomerByUserIdQuery(command.CustomerDTO.UserId));
+        var customerQuery = await sender.Send(new GetCustomerByIdQuery(command.CustomerDTO.Id));
 
         if (customerQuery != null && customerQuery.DoesExist && customerQuery.Customer != null)
         {

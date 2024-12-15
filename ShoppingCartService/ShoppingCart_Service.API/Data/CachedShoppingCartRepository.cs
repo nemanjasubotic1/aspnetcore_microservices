@@ -42,16 +42,7 @@ public class CachedShoppingCartRepository : IShoppingCartRepository
 
     public async Task<ShoppingCart> GetShoppingCartByUserIdAsync(string userId, CancellationToken cancellationToken = default)
     {
-        //var cachedCart = await _cache.GetRecordAsync<ShoppingCart>(userId, cancellationToken);
-
-        //if (cachedCart != null)
-        //{
-        //    return cachedCart;
-        //}
-
         var shoppingCart = await _repository.GetShoppingCartByUserIdAsync(userId, cancellationToken);
-
-        //await _cache.SetRecordAsync<ShoppingCart>(userId, shoppingCart, null, cancellationToken);
 
         return shoppingCart;
     }

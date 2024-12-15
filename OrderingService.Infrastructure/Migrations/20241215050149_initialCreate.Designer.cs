@@ -13,8 +13,8 @@ using OrderingService.Infrastructure.Data;
 namespace OrderingService.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241214141744_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20241215050149_initialCreate")]
+    partial class initialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,7 +29,6 @@ namespace OrderingService.Infrastructure.Migrations
             modelBuilder.Entity("OrderingService.Domain.Models.Customer", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("CreatedAt")
@@ -57,9 +56,6 @@ namespace OrderingService.Infrastructure.Migrations
 
                     b.Property<decimal>("SpentMoney")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Username")
                         .IsRequired()

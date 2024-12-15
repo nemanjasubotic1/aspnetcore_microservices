@@ -1,5 +1,4 @@
 ﻿using GeneralUsing.CQRS;
-using OrderingService.Application.DTOs;
 using OrderingService.Domain.Models;
 
 namespace OrderingService.Application.Customers.Queries.GetCustomerById;

@@ -86,7 +86,7 @@ public class CartController : Controller
 
         CustomerDTO customerDTO = new()
         {
-            UserId = new Guid(userId),
+            Id = new Guid(userId),
             Username = emailAddress,
             Name = name,
             EmailAddress = emailAddress

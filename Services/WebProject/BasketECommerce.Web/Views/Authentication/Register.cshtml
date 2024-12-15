@@ -1,7 +1,9 @@
 ﻿@model RegistrationRequestDTO
 
 <form method="post">
+    <
     <div class="contaier border p-4">
+        <input asp-for="ReturnUrl" hidden />
         <div class="row text-center">
             <h1>Register</h1>
         </div>
@@ -15,10 +17,6 @@
                 <div class="col-12 col-md-6 offset-md-3 pb-2">
                     <input asp-for="Name" class="form-control" placeholder="Name..." />
                     <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-                <div class="col-12 col-md-6 offset-md-3 pb-2">
-                    <input asp-for="PhoneNumber" class="form-control" placeholder="Phone Number..." />
-                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                 </div>
                 <div class="col-12 col-md-6 offset-md-3 pb-2">
                     <input asp-for="Password" class="form-control" placeholder="Password..." />
