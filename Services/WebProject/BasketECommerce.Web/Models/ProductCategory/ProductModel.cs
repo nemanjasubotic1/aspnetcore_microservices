@@ -5,16 +5,16 @@ namespace BasketECommerce.Web.Models.ProductCategory;
 public class ProductModel
 {
     public Guid Id { get; set; }
-    public string Name { get; set; } = default!;
-    public string? Description { get; set; } = default!;
-    public decimal Price { get; set; } = default!;
-    public string? ImageUrl { get; set; } = default!;
-    public DateOnly YearOfProduction { get; set; } = default!;
+    public string? Name { get; set; }
+    public string? Description { get; set; } 
+    public decimal Price { get; set; }
+    public string? ImageUrl { get; set; }
+    public DateOnly YearOfProduction { get; set; } 
     public Guid CategoryId { get; set; }
     public string Category { get; set; }
 
-    // wrapper models
 
-    public record CreateProductRequest(ProductModel ProductDTO);
-    public record UpdateProductRequest(ProductModel ProductDTO);
+
+
+ 
 }

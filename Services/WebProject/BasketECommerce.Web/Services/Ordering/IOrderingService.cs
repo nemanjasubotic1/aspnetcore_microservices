@@ -20,6 +20,6 @@ public interface IOrderingService
 
 
     [Get("/order")]
-    Task<ApiResponse<CustomApiResponse>> GetAllOrders();
+    Task<ApiResponse<CustomApiResponse>> GetAllOrders([Body] GetAllOrdersQuery request);
 
 }

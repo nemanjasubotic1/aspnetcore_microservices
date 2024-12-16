@@ -1,5 +1,6 @@
 ﻿using BasketECommerce.Web.Models.ShoppingCart;
 using BasketECommerce.Web.Services.ShoppingCart;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System.Security.Claims;
 
@@ -9,8 +10,8 @@ public static class SD
 {
     public static string SessionCart = "SessionShoppingCart";
 
-    public static string Admin_Role = "Admin";
-    public static string Customer_Role = "Customer";
+    public const string Admin_Role = "Admin";
+    public const string Customer_Role = "Customer";
 
     public enum OrderStatus
     {

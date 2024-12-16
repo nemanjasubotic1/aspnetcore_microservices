@@ -1,4 +1,5 @@
 ﻿using BasketECommerce.Web.Models;
+using BasketECommerce.Web.Models.ProductCategory;
 using Refit;
 using static BasketECommerce.Web.Models.ProductCategory.ProductModel;
 

@@ -1,6 +1,6 @@
 ﻿using Carter;
-using Mapster;
 using MediatR;
+using OrderingService.Application;
 using OrderingService.Application.DTOs;
 using OrderingService.Application.Orders.Commands.CreateOrder;
 
@@ -24,6 +24,11 @@ public class CreateOrderEndpoint : ICarterModule
 
             return Results.Created($"/order/", result);
 
-        });
+        }).RequireAuthorization()
+        .WithName("CreateOrder")
+        .Produces<CustomApiResponse>(StatusCodes.Status201Created)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .WithSummary("CreateOrder")
+        .WithDescription("Serve for changins making the new order");
     }
 }

@@ -84,7 +84,7 @@
                                 </li>
                             </ul>
 
-                            @if (User.IsInRole(SD.Admin_Role))
+                            @if (User.IsInRole(SD.Admin_Role) && Model.Status == "Pending")
                             {
                                 <input type="submit" class="btn btn-success form-control my-1" value="Verify Order" />
                             }

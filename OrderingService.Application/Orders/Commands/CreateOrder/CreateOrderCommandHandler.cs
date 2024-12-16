@@ -1,7 +1,6 @@
 ﻿using GeneralUsing.CQRS;
 using Mapster;
 using MediatR;
-using Newtonsoft.Json;
 using OrderingService.Application.Customers.Commands.CreateCustomer;
 using OrderingService.Application.Customers.Queries.GetCustomerById;
 using OrderingService.Application.Data;

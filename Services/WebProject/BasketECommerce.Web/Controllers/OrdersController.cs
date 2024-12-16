@@ -1,9 +1,14 @@
 ﻿using BasketECommerce.Web.Models.Orders;
 using BasketECommerce.Web.Services.Ordering;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Security.Claims;
 
 namespace BasketECommerce.Web.Controllers;
+
+
+[Authorize]
 public class OrdersController : Controller
 {
     private readonly IOrderingService _orderingService;
@@ -59,7 +64,14 @@ public class OrdersController : Controller
     [HttpGet]
     public async Task<IActionResult> GetAllOrders()
     {
-        var apiResponse = await _orderingService.GetAllOrders();
+
+        var apiResponse = await _orderingService.GetAllOrders(new GetAllOrdersQuery());
+
+        if (!User.IsInRole(SD.Admin_Role))
+        {
+            var userId = User.Claims.Where(l => l.Type == ClaimTypes.NameIdentifier)?.FirstOrDefault()?.Value;
+            apiResponse = await _orderingService.GetAllOrders(new GetAllOrdersQuery(CustomerId: new Guid(userId)));
+        }
 
         if (!apiResponse.IsSuccessStatusCode)
             return BadRequest(apiResponse);

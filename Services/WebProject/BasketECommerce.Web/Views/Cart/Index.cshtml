@@ -75,11 +75,14 @@
                 <div class="col-6 col-md-3 ">
                     <button type="submit" class="btn btn-outline-danger form-control">Email Cart</button>
                 </div>
-                <div class="col-6 col-md-3 offset-md-6">
-                    <a asp-controller="Cart" asp-action="Checkout" class="btn btn-success form-control ">
-                        Checkout
-                    </a>
-                </div>
+                @if (Model.CartItems != null && Model.CartItems.Count > 0)
+                {
+                    <div class="col-6 col-md-3 offset-md-6">
+                        <a asp-controller="Cart" asp-action="Checkout" class="btn btn-success form-control ">
+                            Checkout
+                        </a>
+                    </div>
+                }
             </div>
         </div>
     </div>

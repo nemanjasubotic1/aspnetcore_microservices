@@ -13,7 +13,7 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductComm
 {
     public CreateProductCommandValidator()
     {
-        RuleFor(l => l.ProductDTO.CategoryId).NotEmpty().WithMessage("The Category is requied");
+        RuleFor(l => l.ProductDTO.Name).NotEmpty().WithMessage("The Category name is requied");
     }
 }
 

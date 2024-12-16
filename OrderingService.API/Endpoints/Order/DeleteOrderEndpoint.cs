@@ -2,6 +2,7 @@
 using GeneralUsing.CQRS;
 using Mapster;
 using MediatR;
+using OrderingService.Application;
 using OrderingService.Application.Orders.Commands.DeleteOrder;
 
 namespace OrderingService.API.Endpoints.Order;
@@ -20,6 +21,12 @@ public class DeleteOrderEndpoint : ICarterModule
             var response = result.Adapt<DeleteOrderResponse>();
 
             return Results.Ok(response);
-        });
+
+        }).RequireAuthorization()
+        .WithName("DeleteOrder")
+        .Produces<CustomApiResponse>(StatusCodes.Status201Created)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .WithSummary("DeleteOrder")
+        .WithDescription("Serve for changins deleting the order");
     }
 }

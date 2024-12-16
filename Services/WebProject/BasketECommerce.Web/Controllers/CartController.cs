@@ -4,12 +4,14 @@ using BasketECommerce.Web.Models.ShoppingCart;
 using BasketECommerce.Web.Services.Ordering;
 using BasketECommerce.Web.Services.ProductCategory;
 using BasketECommerce.Web.Services.ShoppingCart;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Runtime.InteropServices;
 using System.Security.Claims;
 
 namespace BasketECommerce.Web.Controllers;
+
+[Authorize]
 public class CartController : Controller
 {
     private readonly IShoppingCartService _shoppingCartService;

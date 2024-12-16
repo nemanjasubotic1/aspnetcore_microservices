@@ -1,7 +1,7 @@
 ﻿using Carter;
 using MediatR;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using OrderingService.Application;
 using OrderingService.Application.Orders.Commands.ChangeOrderStatus;
 
 namespace OrderingService.API.Endpoints.Order;
@@ -22,6 +22,11 @@ public class ChangeOrderStatusEndpoint : ICarterModule
             }
 
             return Results.Ok(result);
-        });
+        }).RequireAuthorization(policy => policy.RequireRole("Admin"))
+        .WithName("ChangeOrderStatus")
+        .Produces<CustomApiResponse>(StatusCodes.Status201Created)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .WithSummary("ChangeOrderStatus")
+        .WithDescription("Serve for changins status of the order");
     }
 }

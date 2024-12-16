@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace BasketECommerce.Web.Controllers;
 
-[Authorize(Roles = "Admin")]
+[Authorize(Roles = SD.Admin_Role)]
 public class CategoryController : Controller
 {
     private readonly ICategoryService _categoryService;

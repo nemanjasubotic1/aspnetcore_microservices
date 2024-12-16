@@ -1,6 +1,7 @@
 ﻿using Carter;
 using Mapster;
 using MediatR;
+using OrderingService.Application;
 using OrderingService.Application.Customers.Commands.CreateCustomer;
 using OrderingService.Application.DTOs;
 using OrderingService.Domain.Models;
@@ -25,6 +26,11 @@ public class CreateCustomerEndpoint : ICarterModule
 
             return Results.Created($"/customer/", result);
 
-        });
+        }).RequireAuthorization()
+        .WithName("CreateCustomer")
+        .Produces<CustomApiResponse>(StatusCodes.Status201Created)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .WithSummary("CreateCustomer")
+        .WithDescription("Serve for creating customer with creation of the order if customer dont exist");
     }
 }

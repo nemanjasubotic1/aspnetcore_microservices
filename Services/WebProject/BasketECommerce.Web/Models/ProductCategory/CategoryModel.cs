@@ -9,7 +9,4 @@ public class CategoryModel
     public string Description { get; set; } = default!;
 }
 
-// wrapper models
 
-public record CreateCategoryRequest(CategoryModel CategoryDTO);
-public record UpdateCategoryRequest(CategoryModel CategoryDTO);

@@ -1,8 +1,7 @@
 ﻿using Carter;
-using Mapster;
 using MediatR;
+using OrderingService.Application;
 using OrderingService.Application.Customers.Queries.GetCustomerById;
-using OrderingService.Application.DTOs;
 
 namespace OrderingService.API.Endpoints.Customers;
 
@@ -22,6 +21,11 @@ public class GetCustomerEndpoint : ICarterModule
 
             return Results.Ok(query);
 
-        });
+        }).RequireAuthorization()
+        .WithName("GetCustomer")
+        .Produces<CustomApiResponse>(StatusCodes.Status201Created)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .WithSummary("GetCustomer")
+        .WithDescription("Serve for get the customer by Id");
     }
 }

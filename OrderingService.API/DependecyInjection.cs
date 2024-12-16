@@ -1,5 +1,6 @@
 ﻿using Carter;
 using FluentValidation;
+using GeneralUsing.Exceptions;
 using GeneralUsing.Extensions;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using OrderingService.Application.Data;
@@ -16,10 +17,12 @@ public static class DependecyInjection
 
         services.AddAuthorization();
 
-
         services.AddCarter();
 
         services.AddValidatorsFromAssembly(typeof(Program).Assembly);
+
+        services.AddExceptionHandler<CustomExceptionHandler>();
+
 
         return services;
     }
@@ -28,6 +31,8 @@ public static class DependecyInjection
     {
         app.UseAuthentication();
         app.UseAuthorization();
+
+        app.UseExceptionHandler(options => { });
 
         app.MapCarter();
 

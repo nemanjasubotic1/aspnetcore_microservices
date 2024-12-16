@@ -2,12 +2,8 @@
 using GeneralUsing.CQRS;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using OrderingService.Application.Data;
-using OrderingService.Application.DTOs;
-using OrderingService.Application.Orders.Queries.GetOrderById;
 using OrderingService.Domain;
-using OrderingService.Domain.Models;
 
 namespace OrderingService.Application.Orders.Commands.ChangeOrderStatus;
 public class ChangeOrderStatusCommandHandler(IAppDbContext dbContext, ISender sender) : ICommandHandler<ChangeOrderStatusCommand, CustomApiResponse>

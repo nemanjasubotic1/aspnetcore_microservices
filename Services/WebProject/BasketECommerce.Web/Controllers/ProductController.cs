@@ -1,12 +1,15 @@
 ﻿using BasketECommerce.Web.Models.ProductCategory;
 using BasketECommerce.Web.Models.ProductCategory.ViewModels;
 using BasketECommerce.Web.Services.ProductCategory;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using static BasketECommerce.Web.Models.ProductCategory.ProductModel;
 
 namespace BasketECommerce.Web.Controllers;
+
+[Authorize(Roles = SD.Admin_Role)]
 public class ProductController : Controller
 {
     private readonly IProductService _productService;

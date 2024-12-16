@@ -1,5 +1,6 @@
 ﻿using Carter;
 using MediatR;
+using OrderingService.Application;
 using OrderingService.Application.Orders.Queries.GetOrderByCustomerId;
 
 namespace OrderingService.API.Endpoints.Order;
@@ -23,6 +24,11 @@ public class GetOrderByUserIdEndpoint : ICarterModule
 
             return Results.Ok(result);
 
-        });
+        }).RequireAuthorization()
+        .WithName("GetOrderByUserId")
+        .Produces<CustomApiResponse>(StatusCodes.Status201Created)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .WithSummary("GetOrderByUserId")
+        .WithDescription("Serve for changins get order by UserId");
     }
 }
