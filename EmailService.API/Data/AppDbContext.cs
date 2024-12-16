@@ -1,7 +1,7 @@
-﻿using EmailService.API.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Services.EmailService.EmailService.API.Models;
 
-namespace EmailService.API.Data;
+namespace Services.EmailService.EmailService.API.Data;
 
 public class AppDbContext : DbContext
 {

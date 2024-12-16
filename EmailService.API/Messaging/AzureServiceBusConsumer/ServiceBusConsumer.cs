@@ -1,10 +1,10 @@
 ﻿using Azure.Messaging.ServiceBus;
-using EmailService.API.Models.DTOs;
-using EmailService.API.Services.ShoppingCartEmail;
 using Newtonsoft.Json;
+using Services.EmailService.EmailService.API.Models.DTOs;
+using Services.EmailService.EmailService.API.Services.ShoppingCartEmail;
 using System.Text;
 
-namespace EmailService.API.Messaging.AzureServiceBusConsumer;
+namespace Services.EmailService.EmailService.API.Messaging.AzureServiceBusConsumer;
 
 public class ServiceBusConsumer : IServiceBusConsumer
 {

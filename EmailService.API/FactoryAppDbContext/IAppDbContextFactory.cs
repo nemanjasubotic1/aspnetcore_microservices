@@ -1,6 +1,6 @@
-﻿using EmailService.API.Data;
+﻿using Services.EmailService.EmailService.API.Data;
 
-namespace EmailService.API.FactoryAppDbContext;
+namespace Services.EmailService.EmailService.API.FactoryAppDbContext;
 
 public interface IAppDbContextFactory
 {

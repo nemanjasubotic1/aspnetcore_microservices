@@ -1,8 +1,6 @@
-﻿using EmailService.API.Messaging.AzureServiceBusConsumer;
-using Microsoft.Extensions.DependencyInjection;
-using System.Security.AccessControl;
+﻿using Services.EmailService.EmailService.API.Messaging.AzureServiceBusConsumer;
 
-namespace EmailService.API.Extensions;
+namespace Services.EmailService.EmailService.API.Extensions;
 
 public static class ApplicationBuilderExtensions
 {

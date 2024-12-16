@@ -1,4 +1,4 @@
-﻿namespace EmailService.API.Models.DTOs;
+﻿namespace Services.EmailService.EmailService.API.Models.DTOs;
 
 public class CartItemDTO
 {

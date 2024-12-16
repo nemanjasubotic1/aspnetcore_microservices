@@ -1,11 +1,11 @@
-using EmailService.API.Data;
-using EmailService.API.Extensions;
-using EmailService.API.FactoryAppDbContext;
-using EmailService.API.Messaging.AzureServiceBusConsumer;
-using EmailService.API.Messaging.RabbitMQMessageConsumer;
-using EmailService.API.Services.RegistrationNotification;
-using EmailService.API.Services.ShoppingCartEmail;
 using Microsoft.EntityFrameworkCore;
+using Services.EmailService.EmailService.API.Data;
+using Services.EmailService.EmailService.API.Extensions;
+using Services.EmailService.EmailService.API.FactoryAppDbContext;
+using Services.EmailService.EmailService.API.Messaging.AzureServiceBusConsumer;
+using Services.EmailService.EmailService.API.Messaging.RabbitMQMessageConsumer;
+using Services.EmailService.EmailService.API.Services.RegistrationNotification;
+using Services.EmailService.EmailService.API.Services.ShoppingCartEmail;
 
 var builder = WebApplication.CreateBuilder(args);
 

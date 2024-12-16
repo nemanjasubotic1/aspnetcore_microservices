@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EmailService.API.Models;
+namespace Services.EmailService.EmailService.API.Models;
 
 public class EmailLogger
 {

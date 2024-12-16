@@ -1,6 +1,6 @@
-﻿using EmailService.API.Models.DTOs;
+﻿using Services.EmailService.EmailService.API.Models.DTOs;
 
-namespace EmailService.API.Services.RegistrationNotification;
+namespace Services.EmailService.EmailService.API.Services.RegistrationNotification;
 
 public interface IRegistrationNotify
 {

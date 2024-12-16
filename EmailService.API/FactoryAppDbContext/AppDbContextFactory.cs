@@ -1,7 +1,7 @@
-﻿using EmailService.API.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Services.EmailService.EmailService.API.Data;
 
-namespace EmailService.API.FactoryAppDbContext;
+namespace Services.EmailService.EmailService.API.FactoryAppDbContext;
 
 public class AppDbContextFactory : IAppDbContextFactory
 {
@@ -16,5 +16,10 @@ public class AppDbContextFactory : IAppDbContextFactory
     public AppDbContext Create()
     {
         return new AppDbContext(_options);
+    }
+
+    AppDbContext IAppDbContextFactory.Create()
+    {
+        throw new NotImplementedException();
     }
 }

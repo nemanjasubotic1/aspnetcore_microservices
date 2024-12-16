@@ -1,11 +1,11 @@
-﻿using EmailService.API.Models.DTOs;
-using EmailService.API.Services.RegistrationNotification;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using Services.EmailService.EmailService.API.Models.DTOs;
+using Services.EmailService.EmailService.API.Services.RegistrationNotification;
 using System.Text;
 
-namespace EmailService.API.Messaging.RabbitMQMessageConsumer;
+namespace Services.EmailService.EmailService.API.Messaging.RabbitMQMessageConsumer;
 
 public class RabbitMQAuthConsumer : BackgroundService
 {

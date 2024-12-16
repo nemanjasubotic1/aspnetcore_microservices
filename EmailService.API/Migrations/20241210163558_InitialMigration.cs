@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace EmailService.API.Migrations
+namespace Services.EmailService.EmailService.API.Migrations
 {
     /// <inheritdoc />
     public partial class InitialMigration : Migration

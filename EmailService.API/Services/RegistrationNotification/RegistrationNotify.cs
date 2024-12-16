@@ -1,9 +1,9 @@
-﻿using EmailService.API.FactoryAppDbContext;
-using EmailService.API.Models;
-using EmailService.API.Models.DTOs;
-using Mapster;
+﻿using Mapster;
+using Services.EmailService.EmailService.API.FactoryAppDbContext;
+using Services.EmailService.EmailService.API.Models;
+using Services.EmailService.EmailService.API.Models.DTOs;
 
-namespace EmailService.API.Services.RegistrationNotification;
+namespace Services.EmailService.EmailService.API.Services.RegistrationNotification;
 
 public class RegistrationNotify : IRegistrationNotify
 {
