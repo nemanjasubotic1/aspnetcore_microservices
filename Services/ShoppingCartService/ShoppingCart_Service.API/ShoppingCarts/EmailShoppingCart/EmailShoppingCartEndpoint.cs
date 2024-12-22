@@ -1,8 +1,8 @@
 ﻿using Carter;
+using Main.ShoppingCartService.ShoppingCart_Service.API.Models.DTOs;
 using MediatR;
-using Services.ShoppingCartService.ShoppingCart_Service.API.Models.DTOs;
 
-namespace Services.ShoppingCartService.ShoppingCart_Service.API.ShoppingCarts.EmailShoppingCart;
+namespace Main.ShoppingCartService.ShoppingCart_Service.API.ShoppingCarts.EmailShoppingCart;
 
 public record EmailShoppingCartRequest(ShoppingCartDTO ShoppingCartDTO);
 //public record EmailShoppingCartResponse(bool IsSucces);

@@ -1,4 +1,4 @@
-﻿namespace Services.ShoppingCartService.ShoppingCart_Service.API.Models;
+﻿namespace Main.ShoppingCartService.ShoppingCart_Service.API.Models;
 
 public interface IBaseModel
 {

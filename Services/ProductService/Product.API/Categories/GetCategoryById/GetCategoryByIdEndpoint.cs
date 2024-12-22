@@ -1,7 +1,7 @@
 ﻿using Carter;
 using MediatR;
 
-namespace Services.ProductService.ProductCategory.API.Categories.GetCategoryById;
+namespace Main.ProductService.ProductCategory.API.InitialData;
 
 public class GetCategoryByIdEndpoint : ICarterModule
 {

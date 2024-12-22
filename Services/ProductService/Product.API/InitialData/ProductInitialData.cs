@@ -1,14 +1,20 @@
 ﻿using Marten;
 using Marten.Schema;
-using Services.ProductService.ProductCategory.API.Models;
 
-namespace Services.ProductService.ProductCategory.API.InitialData;
-
+namespace Main.ProductService.ProductCategory.API.InitialData;
 public class ProductInitialData : IInitialData
 {
     public async Task Populate(IDocumentStore store, CancellationToken cancellation)
     {
         using var session = store.LightweightSession();
+
+
+        if (session == null)
+        {
+            Console.WriteLine("Session is null");
+
+            return;
+        }
 
         if (await session.Query<Product>().AnyAsync())
             return;

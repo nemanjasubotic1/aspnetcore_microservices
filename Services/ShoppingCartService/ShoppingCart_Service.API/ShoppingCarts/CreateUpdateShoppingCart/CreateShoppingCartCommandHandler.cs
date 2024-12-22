@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 using GeneralUsing.CQRS;
-using Services.ShoppingCartService.ShoppingCart_Service.API.Data;
-using Services.ShoppingCartService.ShoppingCart_Service.API.Models;
-using Services.ShoppingCartService.ShoppingCart_Service.API.Models.DTOs;
+using Main.ShoppingCartService.ShoppingCart_Service.API.Data;
+using Main.ShoppingCartService.ShoppingCart_Service.API.Models;
+using Main.ShoppingCartService.ShoppingCart_Service.API.Models.DTOs;
 
-namespace Services.ShoppingCartService.ShoppingCart_Service.API.ShoppingCarts.CreateUpdateShoppingCart;
+namespace Main.ShoppingCartService.ShoppingCart_Service.API.ShoppingCarts.CreateUpdateShoppingCart;
 
 public record CreateShoppingCartCommand(ShoppingCartDTO ShoppingCartDTO) : ICommand<CustomApiResponse>;
 //public record CreateShoppingCartResult(Guid Id);

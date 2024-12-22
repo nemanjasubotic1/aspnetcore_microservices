@@ -1,7 +1,6 @@
 ﻿using GeneralUsing.CQRS;
-using Services.ProductService.ProductCategory.API.Data;
 
-namespace Services.ProductService.ProductCategory.API.Products.GetAllProducts;
+namespace Main.ProductService.ProductCategory.API.InitialData;
 
 public record GetAllProductsQuery(int? pageNumber = 1, int? pageSize = 10) : IQuery<CustomApiResponse>;
 //public record GetAllProductsResult(IEnumerable<Product> Products);

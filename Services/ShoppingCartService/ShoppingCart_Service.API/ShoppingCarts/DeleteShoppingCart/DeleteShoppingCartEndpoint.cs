@@ -1,7 +1,7 @@
 ﻿using Carter;
 using MediatR;
 
-namespace Services.ShoppingCartService.ShoppingCart_Service.API.ShoppingCarts.DeleteShoppingCart;
+namespace Main.ShoppingCartService.ShoppingCart_Service.API.ShoppingCarts.DeleteShoppingCart;
 
 //public record DeleteShoppingCartRequest(Guid Id);
 //public record DeleteShoppingCartResponse(bool IsSuccess);

@@ -2,7 +2,7 @@
 using Mapster;
 using MediatR;
 
-namespace Services.ProductService.ProductCategory.API.Categories.GetAllCategories;
+namespace Main.ProductService.ProductCategory.API.InitialData;
 
 public record GetAllCategoriesRequest(int? PageNumber = 1, int? PageSize = 10);
 //public record GetAllCategoriesResponse(IEnumerable<Category> Categories);

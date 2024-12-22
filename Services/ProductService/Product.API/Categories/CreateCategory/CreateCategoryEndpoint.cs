@@ -1,8 +1,7 @@
 ﻿using Carter;
 using MediatR;
-using Services.ProductService.ProductCategory.API.Models.DTOs;
 
-namespace Services.ProductService.ProductCategory.API.Categories.CreateCategory;
+namespace Main.ProductService.ProductCategory.API.InitialData;
 
 public record CreateCategoryRequest(CategoryDTO CategoryDTO);
 //public record CreateCategoryResponse(Guid Id, List<ValidationFailure>? Errors = null);

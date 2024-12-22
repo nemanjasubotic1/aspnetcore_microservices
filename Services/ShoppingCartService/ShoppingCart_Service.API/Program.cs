@@ -1,10 +1,11 @@
-using Services.ShoppingCartService.ShoppingCart_Service.API;
+using Main.ShoppingCartService.ShoppingCart_Service.API;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddShoppingCartServices(builder.Configuration);
+
 
 var app = builder.Build();
 

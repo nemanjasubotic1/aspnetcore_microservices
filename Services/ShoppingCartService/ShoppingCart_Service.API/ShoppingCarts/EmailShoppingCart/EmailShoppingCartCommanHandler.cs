@@ -1,9 +1,9 @@
 ﻿using GeneralUsing.CQRS;
 using Integration.AzureServiceBusSender;
-using Services.ShoppingCartService.ShoppingCart_Service.API.Data;
-using Services.ShoppingCartService.ShoppingCart_Service.API.Models.DTOs;
+using Main.ShoppingCartService.ShoppingCart_Service.API.Data;
+using Main.ShoppingCartService.ShoppingCart_Service.API.Models.DTOs;
 
-namespace Services.ShoppingCartService.ShoppingCart_Service.API.ShoppingCarts.EmailShoppingCart;
+namespace Main.ShoppingCartService.ShoppingCart_Service.API.ShoppingCarts.EmailShoppingCart;
 
 public record EmailShoppingCartCommand(ShoppingCartDTO ShoppingCartDTO) : ICommand<CustomApiResponse>;
 //public record EmailShoppingCartResult(bool IsSucces);

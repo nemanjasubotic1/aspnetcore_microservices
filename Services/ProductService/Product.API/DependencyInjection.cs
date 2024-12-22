@@ -4,15 +4,25 @@ using GeneralUsing.Exceptions;
 using GeneralUsing.Extensions;
 using GeneralUsing.MediatorPipelineBehaviors;
 using Marten;
-using Services.ProductService.ProductCategory.API.Data;
-using Services.ProductService.ProductCategory.API.Models;
 
-namespace Services.ProductService.ProductCategory.API;
+namespace Main.ProductService.ProductCategory.API.InitialData;
 
 public static class DependencyInjection
 {
     public static IServiceCollection AddProductServices(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddMarten(options =>
+        {
+            options.Connection(configuration.GetConnectionString("DefaultConnection")!);
+
+            options.Schema.For<Category>().Identity(l => l.Id).SoftDeleted();
+            options.Schema.For<Product>().Identity(l => l.Id).Index(l => l.CategoryId);
+
+        }).UseLightweightSessions();
+
+
+
+
         services.AddAppAuthentication(configuration);
 
         services.AddCarter();
@@ -25,14 +35,6 @@ public static class DependencyInjection
 
         });
 
-        services.AddMarten(options =>
-        {
-            options.Connection(configuration.GetConnectionString("DefaultConnection")!);
-
-            options.Schema.For<Category>().Identity(l => l.Id).SoftDeleted();
-            options.Schema.For<Product>().Identity(l => l.Id).Index(l => l.CategoryId);
-
-        }).UseLightweightSessions();
 
 
         services.AddStackExchangeRedisCache(options =>

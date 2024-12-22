@@ -1,7 +1,7 @@
 ﻿using Carter;
 using MediatR;
 
-namespace Services.ProductService.ProductCategory.API.Categories.DeleteCategory;
+namespace Main.ProductService.ProductCategory.API.InitialData;
 
 //public record DeleteCategoryRequest(Guid Id);
 //public record DeleteProductResponse(bool IsSuccess);

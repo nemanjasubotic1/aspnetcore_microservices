@@ -1,4 +1,4 @@
-﻿namespace Services.ProductService.ProductCategory.API.Models;
+﻿namespace Main.ProductService.ProductCategory.API.InitialData;
 
 public interface IBaseModel
 {

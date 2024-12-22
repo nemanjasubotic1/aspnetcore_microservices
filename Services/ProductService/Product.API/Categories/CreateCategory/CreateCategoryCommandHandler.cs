@@ -1,10 +1,7 @@
 ﻿using FluentValidation;
 using GeneralUsing.CQRS;
-using Services.ProductService.ProductCategory.API.Data;
-using Services.ProductService.ProductCategory.API.Models;
-using Services.ProductService.ProductCategory.API.Models.DTOs;
 
-namespace Services.ProductService.ProductCategory.API.Categories.CreateCategory;
+namespace Main.ProductService.ProductCategory.API.InitialData;
 
 public record CreateCategoryCommand(CategoryDTO CategoryDTO) : ICommand<CustomApiResponse>;
 //public record CreateCategoryResult(Guid Id, List<ValidationFailure>? Errors = null);

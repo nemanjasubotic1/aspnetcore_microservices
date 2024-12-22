@@ -2,11 +2,8 @@
 using GeneralUsing.CQRS;
 using GeneralUsing.Exceptions.CustomExceptionHandlers;
 using Mapster;
-using Services.ProductService.ProductCategory.API.Data;
-using Services.ProductService.ProductCategory.API.Models;
-using Services.ProductService.ProductCategory.API.Models.DTOs;
 
-namespace Services.ProductService.ProductCategory.API.Categories.UpdateCategory;
+namespace Main.ProductService.ProductCategory.API.InitialData;
 
 
 public record UpdateProductCommand(ProductDTO ProductDTO) : ICommand<CustomApiResponse>;

@@ -1,8 +1,7 @@
 ﻿using Marten;
 using Marten.Schema;
-using Services.ProductService.ProductCategory.API.Models;
 
-namespace Services.ProductService.ProductCategory.API.InitialData;
+namespace Main.ProductService.ProductCategory.API.InitialData;
 
 public class CategoryInitialData : IInitialData
 {
@@ -10,7 +9,7 @@ public class CategoryInitialData : IInitialData
     {
         using var session = store.LightweightSession();
 
-        if (await session.Query<Category>().AnyAsync())
+        if (await session.Query<Category>().AnyAsync(cancellation))
             return;
 
 

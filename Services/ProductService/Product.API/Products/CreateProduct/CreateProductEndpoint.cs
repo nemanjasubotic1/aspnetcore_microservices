@@ -1,8 +1,7 @@
 ﻿using Carter;
 using MediatR;
-using Services.ProductService.ProductCategory.API.Models.DTOs;
 
-namespace Services.ProductService.ProductCategory.API.Products.CreateProduct;
+namespace Main.ProductService.ProductCategory.API.InitialData;
 
 public record CreateProductRequest(ProductDTO ProductDTO);
 //public record CreateProductResponse(Guid Id);

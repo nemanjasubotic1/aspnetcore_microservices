@@ -1,10 +1,9 @@
 ﻿using Marten;
 using Marten.Linq;
 using Marten.Pagination;
-using Services.ProductService.ProductCategory.API.Models;
 using System.Linq.Expressions;
 
-namespace Services.ProductService.ProductCategory.API.Data.General;
+namespace Main.ProductService.ProductCategory.API.InitialData;
 
 public class Repository<T> : IRepository<T> where T : IBaseModel
 {
@@ -20,7 +19,7 @@ public class Repository<T> : IRepository<T> where T : IBaseModel
         await _session.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<IEnumerable<T>> GetAllAsync<TInclude>(Expression<Func<T, bool>>? filter = null, bool isPaged = false, int? pageNumber = null, int? pageSize = null, CancellationToken cancellationToken = default) 
+    public async Task<IEnumerable<T>> GetAllAsync<TInclude>(Expression<Func<T, bool>>? filter = null, bool isPaged = false, int? pageNumber = null, int? pageSize = null, CancellationToken cancellationToken = default)
     {
         var listOfT = _session.Query<T>();
 
@@ -40,7 +39,7 @@ public class Repository<T> : IRepository<T> where T : IBaseModel
     public async Task<T> GetAsync(Guid Id, CancellationToken cancellationToken = default)
     {
         var query = await _session.LoadAsync<T>(Id, cancellationToken);
-      
+
         if (query == null)
         {
             return default(T);
@@ -51,7 +50,7 @@ public class Repository<T> : IRepository<T> where T : IBaseModel
 
     public async Task RemoveAsync(Guid Id, CancellationToken cancellationToken = default)
     {
-       _session.Delete<T>(Id);
+        _session.Delete<T>(Id);
         await _session.SaveChangesAsync(cancellationToken);
     }
 }

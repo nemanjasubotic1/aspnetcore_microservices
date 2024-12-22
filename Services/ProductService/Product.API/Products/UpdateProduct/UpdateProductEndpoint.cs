@@ -1,9 +1,8 @@
 ﻿using Carter;
 using FluentValidation;
 using MediatR;
-using Services.ProductService.ProductCategory.API.Models.DTOs;
 
-namespace Services.ProductService.ProductCategory.API.Categories.UpdateCategory;
+namespace Main.ProductService.ProductCategory.API.InitialData;
 
 public record UpdateProductRequest(ProductDTO ProductDTO);
 //public record UpdateProductResponse(Guid Id);

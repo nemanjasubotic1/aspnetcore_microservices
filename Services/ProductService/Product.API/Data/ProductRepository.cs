@@ -1,10 +1,8 @@
 ﻿using GeneralUsing.Extensions;
 using Marten;
 using Microsoft.Extensions.Caching.Distributed;
-using Services.ProductService.ProductCategory.API.Data.General;
-using Services.ProductService.ProductCategory.API.Models;
 
-namespace Services.ProductService.ProductCategory.API.Data;
+namespace Main.ProductService.ProductCategory.API.InitialData;
 
 public class ProductRepository : Repository<Product>, IProductRepository
 {

@@ -1,10 +1,6 @@
 ﻿using FluentValidation;
 using GeneralUsing.CQRS;
-using Services.ProductService.ProductCategory.API.Data;
-using Services.ProductService.ProductCategory.API.Models;
-using Services.ProductService.ProductCategory.API.Models.DTOs;
-
-namespace Services.ProductService.ProductCategory.API.Products.CreateProduct;
+namespace Main.ProductService.ProductCategory.API.InitialData;
 
 public record CreateProductCommand(ProductDTO ProductDTO) : ICommand<CustomApiResponse>;
 //public record CreateProductResult(Guid Id);

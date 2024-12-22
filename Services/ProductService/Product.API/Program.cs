@@ -1,10 +1,20 @@
+using Main.ProductService.ProductCategory.API.InitialData;
 using Marten;
-using Services.ProductService.ProductCategory.API;
-using Services.ProductService.ProductCategory.API.InitialData;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddMarten(options =>
+{
+    options.Connection(builder.Configuration.GetConnectionString("DefaultConnection")!);
+
+    options.Schema.For<Category>().Identity(l => l.Id).SoftDeleted();
+    options.Schema.For<Product>().Identity(l => l.Id).Index(l => l.CategoryId);
+
+}).UseLightweightSessions();
+
+
 
 builder.Services.AddProductServices(builder.Configuration);
 

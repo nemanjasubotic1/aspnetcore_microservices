@@ -1,4 +1,4 @@
-﻿namespace Services.ShoppingCartService.ShoppingCart_Service.API.Models.DTOs;
+﻿namespace Main.ShoppingCartService.ShoppingCart_Service.API.Models.DTOs;
 
 public class CartItemDTO
 {

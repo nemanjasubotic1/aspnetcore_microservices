@@ -1,7 +1,7 @@
-﻿using Marten;
-using Services.ShoppingCartService.ShoppingCart_Service.API.Models;
+﻿using Main.ShoppingCartService.ShoppingCart_Service.API.Models;
+using Marten;
 
-namespace Services.ShoppingCartService.ShoppingCart_Service.API.Data;
+namespace Main.ShoppingCartService.ShoppingCart_Service.API.Data;
 
 public class ShoppingCartRepository : IShoppingCartRepository
 {

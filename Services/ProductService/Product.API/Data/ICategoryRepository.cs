@@ -1,7 +1,4 @@
-﻿using Services.ProductService.ProductCategory.API.Data.General;
-using Services.ProductService.ProductCategory.API.Models;
-
-namespace Services.ProductService.ProductCategory.API.Data;
+﻿namespace Main.ProductService.ProductCategory.API.InitialData;
 
 public interface ICategoryRepository : IRepository<Category>
 {

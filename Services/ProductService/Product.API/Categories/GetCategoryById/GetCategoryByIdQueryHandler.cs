@@ -1,8 +1,7 @@
 ﻿using FluentValidation.Results;
 using GeneralUsing.CQRS;
-using Services.ProductService.ProductCategory.API.Data;
 
-namespace Services.ProductService.ProductCategory.API.Categories.GetCategoryById;
+namespace Main.ProductService.ProductCategory.API.InitialData;
 
 public record GetCategoryByIdQuery(Guid Id) : IQuery<CustomApiResponse>;
 

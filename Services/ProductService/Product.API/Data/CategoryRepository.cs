@@ -1,8 +1,6 @@
 ﻿using Marten;
-using Services.ProductService.ProductCategory.API.Data.General;
-using Services.ProductService.ProductCategory.API.Models;
 
-namespace Services.ProductService.ProductCategory.API.Data;
+namespace Main.ProductService.ProductCategory.API.InitialData;
 
 public class CategoryRepository : Repository<Category>, ICategoryRepository
 {
@@ -14,7 +12,7 @@ public class CategoryRepository : Repository<Category>, ICategoryRepository
 
     public async Task<List<Category>> GetAllCategoriesWithProducts(CancellationToken cancellationToken, int? pageNumber = null, int? pageSize = null)
     {
-        var categories = await GetAllAsync<Category>(filter:null, isPaged: true, pageNumber ?? 1, pageSize ?? 10, cancellationToken);
+        var categories = await GetAllAsync<Category>(filter: null, isPaged: true, pageNumber ?? 1, pageSize ?? 10, cancellationToken);
 
         var allProducts = await _session.Query<Product>().ToListAsync(cancellationToken);
 

@@ -1,7 +1,6 @@
 ﻿using Carter;
 using MediatR;
-
-namespace Services.ProductService.ProductCategory.API.Products.GetAllProducts;
+namespace Main.ProductService.ProductCategory.API.InitialData;
 
 public record GetAllProductsRequest(int? pageNumber = 1, int? pageSize = 10);
 //public record GetAllProductsResponse(IEnumerable<Product> Products);

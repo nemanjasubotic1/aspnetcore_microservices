@@ -1,7 +1,7 @@
 ﻿using Carter;
 using MediatR;
 
-namespace Services.ShoppingCartService.ShoppingCart_Service.API.ShoppingCarts.GetShoppingCartById;
+namespace Main.ShoppingCartService.ShoppingCart_Service.API.ShoppingCarts.GetShoppingCartById;
 
 
 //public record GetShoppingCartByIdRequest(Guid Id);

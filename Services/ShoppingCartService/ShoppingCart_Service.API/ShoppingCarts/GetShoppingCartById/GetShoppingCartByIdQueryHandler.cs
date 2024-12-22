@@ -1,10 +1,10 @@
 ﻿using GeneralUsing.CQRS;
 using GeneralUsing.Exceptions.CustomExceptionHandlers;
+using Main.ShoppingCartService.ShoppingCart_Service.API.Data;
+using Main.ShoppingCartService.ShoppingCart_Service.API.Models.DTOs;
 using Mapster;
-using Services.ShoppingCartService.ShoppingCart_Service.API.Data;
-using Services.ShoppingCartService.ShoppingCart_Service.API.Models.DTOs;
 
-namespace Services.ShoppingCartService.ShoppingCart_Service.API.ShoppingCarts.GetShoppingCartById;
+namespace Main.ShoppingCartService.ShoppingCart_Service.API.ShoppingCarts.GetShoppingCartById;
 
 public record GetShoppingCartByIdQuery(Guid Id) : IQuery<CustomApiResponse>;
 //public record GetShoppingCartByIdResult(ShoppingCartDTO ShoppingCartDTO);

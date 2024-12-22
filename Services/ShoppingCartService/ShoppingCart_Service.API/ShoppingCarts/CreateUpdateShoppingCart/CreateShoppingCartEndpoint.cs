@@ -1,9 +1,9 @@
 ﻿using Carter;
+using Main.ShoppingCartService.ShoppingCart_Service.API.Models.DTOs;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Services.ShoppingCartService.ShoppingCart_Service.API.Models.DTOs;
 
-namespace Services.ShoppingCartService.ShoppingCart_Service.API.ShoppingCarts.CreateUpdateShoppingCart;
+namespace Main.ShoppingCartService.ShoppingCart_Service.API.ShoppingCarts.CreateUpdateShoppingCart;
 
 public record CreateShoppingCartRequest(ShoppingCartDTO ShoppingCartDTO);
 //public record CreateShoppingCartResponse(Guid Id);

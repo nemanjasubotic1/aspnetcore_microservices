@@ -3,11 +3,11 @@ using FluentValidation;
 using GeneralUsing.Exceptions;
 using GeneralUsing.MediatorPipelineBehaviors;
 using Integration.AzureServiceBusSender;
+using Main.ShoppingCartService.ShoppingCart_Service.API.Data;
+using Main.ShoppingCartService.ShoppingCart_Service.API.Models;
 using Marten;
-using Services.ShoppingCartService.ShoppingCart_Service.API.Data;
-using Services.ShoppingCartService.ShoppingCart_Service.API.Models;
 
-namespace Services.ShoppingCartService.ShoppingCart_Service.API;
+namespace Main.ShoppingCartService.ShoppingCart_Service.API;
 
 public static class DependencyInjection
 {

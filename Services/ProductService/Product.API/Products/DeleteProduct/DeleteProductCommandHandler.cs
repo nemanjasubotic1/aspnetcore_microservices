@@ -1,7 +1,6 @@
 ﻿using GeneralUsing.CQRS;
-using Services.ProductService.ProductCategory.API.Data;
 
-namespace Services.ProductService.ProductCategory.API.Categories.DeleteCategory;
+namespace Main.ProductService.ProductCategory.API.InitialData;
 
 public record DeleteProductCommand(Guid Id) : ICommand<CustomApiResponse>;
 //public record DeleteProductResult(bool IsSuccess);

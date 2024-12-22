@@ -1,6 +1,6 @@
-﻿using Services.ShoppingCartService.ShoppingCart_Service.API.Models;
+﻿using Main.ShoppingCartService.ShoppingCart_Service.API.Models;
 
-namespace Services.ShoppingCartService.ShoppingCart_Service.API.Data;
+namespace Main.ShoppingCartService.ShoppingCart_Service.API.Data;
 
 public interface IShoppingCartRepository
 {

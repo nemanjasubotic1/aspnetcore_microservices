@@ -1,6 +1,6 @@
 ﻿using FluentValidation.Results;
 
-namespace Services.ProductService.ProductCategory.API;
+namespace Main.ProductService.ProductCategory.API.InitialData;
 
 public record CustomApiResponse(object? Result = null, bool IsSuccess = true, List<ValidationFailure>? Errors = null);
 

@@ -1,4 +1,4 @@
-﻿namespace Services.ProductService.ProductCategory.API.Models.DTOs;
+﻿namespace Main.ProductService.ProductCategory.API.InitialData;
 
 public class ProductDTO
 {

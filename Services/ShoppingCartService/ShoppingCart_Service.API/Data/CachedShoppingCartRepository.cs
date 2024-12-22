@@ -1,8 +1,8 @@
 ﻿using GeneralUsing.Extensions;
+using Main.ShoppingCartService.ShoppingCart_Service.API.Models;
 using Microsoft.Extensions.Caching.Distributed;
-using Services.ShoppingCartService.ShoppingCart_Service.API.Models;
 
-namespace Services.ShoppingCartService.ShoppingCart_Service.API.Data;
+namespace Main.ShoppingCartService.ShoppingCart_Service.API.Data;
 
 public class CachedShoppingCartRepository : IShoppingCartRepository
 {
@@ -42,9 +42,18 @@ public class CachedShoppingCartRepository : IShoppingCartRepository
 
     public async Task<ShoppingCart> GetShoppingCartByUserIdAsync(string userId, CancellationToken cancellationToken = default)
     {
-        var shoppingCart = await _repository.GetShoppingCartByUserIdAsync(userId, cancellationToken);
 
-        return shoppingCart;
+        try
+        {
+            var shoppingCart = await _repository.GetShoppingCartByUserIdAsync(userId, cancellationToken);
+            return shoppingCart;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+
+        return new ShoppingCart();
     }
 
     public Task<bool> RemoveItemFromShoppingCart(Guid itemId, string userId, CancellationToken cancellationToken = default)

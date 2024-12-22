@@ -2,9 +2,8 @@
 using FluentValidation;
 using GeneralUsing.CQRS;
 using MediatR;
-using Services.ProductService.ProductCategory.API.Models.DTOs;
 
-namespace Services.ProductService.ProductCategory.API.Categories.UpdateCategory;
+namespace Main.ProductService.ProductCategory.API.InitialData;
 
 public record UpdateCategoryRequest(CategoryDTO CategoryDTO) : ICommand<CustomApiResponse>;
 //public record UpdateCategoryResponse(Guid Id);
