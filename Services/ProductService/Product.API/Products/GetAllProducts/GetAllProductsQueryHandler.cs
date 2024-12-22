@@ -1,0 +1,18 @@
+﻿using GeneralUsing.CQRS;
+using Services.ProductService.ProductCategory.API.Data;
+
+namespace Services.ProductService.ProductCategory.API.Products.GetAllProducts;
+
+public record GetAllProductsQuery(int? pageNumber = 1, int? pageSize = 10) : IQuery<CustomApiResponse>;
+//public record GetAllProductsResult(IEnumerable<Product> Products);
+
+
+public class GetAllProductsQueryHandler(IProductRepository productRepository) : IQueryHandler<GetAllProductsQuery, CustomApiResponse>
+{
+    public async Task<CustomApiResponse> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
+    {
+        var listOfProducts = await productRepository.GetAllProductsWithCategory(cancellationToken, request.pageNumber, request.pageSize);
+
+        return new CustomApiResponse(listOfProducts);
+    }
+}

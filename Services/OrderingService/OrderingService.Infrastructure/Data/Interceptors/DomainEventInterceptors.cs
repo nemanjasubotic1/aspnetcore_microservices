@@ -37,6 +37,8 @@ public class DomainEventInterceptors : SaveChangesInterceptor
 
         var domainEvents = domainEventCreators.SelectMany(l => l.DomainEvents).ToList();
 
+        domainEventCreators.ToList().ForEach(l => l.ClearDomainEvents());
+
         foreach ( var domainEvent in domainEvents)
         {
             await _mediator.Publish(domainEvent);
