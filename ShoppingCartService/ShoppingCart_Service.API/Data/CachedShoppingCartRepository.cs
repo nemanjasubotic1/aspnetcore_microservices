@@ -1,8 +1,8 @@
 ﻿using GeneralUsing.Extensions;
 using Microsoft.Extensions.Caching.Distributed;
-using ShoppingCart_Service.API.Models;
+using Services.ShoppingCart_Service.API.Models;
 
-namespace ShoppingCart_Service.API.Data;
+namespace Services.ShoppingCart_Service.API.Data;
 
 public class CachedShoppingCartRepository : IShoppingCartRepository
 {

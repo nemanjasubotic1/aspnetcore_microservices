@@ -1,7 +1,7 @@
 ﻿using GeneralUsing.CQRS;
-using ShoppingCart_Service.API.Data;
+using Services.ShoppingCart_Service.API.Data;
 
-namespace ShoppingCart_Service.API.ShoppingCarts.DeleteShoppingCart;
+namespace Services.ShoppingCart_Service.API.ShoppingCarts.DeleteShoppingCart;
 
 public record DeleteShoppingCartCommand(Guid Id) : ICommand<CustomApiResponse>;
 //public record DeleteShoppingCartResult(bool IsSuccess);

@@ -26,8 +26,7 @@ public class OrderHeaderConfiguration : IEntityTypeConfiguration<OrderHeader>
                  .HasMaxLength(50);
 
             addressBuilder.Property(l => l.AddressLine)
-               .HasMaxLength(50)
-               .IsRequired();
+               .HasMaxLength(50);
 
             addressBuilder.Property(l => l.Country)
                .HasMaxLength(50);

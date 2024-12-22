@@ -1,9 +1,7 @@
 ﻿using Carter;
-using Mapster;
 using MediatR;
-using ShoppingCart_Service.API.Models.DTOs;
 
-namespace ShoppingCart_Service.API.ShoppingCarts.GetShoppingCartById;
+namespace Services.ShoppingCart_Service.API.ShoppingCarts.GetShoppingCartById;
 
 
 //public record GetShoppingCartByIdRequest(Guid Id);

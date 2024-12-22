@@ -1,8 +1,8 @@
 ﻿using FluentValidation.Results;
 using GeneralUsing.CQRS;
-using ShoppingCart_Service.API.Data;
+using Services.ShoppingCart_Service.API.Data;
 
-namespace ShoppingCart_Service.API.ShoppingCarts.RemoveItemFromCartByItemId;
+namespace Services.ShoppingCart_Service.API.ShoppingCarts.RemoveItemFromCartByItemId;
 
 public record RemoveItemFromCartByItemIdCommand(Guid Id, string userId) : ICommand<CustomApiResponse>;
 
@@ -18,5 +18,6 @@ public class RemoveItemFromCartByItemIdCommandHandler(IShoppingCartRepository sh
         }
 
         return new CustomApiResponse();
+
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace ShoppingCart_Service.API.Models.DTOs;
+﻿namespace Services.ShoppingCart_Service.API.Models.DTOs;
 
 public class ShoppingCartDTO
 {

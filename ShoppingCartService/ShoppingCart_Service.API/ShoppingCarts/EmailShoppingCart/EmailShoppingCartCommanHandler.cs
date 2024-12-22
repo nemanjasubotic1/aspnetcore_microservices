@@ -1,10 +1,9 @@
 ﻿using GeneralUsing.CQRS;
-using GeneralUsing.Exceptions.CustomExceptionHandlers;
 using Integration.AzureServiceBusSender;
-using ShoppingCart_Service.API.Data;
-using ShoppingCart_Service.API.Models.DTOs;
+using Services.ShoppingCart_Service.API.Data;
+using Services.ShoppingCart_Service.API.Models.DTOs;
 
-namespace ShoppingCart_Service.API.ShoppingCarts.EmailShoppingCart;
+namespace Services.ShoppingCart_Service.API.ShoppingCarts.EmailShoppingCart;
 
 public record EmailShoppingCartCommand(ShoppingCartDTO ShoppingCartDTO) : ICommand<CustomApiResponse>;
 //public record EmailShoppingCartResult(bool IsSucces);

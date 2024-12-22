@@ -1,4 +1,6 @@
-﻿using Marten;
+﻿using GeneralUsing.Extensions;
+using Marten;
+using Microsoft.Extensions.Caching.Distributed;
 using ProductCategory.API.Data.General;
 using ProductCategory.API.Models;
 
@@ -8,18 +10,27 @@ public class ProductRepository : Repository<Product>, IProductRepository
 {
     private readonly IDocumentSession _session;
 
-    public ProductRepository(IDocumentSession session) : base(session)
+    private readonly IDistributedCache _cache;
+    public ProductRepository(IDocumentSession session, IDistributedCache cache) : base(session)
     {
         _session = session;
+        _cache = cache;
     }
 
     public async Task<List<Product>> GetAllProductsWithCategory(CancellationToken cancellationToken, int? pageNumber = null, int? pageSize = null)
     {
+        var cachedProducts = await _cache.GetRecordAsync<IEnumerable<Product>>(DateTime.Now.ToString("yyyyMMdd_hhmm"), cancellationToken);
+
+        if (cachedProducts != null)
+        {
+            return cachedProducts.ToList();
+        }
+
         var allProducts = await GetAllAsync<Product>(filter: null, isPaged: true, pageNumber ?? 1, pageSize ?? 10, cancellationToken);
 
         var categoryIds = allProducts.Select(x => x.CategoryId).Distinct().ToList();
 
-        var categories = await _session.Query<Category>().Where(l => categoryIds.Contains(l.Id)).ToListAsync();
+        var categories = await _session.Query<Category>().Where(l => categoryIds.Contains(l.Id)).ToListAsync(cancellationToken);
 
         var categoryDictionary = categories.ToDictionary(l => l.Id);
 
@@ -31,6 +42,8 @@ public class ProductRepository : Repository<Product>, IProductRepository
             }
         }
 
+        await _cache.SetRecordAsync<IEnumerable<Product>>(DateTime.Now.ToString("yyyyMMdd_hhmm"), allProducts, null, cancellationToken);
+
         return allProducts.ToList();
     }
 
@@ -38,7 +51,7 @@ public class ProductRepository : Repository<Product>, IProductRepository
     {
         var product = await GetAsync(Id, cancellationToken);
 
-        var categories = await _session.Query<Category>().ToListAsync();
+        var categories = await _session.Query<Category>().ToListAsync(cancellationToken);
 
         var categoryDictionary = categories.ToDictionary(l => l.Id);
 

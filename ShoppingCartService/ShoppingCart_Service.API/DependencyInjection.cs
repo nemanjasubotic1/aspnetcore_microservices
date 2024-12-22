@@ -4,10 +4,10 @@ using GeneralUsing.Exceptions;
 using GeneralUsing.MediatorPipelineBehaviors;
 using Integration.AzureServiceBusSender;
 using Marten;
-using ShoppingCart_Service.API.Data;
-using ShoppingCart_Service.API.Models;
+using Services.ShoppingCart_Service.API.Data;
+using Services.ShoppingCart_Service.API.Models;
 
-namespace ShoppingCart_Service.API;
+namespace Services.ShoppingCart_Service.API;
 
 public static class DependencyInjection
 {

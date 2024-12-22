@@ -1,7 +1,6 @@
-﻿using ShoppingCart_Service.API.Models;
-using System.Runtime.CompilerServices;
+﻿using Services.ShoppingCart_Service.API.Models;
 
-namespace ShoppingCart_Service.API.Data;
+namespace Services.ShoppingCart_Service.API.Data;
 
 public interface IShoppingCartRepository
 {

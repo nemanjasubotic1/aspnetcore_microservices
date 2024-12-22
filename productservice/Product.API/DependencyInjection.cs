@@ -34,6 +34,13 @@ public static class DependencyInjection
 
         }).UseLightweightSessions();
 
+
+        services.AddStackExchangeRedisCache(options =>
+        {
+            options.Configuration = configuration["Redis"];
+            options.InstanceName = "ProductCategory_";
+        });
+
         services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 
         services.AddScoped<ICategoryRepository, CategoryRepository>();

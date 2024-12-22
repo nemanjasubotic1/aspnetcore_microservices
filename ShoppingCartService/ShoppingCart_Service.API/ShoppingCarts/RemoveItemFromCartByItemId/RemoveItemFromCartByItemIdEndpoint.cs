@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ShoppingCart_Service.API.ShoppingCarts.RemoveItemFromCartByItemId;
+namespace Services.ShoppingCart_Service.API.ShoppingCarts.RemoveItemFromCartByItemId;
 
 public record RemoveItemFromCartByItemIdRequest(Guid id, string userId);
 

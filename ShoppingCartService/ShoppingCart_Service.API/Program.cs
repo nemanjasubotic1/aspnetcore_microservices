@@ -1,4 +1,4 @@
-using ShoppingCart_Service.API;
+using Services.ShoppingCart_Service.API;
 
 var builder = WebApplication.CreateBuilder(args);
 

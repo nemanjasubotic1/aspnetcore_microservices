@@ -1,5 +1,5 @@
 ﻿
-namespace ShoppingCart_Service.API.Models;
+namespace Services.ShoppingCart_Service.API.Models;
 
 public class CartItem : IBaseModel
 {
