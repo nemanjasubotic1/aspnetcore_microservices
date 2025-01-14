@@ -42,7 +42,6 @@ public class CachedShoppingCartRepository : IShoppingCartRepository
 
     public async Task<ShoppingCart> GetShoppingCartByUserIdAsync(string userId, CancellationToken cancellationToken = default)
     {
-
         try
         {
             var shoppingCart = await _repository.GetShoppingCartByUserIdAsync(userId, cancellationToken);

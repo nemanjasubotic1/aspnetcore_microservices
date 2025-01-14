@@ -52,7 +52,6 @@ public static class DependencyInjection
 
     public static WebApplication UseShoppingCartServices(this WebApplication app)
     {
-
         app.MapCarter();
 
         app.UseExceptionHandler(options => { });

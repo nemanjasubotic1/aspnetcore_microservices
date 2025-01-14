@@ -12,8 +12,10 @@ public class RegistrationNotify : IRegistrationNotify
     {
         _factory = factory;
     }
+
     public async Task NewRegistrationNotification(RegistrationNotifyDTO registrationNotify)
     {
+
         using var context = _factory.Create();
 
         var emailLoggerDto = new EmailLoggerDTO

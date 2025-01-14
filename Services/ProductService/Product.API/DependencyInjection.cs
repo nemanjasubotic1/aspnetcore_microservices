@@ -3,7 +3,9 @@ using FluentValidation;
 using GeneralUsing.Exceptions;
 using GeneralUsing.Extensions;
 using GeneralUsing.MediatorPipelineBehaviors;
+using HealthChecks.UI.Client;
 using Marten;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 namespace Main.ProductService.ProductCategory.API.InitialData;
 
@@ -20,9 +22,6 @@ public static class DependencyInjection
 
         }).UseLightweightSessions();
 
-
-
-
         services.AddAppAuthentication(configuration);
 
         services.AddCarter();
@@ -34,8 +33,6 @@ public static class DependencyInjection
             config.AddOpenBehavior(typeof(FluentValidationBehavior<,>));
 
         });
-
-
 
         services.AddStackExchangeRedisCache(options =>
         {
@@ -50,6 +47,8 @@ public static class DependencyInjection
 
         services.AddExceptionHandler<CustomExceptionHandler>();
 
+        services.AddHealthChecks()
+            .AddNpgSql(configuration.GetConnectionString("DefaultConnection")!);
 
         services.AddAuthorization();
 
@@ -61,6 +60,12 @@ public static class DependencyInjection
         app.MapCarter();
 
         app.UseExceptionHandler(options => { });
+
+        app.UseHealthChecks("/health",
+            new HealthCheckOptions
+            {
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
+            });
 
         app.UseAuthentication();
         app.UseAuthorization();

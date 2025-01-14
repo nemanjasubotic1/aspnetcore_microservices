@@ -7,7 +7,7 @@ namespace BasketECommerce.Web.Services.ShoppingCart;
 public interface IShoppingCartService
 {
     [Post("/shoppingCart")]
-    Task<ApiResponse<CustomApiResponse>> CreateShoppingCart(CreateShoppingCartRequest request);
+    Task<ApiResponse<CustomApiResponse>> CreateUpdateShoppingCart(CreateShoppingCartRequest request);
 
     [Get("/shoppingCart/usercart/{Id}")]
     Task<ApiResponse<CustomApiResponse>> GetShoppingCartByUserId(string Id);

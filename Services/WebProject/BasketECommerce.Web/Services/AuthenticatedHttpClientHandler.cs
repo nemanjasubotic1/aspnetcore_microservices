@@ -1,19 +1,14 @@
-﻿
-using BasketECommerce.Web.Services.AuthenticationService;
-using Microsoft.AspNetCore.Authentication;
+﻿using BasketECommerce.Web.Services.AuthenticationService;
 using System.Net.Http.Headers;
 
 namespace BasketECommerce.Web.Services;
 
 public class AuthenticatedHttpClientHandler : DelegatingHandler
 {
-    private readonly IHttpContextAccessor _httpContextAccessor;
-
     private readonly ITokenProvider _tokenProvider;
 
     public AuthenticatedHttpClientHandler(IHttpContextAccessor httpContextAccessor, ITokenProvider tokenProvider)
     {
-        _httpContextAccessor = httpContextAccessor;
         _tokenProvider = tokenProvider;
     }
 

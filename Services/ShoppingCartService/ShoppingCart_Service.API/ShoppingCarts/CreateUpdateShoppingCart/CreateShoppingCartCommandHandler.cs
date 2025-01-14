@@ -39,7 +39,7 @@ public class CreateShoppingCartCommandHandler(IShoppingCartRepository shoppingCa
 
             return new CustomApiResponse(cart.Id);
         }
-        // cart for this user exists, just add items quantity or add new items
+        // cart for this user exists, change items quantity or add new items
         else
         {
             foreach (var item in request.ShoppingCartDTO.CartItems)
@@ -57,6 +57,8 @@ public class CreateShoppingCartCommandHandler(IShoppingCartRepository shoppingCa
                     cartFromDb.CartItems.Add(item);
                 }
             }
+
+            cartFromDb.Discount = request.ShoppingCartDTO.Discount;
 
             await shoppingCartRepository.UpdateShoppingCart(cartFromDb, cancellationToken);
         }

@@ -17,9 +17,4 @@ public class AppDbContextFactory : IAppDbContextFactory
     {
         return new AppDbContext(_options);
     }
-
-    AppDbContext IAppDbContextFactory.Create()
-    {
-        throw new NotImplementedException();
-    }
 }

@@ -22,7 +22,7 @@ public class UserRegisterCommandValidator : AbstractValidator<UserRegisterComman
 
 
 public class UserRegisterCommandHandler(IAuthenticationService _authenticationService, 
-    IRabbitMQMessageSender messageSender, IConfiguration configuration) : ICommandHandler<UserRegisterCommand, CustomApiResponse>
+    IRabbitMQMessageSender messageSender) : ICommandHandler<UserRegisterCommand, CustomApiResponse>
 {
 
     public async Task<CustomApiResponse> Handle(UserRegisterCommand request, CancellationToken cancellationToken)
@@ -43,9 +43,6 @@ public class UserRegisterCommandHandler(IAuthenticationService _authenticationSe
         var queueName = "emailregistration";
 
         await messageSender.SendMessage(registrationData, queueName);
-
-
-        // TODO RabittMQ to send message with registration
 
         return new CustomApiResponse();
     }

@@ -11,11 +11,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-{
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
-
 builder.Services.AddSingleton<IAppDbContextFactory>(provider =>
 {
     var optionBuilder = new DbContextOptionsBuilder<AppDbContext>();
@@ -24,6 +19,11 @@ builder.Services.AddSingleton<IAppDbContextFactory>(provider =>
 
     return new AppDbContextFactory(optionBuilder.Options);  
 
+});
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
 builder.Services.AddSingleton<IServiceBusConsumer, ServiceBusConsumer>();

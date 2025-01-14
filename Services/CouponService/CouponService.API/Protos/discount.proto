@@ -1,0 +1,51 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "CouponService.Api.Protos";
+
+package discount;
+
+service DiscountProtoService{
+	
+	rpc GetDiscount(GetDiscountRequest) returns (CouponModel);
+	rpc CreateDiscount(CreateDiscountRequest) returns (CouponModel);
+	rpc UpdateDiscount(UpdateDiscountRequest) returns (CouponModel);
+	rpc DeleteDiscount(DeleteDiscountRequest) returns (DeleteDiscountResponse);
+	rpc GetAllDiscounts(GetAllDiscountsRequest) returns (GetAllDiscountsResponse);
+}
+
+message GetDiscountRequest{
+	int32 id = 1;
+}
+
+message CouponModel{
+
+	int32 id = 1;
+	string name = 2;
+	string amount = 3;
+	google.protobuf.Timestamp expiryDate = 4;
+	bool isEnabled = 5;
+}
+
+message CreateDiscountRequest{
+	CouponModel coupon = 1;
+}
+
+message UpdateDiscountRequest{
+	CouponModel coupon = 1;
+}
+
+message DeleteDiscountRequest{
+	int32 id = 1;
+}
+
+message DeleteDiscountResponse{
+	bool success = 1;
+}
+
+message GetAllDiscountsRequest{
+}
+
+message GetAllDiscountsResponse{
+	repeated CouponModel coupons = 1;
+}

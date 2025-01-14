@@ -1,5 +1,4 @@
 ﻿using BasketECommerce.Web.Models.Orders;
-using BasketECommerce.Web.Models.ProductCategory;
 using BasketECommerce.Web.Models.ShoppingCart;
 using BasketECommerce.Web.Services.Ordering;
 using BasketECommerce.Web.Services.ProductCategory;
@@ -120,31 +119,32 @@ public class CartController : Controller
         return View();  
     }
 
+    #region APPLY_COUPON
+
+    [HttpPost]
+    public async Task<IActionResult> ApplyCoupon()
+    {
+
+        TempData["success"] = "Successfully activated submit button";
+
+        return RedirectToAction(nameof(Index));
+    }
+
+    #endregion
+
     #region HelperMethods
 
     private async Task<ShoppingCartModel> LoadCartBasedOnLoggedUser()
     {
         var userId = User.Claims.Where(l => l.Type == ClaimTypes.NameIdentifier)?.FirstOrDefault()?.Value;
 
-        var productServiceApiResponse = await _productService.GetAllProducts();
         var shoppingCartServiceApiResponse = await _shoppingCartService.GetShoppingCartByUserId(userId);
 
-        if (!productServiceApiResponse.IsSuccessStatusCode || !shoppingCartServiceApiResponse.IsSuccessStatusCode)
+        if (!shoppingCartServiceApiResponse.IsSuccessStatusCode)
             return null;
-
-        var productList = JsonConvert.DeserializeObject<List<ProductModel>>(Convert.ToString(productServiceApiResponse.Content.Result));
 
         var shoppingCart = JsonConvert.DeserializeObject<ShoppingCartModel>(Convert.ToString(shoppingCartServiceApiResponse.Content.Result));
 
-        foreach(var item in shoppingCart.CartItems)
-        {
-            var productModel = productList.FirstOrDefault(l => l.Id == item.Id);
-
-            if (productModel != null)
-            {
-                item.ProductModel = productModel;
-            }
-        }
         return shoppingCart;
     }
 
@@ -158,7 +158,7 @@ public class CartController : Controller
             var orderDetail = new OrderDetailsDTO
             {
                 ProductId = product.Id,
-                ProductName = product.ProductModel.Name,
+                ProductName = product.ProductName,
                 Quantity = product.Quantity,
                 Price = product.Price,
             };

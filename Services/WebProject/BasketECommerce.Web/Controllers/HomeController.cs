@@ -14,7 +14,7 @@ namespace BasketECommerce.Web.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    
+
     private readonly IProductService _productService;
 
     private readonly IShoppingCartService _shoppingCartService;
@@ -28,6 +28,7 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
+
         var apiResponse = await _productService.GetAllProducts();
 
         if (!apiResponse.IsSuccessStatusCode)
@@ -58,11 +59,15 @@ public class HomeController : Controller
 
         CartItemModel cartItemModel = new()
         {
-            Id = product.Id, 
-            ProductModel = product,
+            Id = product.Id,
             ProductName = product.Name,
             Price = product.Price,
-            Quantity=  0
+            Quantity = 0,
+            ImageUrl = product.ImageUrl,
+            Description = product.Description,
+            Category = product.Category,
+            YearOfProduction = product.YearOfProduction,
+            
         };
 
 
@@ -78,7 +83,7 @@ public class HomeController : Controller
 
         ShoppingCartModel model = new()
         {
-            Discount = 0,
+            Discount = 0, 
             UserId = claim.Value,
             CartItems =
             {
@@ -88,7 +93,7 @@ public class HomeController : Controller
 
         var shoppingCartRequest = new CreateShoppingCartRequest(model);
 
-        var apiResponse = await _shoppingCartService.CreateShoppingCart(shoppingCartRequest);
+        var apiResponse = await _shoppingCartService.CreateUpdateShoppingCart(shoppingCartRequest);
 
         if (!apiResponse.IsSuccessStatusCode && apiResponse.Content == null)
         {

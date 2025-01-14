@@ -1,10 +1,15 @@
 using BasketECommerce.Web.Services;
 using BasketECommerce.Web.Services.AuthenticationService;
+using BasketECommerce.Web.Services.CouponService;
 using BasketECommerce.Web.Services.Ordering;
 using BasketECommerce.Web.Services.ProductCategory;
 using BasketECommerce.Web.Services.ShoppingCart;
+using CouponService.Api.Protos;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Polly;
+using Polly.Extensions.Http;
 using Refit;
+using System.Net.Sockets;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,11 +26,19 @@ builder.Services.AddRefitClient<ICategoryService>()
         config.BaseAddress = new Uri(builder.Configuration["ApiSettings:GatewayAddress"]!);
     }).AddHttpMessageHandler<AuthenticatedHttpClientHandler>();
 
+var retryPolicy = HttpPolicyExtensions
+    .HandleTransientHttpError()
+    .Or<TimeoutException>()
+    .Or<SocketException>()
+    .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
+
 builder.Services.AddRefitClient<IProductService>()
     .ConfigureHttpClient(config =>
     {
         config.BaseAddress = new Uri(builder.Configuration["ApiSettings:GatewayAddress"]!);
-    }).AddHttpMessageHandler<AuthenticatedHttpClientHandler>();
+    })
+    .AddHttpMessageHandler<AuthenticatedHttpClientHandler>()
+    .AddPolicyHandler(retryPolicy);
 
 builder.Services.AddRefitClient<IShoppingCartService>()
     .ConfigureHttpClient(config =>
@@ -44,6 +57,21 @@ builder.Services.AddRefitClient<IAuthService>()
     {
         config.BaseAddress = new Uri(builder.Configuration["ApiSettings:GatewayAddress"]!);
     }).AddHttpMessageHandler<AuthenticatedHttpClientHandler>();
+
+builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(options =>
+{
+    options.Address = new Uri(builder.Configuration["ApiSettings:CouponServiceAddress"]!);
+}).ConfigurePrimaryHttpMessageHandler(() =>
+{
+    var handler = new HttpClientHandler
+    {
+        ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+    };
+
+    return handler;
+});
+
+builder.Services.AddScoped<IDiscountService, DiscountService>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>

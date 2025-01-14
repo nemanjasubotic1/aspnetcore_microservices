@@ -37,11 +37,11 @@
                 {
                     <div class="row h-100">
                         <div class="col-4 col-md-2 text-center py-2">
-                            <img src="@item.ProductModel.ImageUrl" class="rounded" width="100%" />
+                            <img src="@item.ImageUrl" class="rounded" width="100%" />
                         </div>
                         <div class="col-8 col-md-5">
-                            <h5>@item.ProductModel.Name</h5>
-                            <div style="font-size:11px;">@item.ProductModel.Description</div>
+                            <h5>@item.ProductName</h5>
+                            <div style="font-size:11px;">@item.Description</div>
                         </div>
                         <div class="col-3 col-md-2 pt-md-4" style="font-size:11px;">
                             <span style="font-size:17px;">@item.Price.ToString("c") </span>
@@ -63,7 +63,7 @@
                     <div class="col-6">
                         <span>Coupon:</span>
                         <input />
-                        <button type="submit" class="btn btn-sm btn-success"> Apply </button>
+                        <button type="submit" class="btn btn-sm btn-success" asp-controller="Cart" asp-action="ApplyCoupon"> Apply </button>
                     </div>
                     <div class="col-6 text-end">
                         <span class="text-danger" style="font-size:21px;">  Order Total : @Model.CartTotal.ToString("c") <br /></span>
