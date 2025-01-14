@@ -102,6 +102,9 @@ public class CreateOrderCommandHandler(IAppDbContext dbContext, ISender sender) 
             }
         }
 
+        orderHeader.Discount = orderHeaderDTO.Discount;
+        orderHeader.TotalPrice -= orderHeaderDTO.Discount;
+
         customer.NumberOfOrders++;
         customer.LastOrder = DateTime.Now;
         customer.SpentMoney += orderHeader.TotalPrice;

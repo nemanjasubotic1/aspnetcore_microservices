@@ -1,6 +1,7 @@
 ﻿using BasketECommerce.Web.Models.Coupons;
 using CouponService.Api.Protos;
 using Google.Protobuf.WellKnownTypes;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BasketECommerce.Web.Services.CouponService;
 
@@ -18,11 +19,11 @@ public class DiscountService : IDiscountService
         return ToCouponDto(couponModel);
     }
 
-    public async Task<CouponModelDTO> UpdateCouponStatus(int id)
+    public async Task<CouponModelDTO> UpdateCouponStatus(string name)
     {
-        var couponModelDto = await GetCoupon(id);
+        var couponModelDto = await GetCoupon(name);
 
-        if (couponModelDto == null)
+        if (string.IsNullOrEmpty(couponModelDto.CouponName))
         {
             return new CouponModelDTO();
         }
@@ -34,9 +35,14 @@ public class DiscountService : IDiscountService
         return ToCouponDto(couponModel);
     }
 
-    public async Task<CouponModelDTO> GetCoupon(int id)
+    public async Task<CouponModelDTO> GetCoupon(string couponName)
     {
-        var couponModel = await _discountProtoServiceClient.GetDiscountAsync(new GetDiscountRequest { Id = id });
+        var couponModel = await _discountProtoServiceClient.GetDiscountAsync(new GetDiscountRequest { Name = couponName });
+
+        if (string.IsNullOrEmpty(couponModel.Name))
+        {
+            return new CouponModelDTO();
+        }
 
         CouponModelDTO couponModelDTO = ToCouponDto(couponModel);
 

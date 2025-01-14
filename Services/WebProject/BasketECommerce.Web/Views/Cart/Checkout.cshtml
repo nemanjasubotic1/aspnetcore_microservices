@@ -2,13 +2,15 @@
 
 <form method="post">
     <input asp-for="ShoppingCartId" hidden />
+    <input asp-for="TotalPrice" hidden />
+    <input asp-for="Discount" hidden />
     <div class="border mt-2 p-4 rounded">
         <div class="container row">
             <div class="col-md-7 col-12">
                 <span style="font-size:25px;" class="text-secondary mb-2">Order Summary</span>
             </div>
             <div class="col-md-5 col-12">
-                <a class="btn btn-outline-secondary form-control">Back to Cart</a>
+                <a asp-controller="Cart" asp-action="Index" class="btn btn-outline-secondary form-control">Back to Cart</a>
             </div>
             <br /><br /><br />
             <hr />
@@ -80,7 +82,7 @@
                         <div class="row">
                             <div class="col-12 text-center pr-4 text-danger">
                                 Order Total :  @Model.TotalPrice.ToString("c") <br />
-                                <span class="text-success"> Order Discount :  $$</span>
+                                <span class="text-success"> Order Discount :  @Model.Discount</span>
                             </div>
                         </div>
 

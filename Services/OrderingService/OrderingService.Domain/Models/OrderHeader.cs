@@ -16,6 +16,7 @@ public class OrderHeader : Aggregate
     public List<OrderDetails> OrderDetails { get; set; } = [];
 
     public decimal TotalPrice { get; set; }
+    public decimal Discount { get; set; }
 
     public static OrderHeader Create(Guid customerId, Address address, OrderStatus orderStatus, Payment payment)
     {

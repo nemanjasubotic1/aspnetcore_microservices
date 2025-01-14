@@ -9,6 +9,9 @@ public interface IShoppingCartService
     [Post("/shoppingCart")]
     Task<ApiResponse<CustomApiResponse>> CreateUpdateShoppingCart(CreateShoppingCartRequest request);
 
+    [Post("/shoppingCart/discount")]
+    Task<ApiResponse<CustomApiResponse>> ApplyRemoveDiscount(ApplyRemoveDiscountRequest request);
+
     [Get("/shoppingCart/usercart/{Id}")]
     Task<ApiResponse<CustomApiResponse>> GetShoppingCartByUserId(string Id);
 

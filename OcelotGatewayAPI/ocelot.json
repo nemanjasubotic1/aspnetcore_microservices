@@ -166,6 +166,19 @@
       "UpstreamPathTemplate": "/shoppingcart",
       "UpstreamHttpMethod": [ "Post" ]
     },
+
+    {
+      "DownstreamPathTemplate": "/shoppingcart/discount",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5011
+        }
+      ],
+      "UpstreamPathTemplate": "/shoppingcart/discount",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
     {
       "DownstreamPathTemplate": "/shoppingcart/{id}",
       "DownstreamScheme": "https",

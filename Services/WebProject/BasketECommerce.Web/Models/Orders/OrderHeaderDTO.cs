@@ -26,5 +26,6 @@ public class OrderHeaderDTO
     public DateTime? CreatedAt { get; set; }
     public string? Status { get; set; }
     public decimal TotalPrice { get; set; }
+    public decimal Discount { get; set; }
     public List<OrderDetailsDTO> OrderDetails { get; set; } = [];
 }

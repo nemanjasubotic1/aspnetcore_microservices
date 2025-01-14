@@ -2,6 +2,7 @@
 
 
 <form method="post">
+    <input asp-for="Id" hidden />
     <br />
     <div class="">
         <div class="card border mt-4 container">
@@ -62,12 +63,27 @@
                 <div class="row">
                     <div class="col-6">
                         <span>Coupon:</span>
-                        <input />
-                        <button type="submit" class="btn btn-sm btn-success" asp-controller="Cart" asp-action="ApplyCoupon"> Apply </button>
+                        @{
+                            var readonlyAttribute = string.IsNullOrEmpty(Model.CouponName) ? null : "readonly";
+                        }
+                        <input asp-for="CouponName" readonlyAttribute />
+
+                        @if (string.IsNullOrEmpty(Model.CouponName))
+                        {
+                            <button type="submit" class="btn btn-sm btn-success" asp-controller="Cart" asp-action="ApplyCoupon">
+                                Apply
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-sm btn-danger" asp-controller="Cart" asp-action="RemoveCoupon">
+                                Remove
+                            </button>
+                        }
                     </div>
                     <div class="col-6 text-end">
                         <span class="text-danger" style="font-size:21px;">  Order Total : @Model.CartTotal.ToString("c") <br /></span>
-                        <span class="text-success"> Order Discount :  $$</span>
+                        <span class="text-success"> Order Discount : @Model.Discount </span>
                     </div>
                 </div>
             </div>

@@ -64,6 +64,8 @@ public class OrderHeaderConfiguration : IEntityTypeConfiguration<OrderHeader>
 
         builder.Property(l => l.TotalPrice);
 
+        builder.Property(l => l.Discount);
+
 
     }
 }

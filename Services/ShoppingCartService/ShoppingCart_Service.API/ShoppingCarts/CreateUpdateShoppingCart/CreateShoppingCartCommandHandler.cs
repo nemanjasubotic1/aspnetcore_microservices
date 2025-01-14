@@ -58,6 +58,7 @@ public class CreateShoppingCartCommandHandler(IShoppingCartRepository shoppingCa
                 }
             }
 
+            cartFromDb.CouponName = request.ShoppingCartDTO.CouponName;
             cartFromDb.Discount = request.ShoppingCartDTO.Discount;
 
             await shoppingCartRepository.UpdateShoppingCart(cartFromDb, cancellationToken);

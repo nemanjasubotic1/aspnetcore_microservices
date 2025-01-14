@@ -54,9 +54,9 @@ public class CouponController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> EnableDisable(string couponId)
+    public async Task<IActionResult> EnableDisable(string couponName)
     {
-        var couponModelDto = await _discountService.UpdateCouponStatus(Convert.ToInt32(couponId));
+        var couponModelDto = await _discountService.UpdateCouponStatus(couponName);
 
         if (string.IsNullOrEmpty(couponModelDto.CouponName))
         {
@@ -64,7 +64,7 @@ public class CouponController : Controller
             return RedirectToAction(nameof(Index));
         }
 
-        TempData["success"] = $"Coupon id is {couponId}";
+        TempData["success"] = $"Coupon id is {couponName}";
 
         return RedirectToAction(nameof(Index));
     }

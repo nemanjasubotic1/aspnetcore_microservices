@@ -24,7 +24,7 @@ function dataToTable() {
                 "className": "text-center",
                 "render": function (data, type, row) {
                     return `<div class="w-75 btn-group text-center">
-                            <a href="/Coupon/EnableDisable?couponId=${row.id}" class="${row.isEnabled ? "btn btn-outline-danger mx-2" : "btn btn-outline-success mx-2"}">
+                            <a href="/Coupon/EnableDisable?couponName=${row.couponName}" class="${row.isEnabled ? "btn btn-outline-danger mx-2" : "btn btn-outline-success mx-2"}">
                             <i class="bi bi-trash3"></i> ${row.isEnabled ? "Disable" : "Enable" }
                             </a>
                             </div>

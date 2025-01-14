@@ -1,10 +1,12 @@
 ﻿using BasketECommerce.Web.Models.Orders;
 using BasketECommerce.Web.Models.ShoppingCart;
+using BasketECommerce.Web.Services.CouponService;
 using BasketECommerce.Web.Services.Ordering;
 using BasketECommerce.Web.Services.ProductCategory;
 using BasketECommerce.Web.Services.ShoppingCart;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System.Security.Claims;
 
@@ -19,11 +21,14 @@ public class CartController : Controller
 
     private readonly IOrderingService _orderingService;
 
-    public CartController(IShoppingCartService shoppingCartService, IProductService productService, IOrderingService orderingService)
+    private readonly IDiscountService _discountService;
+
+    public CartController(IShoppingCartService shoppingCartService, IProductService productService, IOrderingService orderingService, IDiscountService discountService)
     {
         _shoppingCartService = shoppingCartService;
         _productService = productService;
         _orderingService = orderingService;
+        _discountService = discountService;
     }
     public async Task<IActionResult> Index()
     {
@@ -69,7 +74,8 @@ public class CartController : Controller
         {
             ShoppingCartId = shoppingCartModel.Id,
             TotalPrice = shoppingCartModel.CartTotal,
-            OrderDetails = await PopulateOrderDetails()
+            OrderDetails = await PopulateOrderDetails(),
+            Discount = shoppingCartModel.Discount,
         };
 
 
@@ -116,16 +122,78 @@ public class CartController : Controller
     [HttpGet]
     public IActionResult Confirmation()
     {
-        return View();  
+        return View();
     }
 
     #region APPLY_COUPON
 
     [HttpPost]
-    public async Task<IActionResult> ApplyCoupon()
+    public async Task<IActionResult> ApplyCoupon(ShoppingCartModel shoppingCartModel)
     {
+        if (string.IsNullOrEmpty(shoppingCartModel.CouponName))
+        {
+            TempData["error"] = "Enter coupon";
+            return RedirectToAction(nameof(Index));
+        }
 
-        TempData["success"] = "Successfully activated submit button";
+        var couponAvailable = await _discountService.GetCoupon(shoppingCartModel.CouponName);
+
+        if (string.IsNullOrEmpty(couponAvailable.CouponName))
+        {
+            TempData["error"] = "Entered coupon dont exist.";
+            return RedirectToAction(nameof(Index));
+        }
+
+        var applyRemoveDiscountDTO = new ApplyRemoveDiscountDTO()
+        {
+            Id = shoppingCartModel.Id,
+            Discount = couponAvailable.Amount,
+            CouponName = couponAvailable.CouponName,
+        };
+
+        var applyCouponRequest = new ApplyRemoveDiscountRequest(applyRemoveDiscountDTO);
+
+        var apiResponse = await _shoppingCartService.ApplyRemoveDiscount(applyCouponRequest);
+
+        if (!apiResponse.IsSuccessStatusCode && apiResponse.Content == null)
+        {
+            var errorResponse = apiResponse.Error.Content;
+
+            TempData["error"] = "Error occured.";
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        TempData["success"] = $"Successfully submited coupon, discount of {couponAvailable.Amount} will be applied";
+
+        return RedirectToAction(nameof(Index));
+    }
+
+
+    [HttpPost]
+    public async Task<IActionResult> RemoveCoupon(ShoppingCartModel shoppingCartModel)
+    {
+        var applyRemoveDiscountDTO = new ApplyRemoveDiscountDTO()
+        {
+            Id = shoppingCartModel.Id,
+            Discount = 0,
+            CouponName = "",
+        };
+
+        var applyCouponRequest = new ApplyRemoveDiscountRequest(applyRemoveDiscountDTO);
+
+        var apiResponse = await _shoppingCartService.ApplyRemoveDiscount(applyCouponRequest);
+
+        if (!apiResponse.IsSuccessStatusCode && apiResponse.Content == null)
+        {
+            var errorResponse = apiResponse.Error.Content;
+
+            TempData["error"] = "Error occured.";
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        TempData["success"] = $"The coupon {shoppingCartModel.CouponName} is removed.";
 
         return RedirectToAction(nameof(Index));
     }

@@ -8,7 +8,7 @@ public class CouponModelDTO
 {
     public int Id { get; set; }
     [Required]
-    public string CouponName { get; set; }
+    public string CouponName { get; set; } = string.Empty;
     [Required]
     public decimal Amount { get; set; }
     [Required]

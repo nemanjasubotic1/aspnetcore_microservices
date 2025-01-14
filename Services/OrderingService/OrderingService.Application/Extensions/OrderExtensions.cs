@@ -26,6 +26,7 @@ public static class OrderExtensions
 
             Status = orderHeader.Status.ToString(),
             TotalPrice = orderHeader.TotalPrice,
+            Discount = orderHeader.Discount,    
 
             CreatedAt = orderHeader.CreatedAt,
         };
@@ -64,7 +65,7 @@ public static class OrderExtensions
 
             Status = orderHeader.Status.ToString(),
             TotalPrice = orderHeader.TotalPrice,
-
+            Discount = orderHeader.Discount,
             CreatedAt = orderHeader.CreatedAt,
 
         });
