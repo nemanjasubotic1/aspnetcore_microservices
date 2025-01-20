@@ -1,5 +1,5 @@
 ﻿namespace Integration.AzureServiceBusSender;
 public interface IMessageService
 {
-    Task PublishMessage(object message, string topic_queue_name);
+    Task PublishMessage(object message, string topic_queue_name, string connectionStrings);
 }

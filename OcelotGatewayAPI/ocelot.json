@@ -9,10 +9,22 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5010
+          "Port": 5020
         }
       ],
       "UpstreamPathTemplate": "/category",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/category/{Id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5020
+        }
+      ],
+      "UpstreamPathTemplate": "/category/{Id}",
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
@@ -21,22 +33,22 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5010
+          "Port": 5020
         }
       ],
       "UpstreamPathTemplate": "/category",
       "UpstreamHttpMethod": [ "Post" ]
     },
     {
-      "DownstreamPathTemplate": "/category/{id}",
+      "DownstreamPathTemplate": "/category",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5010
+          "Port": 5020
         }
       ],
-      "UpstreamPathTemplate": "/category/{id}",
+      "UpstreamPathTemplate": "/category",
       "UpstreamHttpMethod": [ "Put" ]
     },
     {
@@ -45,7 +57,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5010
+          "Port": 5020
         }
       ],
       "UpstreamPathTemplate": "/category/{id}",
@@ -60,10 +72,22 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5010
+          "Port": 5020
         }
       ],
       "UpstreamPathTemplate": "/product",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/product/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5020
+        }
+      ],
+      "UpstreamPathTemplate": "/product/{id}",
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
@@ -72,22 +96,22 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5010
+          "Port": 5020
         }
       ],
       "UpstreamPathTemplate": "/product",
       "UpstreamHttpMethod": [ "Post" ]
     },
     {
-      "DownstreamPathTemplate": "/product/{id}",
+      "DownstreamPathTemplate": "/product",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5010
+          "Port": 5020
         }
       ],
-      "UpstreamPathTemplate": "/product/{id}",
+      "UpstreamPathTemplate": "/product",
       "UpstreamHttpMethod": [ "Put" ]
     },
     {
@@ -96,7 +120,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5010
+          "Port": 5020
         }
       ],
       "UpstreamPathTemplate": "/product/{id}",
@@ -119,6 +143,18 @@
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
+      "DownstreamPathTemplate": "/shoppingcart/usercart/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5011
+        }
+      ],
+      "UpstreamPathTemplate": "/shoppingcart/usercart/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
       "DownstreamPathTemplate": "/shoppingcart",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -128,6 +164,19 @@
         }
       ],
       "UpstreamPathTemplate": "/shoppingcart",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/shoppingcart/discount",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5011
+        }
+      ],
+      "UpstreamPathTemplate": "/shoppingcart/discount",
       "UpstreamHttpMethod": [ "Post" ]
     },
     {
@@ -141,6 +190,162 @@
       ],
       "UpstreamPathTemplate": "/shoppingcart/{id}",
       "UpstreamHttpMethod": [ "Delete" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/shoppingcart/itemremove/",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5011
+        }
+      ],
+      "UpstreamPathTemplate": "/shoppingcart/itemremove/",
+      "UpstreamHttpMethod": [ "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/shoppingcart/emailnotification",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5011
+        }
+      ],
+      "UpstreamPathTemplate": "/shoppingcart/emailnotification",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+
+    // AUTHENTICATION
+
+
+    {
+      "DownstreamPathTemplate": "/userauth/login",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5014
+        }
+      ],
+      "UpstreamPathTemplate": "/userauth/login",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/userauth/register",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5014
+        }
+      ],
+      "UpstreamPathTemplate": "/userauth/register",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+
+    // ORDERING / customer
+
+
+    {
+      "DownstreamPathTemplate": "/customer",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5013
+        }
+      ],
+      "UpstreamPathTemplate": "/customer",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/customer/{Id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5013
+        }
+      ],
+      "UpstreamPathTemplate": "/customer/{Id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+
+    // ORDERING / order
+
+    {
+      "DownstreamPathTemplate": "/order",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5013
+        }
+      ],
+      "UpstreamPathTemplate": "/order",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/order/status",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5013
+        }
+      ],
+      "UpstreamPathTemplate": "/order/status",
+      "UpstreamHttpMethod": [ "Put" ]
+    },
+    {
+      "DownstreamPathTemplate": "/order/{Id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5013
+        }
+      ],
+      "UpstreamPathTemplate": "/order/{Id}",
+      "UpstreamHttpMethod": [ "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/order/{CustomerId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5013
+        }
+      ],
+      "UpstreamPathTemplate": "/order/{CustomerId}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/order",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5013
+        }
+      ],
+      "UpstreamPathTemplate": "/order",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/order/singleorder/{Id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5013
+        }
+      ],
+      "UpstreamPathTemplate": "/order/singleorder/{Id}",
+      "UpstreamHttpMethod": [ "Get" ]
     }
 
   ],

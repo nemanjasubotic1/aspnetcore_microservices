@@ -1,0 +1,37 @@
+﻿
+<div class="w-100 card border-0 p-4">
+    <div class="card-header bg-info bg-gradient py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Coupons created</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body border p-4">
+        <div class="row pb-3">
+            <div class="col-6 offset-6 text-end">
+                <a asp-controller="Coupon" asp-action="CreateCoupon" class="btn btn-secondary">
+                    <i class="bi bi-plus-circle"></i> Create new Coupon
+                </a>
+            </div>
+        </div>
+
+        <table id="couponTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Coupon Name</th>
+                    <th>Amount</th>
+                    <th>Expiry Date</th>
+                    <th>Is Expired</th>
+                    <th>Is Enabled</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/js/couponTable.js"></script>
+}
