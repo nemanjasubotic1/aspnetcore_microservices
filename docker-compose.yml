@@ -1,0 +1,6 @@
+services:
+  basketecommerce.web:
+    image: ${DOCKER_REGISTRY-}basketecommerceweb
+    build:
+      context: .
+      dockerfile: Services/WebProject/BasketECommerce.Web/Dockerfile
