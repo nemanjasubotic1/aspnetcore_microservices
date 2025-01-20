@@ -1,4 +1,5 @@
-﻿using BasketECommerce.Web.Models.Orders;
+﻿using BasketECommerce.Web.Models;
+using BasketECommerce.Web.Models.Orders;
 using BasketECommerce.Web.Services.Ordering;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -65,12 +66,16 @@ public class OrdersController : Controller
     public async Task<IActionResult> GetAllOrders()
     {
 
-        var apiResponse = await _orderingService.GetAllOrders(new GetAllOrdersQuery());
+        Refit.ApiResponse<CustomApiResponse> apiResponse;
 
-        if (!User.IsInRole(SD.Admin_Role))
+        if (User.IsInRole(SD.Admin_Role))
+        {
+            apiResponse = await _orderingService.GetAllOrders(CustomerId: null);
+        }
+        else
         {
             var userId = User.Claims.Where(l => l.Type == ClaimTypes.NameIdentifier)?.FirstOrDefault()?.Value;
-            apiResponse = await _orderingService.GetAllOrders(new GetAllOrdersQuery(CustomerId: new Guid(userId)));
+            apiResponse = await _orderingService.GetAllOrders(userId);
         }
 
         if (!apiResponse.IsSuccessStatusCode)

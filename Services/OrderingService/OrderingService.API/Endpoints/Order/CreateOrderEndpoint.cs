@@ -21,7 +21,10 @@ public class CreateOrderEndpoint : ICarterModule
 
             var result = await sender.Send(command);
 
-            //var response = result.Adapt<CreateOrderResponse>();
+            if (result.Errors != null && result.Errors.Any())
+            {
+                return Results.BadRequest(result.Errors.Select(l => l.ErrorMessage));
+            }
 
             return Results.Created($"/order/", result);
 

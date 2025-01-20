@@ -93,7 +93,10 @@ public class AuthenticationController : Controller
     public async Task<IActionResult> Logout()
     {
         await HttpContext.SignOutAsync();
+
         _tokenProvider.ClearToken();
+
+        HttpContext.Session.Clear();
 
         return RedirectToAction("Index", "Home");
     }

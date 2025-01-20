@@ -19,7 +19,7 @@ public interface IOrderingService
     Task<ApiResponse<CustomApiResponse>> GetOrderById(Guid Id);
 
 
-    [Get("/order")]
-    Task<ApiResponse<CustomApiResponse>> GetAllOrders([Body] GetAllOrdersQuery request);
+    [Get("/getallorders/{CustomerId}")]
+    Task<ApiResponse<CustomApiResponse>> GetAllOrders(string CustomerId);
 
 }

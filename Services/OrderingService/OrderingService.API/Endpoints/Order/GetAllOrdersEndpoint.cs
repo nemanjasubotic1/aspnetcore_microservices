@@ -10,14 +10,21 @@ public class GetAllOrdersEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet("/order", async ( [FromBody] GetAllOrdersQuery request,ISender sender) =>
+        app.MapGet("/getallorders/{CustomerId?}", async (Guid? CustomerId, ISender sender) =>
         {
+            GetAllOrdersQuery request = CustomerId == null ? new GetAllOrdersQuery() : new GetAllOrdersQuery(CustomerId);
+
             var result = await sender.Send(request);
+
+            if (result.Errors != null && result.Errors.Any())
+            {
+                return Results.BadRequest(result.Errors.Select(l => l.ErrorMessage));
+            }
 
             return Results.Ok(result);
 
 
-        }).RequireAuthorization()
+        })
         .WithName("GetAllOrders")
         .Produces<CustomApiResponse>(StatusCodes.Status201Created)
         .ProducesProblem(StatusCodes.Status400BadRequest)

@@ -324,7 +324,7 @@
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
-      "DownstreamPathTemplate": "/order",
+      "DownstreamPathTemplate": "/getallorders/{CustomerId}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -332,7 +332,7 @@
           "Port": 5013
         }
       ],
-      "UpstreamPathTemplate": "/order",
+      "UpstreamPathTemplate": "/getallorders/{CustomerId}",
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
