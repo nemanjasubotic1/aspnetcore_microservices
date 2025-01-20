@@ -20,6 +20,11 @@ public class GetShoppingCartByIdEndpoint : ICarterModule
             //var response = new GetShoppingCartByIdResponse(result.ShoppingCartDTO);
 
             return Results.Ok(result);
-        });
+        }).RequireAuthorization()
+        .WithName("GetShoppingCartById")
+        .Produces<CustomApiResponse>(StatusCodes.Status200OK)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .WithSummary("GetShoppingCartById")
+        .WithDescription("Get the cart details by cart id.");
     }
 }

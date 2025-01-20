@@ -14,9 +14,12 @@ public class DeleteShoppingCartEndpoint : ICarterModule
         {
             var result = await sender.Send(new DeleteShoppingCartCommand(id));
 
-            //var response = result.Adapt<DeleteShoppingCartResponse>();
-
             return Results.Ok(result);
-        });
+        }).RequireAuthorization()
+        .WithName("DeleteShoppingCart")
+        .Produces<CustomApiResponse>(StatusCodes.Status200OK)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .WithSummary("DeleteShoppingCart")
+        .WithDescription("Deleting the cart.");
     }
 }

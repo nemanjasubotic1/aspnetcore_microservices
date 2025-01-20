@@ -1,14 +1,14 @@
-﻿using Azure.Messaging.ServiceBus;
+﻿using Azure.Core.Extensions;
+using Azure.Messaging.ServiceBus;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System.Text;
 
 namespace Integration.AzureServiceBusSender;
 public class MessageService : IMessageService
 {
-    private string connectionStrings =
-        "Endpoint=sb://mangowebsolutions.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=wap4Qc3+PiiuoBTOIkoQQg9SlMA3ITus5+ASbOrrCRU=";
-
-    public async Task PublishMessage(object message, string topic_queue_name)
+    
+    public async Task PublishMessage(object message, string topic_queue_name, string connectionStrings)
     {
         await using var client = new ServiceBusClient(connectionStrings);
 

@@ -1,6 +1,6 @@
 ﻿namespace BasketECommerce.Web.Models.ShoppingCart;
 
-public class ShoppingCartModel
+public class ShoppingCartDTO
 {
     public Guid Id { get; set; }
     public string UserId { get; set; }
@@ -9,7 +9,7 @@ public class ShoppingCartModel
 
     public string CouponName { get; set; } = string.Empty;
     public decimal Discount { get; set; }
-    public decimal CartTotal => CartItems.Sum(l => l.Price * l.Quantity) - Discount;
+    public decimal CartTotal => CartItems.Sum(l => l.Price * l.Quantity) - Discount; 
 }
 
 

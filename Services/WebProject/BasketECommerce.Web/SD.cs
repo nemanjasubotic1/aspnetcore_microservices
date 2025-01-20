@@ -1,6 +1,5 @@
 ﻿using BasketECommerce.Web.Models.ShoppingCart;
 using BasketECommerce.Web.Services.ShoppingCart;
-using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System.Security.Claims;
 
@@ -32,7 +31,7 @@ public static class SD
 
         var content = apiResponse.Content;
 
-        var shoppingCartModel = JsonConvert.DeserializeObject<ShoppingCartModel>(Convert.ToString(apiResponse.Content.Result));
+        var shoppingCartModel = JsonConvert.DeserializeObject<ShoppingCartDTO>(Convert.ToString(apiResponse.Content.Result));
 
         int numberOfShoppingCartItems = shoppingCartModel.CartItems.Count;
 

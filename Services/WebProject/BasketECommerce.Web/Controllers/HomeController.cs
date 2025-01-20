@@ -81,7 +81,7 @@ public class HomeController : Controller
         var claimsIdentity = (ClaimsIdentity)User.Identity!;
         var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
-        ShoppingCartModel model = new()
+        ShoppingCartDTO model = new()
         {
             Discount = 0, 
             UserId = claim.Value,

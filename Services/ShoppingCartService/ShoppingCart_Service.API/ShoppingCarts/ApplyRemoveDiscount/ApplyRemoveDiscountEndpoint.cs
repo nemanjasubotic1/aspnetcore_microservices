@@ -1,4 +1,5 @@
 ﻿using Carter;
+using Main.ShoppingCartService.ShoppingCart_Service.API;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingCart_Service.API.Models.DTOs;
@@ -23,6 +24,12 @@ public class ApplyRemoveDiscountEndpoint : ICarterModule
             }
 
             return Results.Created($"/product", result);
-        });
+
+        }).RequireAuthorization()
+        .WithName("ApplyRemoveDiscount")
+        .Produces<CustomApiResponse>(StatusCodes.Status200OK)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .WithSummary("ApplyRemoveDiscount")
+        .WithDescription("Applying or removing discount coupon.");
     }
 }

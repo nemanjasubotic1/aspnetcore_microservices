@@ -17,12 +17,20 @@ public class CreateShoppingCartEndpoint : ICarterModule
         {
             var command = new CreateShoppingCartCommand(request.ShoppingCartDTO);
 
-            // try catch
-
             var result = await sender.Send(command);
+
+            if (result.Errors != null && result.Errors.Any())
+            {
+                return Results.BadRequest(result.Errors.Select(l => l.ErrorMessage));
+            }
 
             return Results.Created($"/shoppingcart", result);
 
-        });
+        }).RequireAuthorization()
+        .WithName("CreateShoppingCart")
+        .Produces<CustomApiResponse>(StatusCodes.Status201Created)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .WithSummary("CreateShoppingCart")
+        .WithDescription("Creating the cart.");
     }
 }

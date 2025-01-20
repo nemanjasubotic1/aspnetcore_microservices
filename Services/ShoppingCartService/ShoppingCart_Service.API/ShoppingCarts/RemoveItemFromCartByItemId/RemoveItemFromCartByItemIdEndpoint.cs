@@ -21,7 +21,7 @@ public class RemoveItemFromCartByItemIdEndpoint : ICarterModule
 
             return Results.Ok(result);
 
-        })
+        }).RequireAuthorization()
         .WithName("RemoveItemFromCart")
         .Produces<CustomApiResponse>(StatusCodes.Status201Created)
         .ProducesProblem(StatusCodes.Status400BadRequest)

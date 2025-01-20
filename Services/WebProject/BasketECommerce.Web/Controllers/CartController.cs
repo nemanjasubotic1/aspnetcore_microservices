@@ -6,7 +6,6 @@ using BasketECommerce.Web.Services.ProductCategory;
 using BasketECommerce.Web.Services.ShoppingCart;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System.Security.Claims;
 
@@ -125,10 +124,41 @@ public class CartController : Controller
         return View();
     }
 
+
+    [HttpPost]
+    public async Task<IActionResult> EmailCart(string cartTotal)
+    {
+        EmailCartDTO emailCartDTO = new()
+        {
+            UserId = User.Claims.Where(l => l.Type == ClaimTypes.NameIdentifier)?.FirstOrDefault()?.Value,
+            Email = User.Claims.Where(l => l.Type == ClaimTypes.Email)?.FirstOrDefault()?.Value,
+            EmailSendAt = DateTime.Now,
+            CartTotal = Convert.ToDecimal(cartTotal)
+        };
+
+        var apiResponse = await _shoppingCartService.EmailShoppingCart(new EmailShoppingCartRequest(emailCartDTO));
+
+        if (!apiResponse.IsSuccessStatusCode)
+        {
+            var errorResponse = apiResponse.Error.Content;
+
+            TempData["error"] = "Error occured, try again.";
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        TempData["success"] = "Successfully emailed a current card";
+
+
+        return RedirectToAction(nameof(Index));
+    }
+
+
     #region APPLY_COUPON
 
     [HttpPost]
-    public async Task<IActionResult> ApplyCoupon(ShoppingCartModel shoppingCartModel)
+    public async Task<IActionResult> ApplyCoupon(ShoppingCartDTO shoppingCartModel)
     {
         if (string.IsNullOrEmpty(shoppingCartModel.CouponName))
         {
@@ -171,7 +201,7 @@ public class CartController : Controller
 
 
     [HttpPost]
-    public async Task<IActionResult> RemoveCoupon(ShoppingCartModel shoppingCartModel)
+    public async Task<IActionResult> RemoveCoupon(ShoppingCartDTO shoppingCartModel)
     {
         var applyRemoveDiscountDTO = new ApplyRemoveDiscountDTO()
         {
@@ -202,7 +232,7 @@ public class CartController : Controller
 
     #region HelperMethods
 
-    private async Task<ShoppingCartModel> LoadCartBasedOnLoggedUser()
+    private async Task<ShoppingCartDTO> LoadCartBasedOnLoggedUser()
     {
         var userId = User.Claims.Where(l => l.Type == ClaimTypes.NameIdentifier)?.FirstOrDefault()?.Value;
 
@@ -211,7 +241,7 @@ public class CartController : Controller
         if (!shoppingCartServiceApiResponse.IsSuccessStatusCode)
             return null;
 
-        var shoppingCart = JsonConvert.DeserializeObject<ShoppingCartModel>(Convert.ToString(shoppingCartServiceApiResponse.Content.Result));
+        var shoppingCart = JsonConvert.DeserializeObject<ShoppingCartDTO>(Convert.ToString(shoppingCartServiceApiResponse.Content.Result));
 
         return shoppingCart;
     }

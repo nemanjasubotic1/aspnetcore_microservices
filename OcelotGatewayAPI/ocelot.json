@@ -204,6 +204,18 @@
       "UpstreamPathTemplate": "/shoppingcart/itemremove/",
       "UpstreamHttpMethod": [ "Delete" ]
     },
+    {
+      "DownstreamPathTemplate": "/shoppingcart/emailnotification",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5011
+        }
+      ],
+      "UpstreamPathTemplate": "/shoppingcart/emailnotification",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
 
     // AUTHENTICATION
 

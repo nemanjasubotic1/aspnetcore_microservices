@@ -26,6 +26,7 @@ public class ShoppingCartViewComponent : ViewComponent
                 int numberOfShoppingCartItems = await SD.GetNumberOfCartItems(_shoppingCartService, claim);
 
                 HttpContext.Session.SetInt32(SD.SessionCart, numberOfShoppingCartItems);
+
             }
 
             return View(HttpContext.Session.GetInt32(SD.SessionCart));

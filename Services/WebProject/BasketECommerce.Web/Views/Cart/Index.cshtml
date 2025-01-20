@@ -1,8 +1,10 @@
-﻿@model ShoppingCartModel
+﻿@model ShoppingCartDTO
 
 
 <form method="post">
     <input asp-for="Id" hidden />
+    <input asp-for="CreatedAt" hidden />
+    <input asp-for="UserId" hidden />
     <br />
     <div class="">
         <div class="card border mt-4 container">
@@ -89,7 +91,10 @@
             </div>
             <div class="card-footer row">
                 <div class="col-6 col-md-3 ">
-                    <button type="submit" class="btn btn-outline-danger form-control">Email Cart</button>
+                    <button type="submit" class="btn btn-outline-danger form-control"
+                            asp-controller="Cart" asp-action="EmailCart" asp-route-cartTotal="@Model.CartTotal.ToString()">
+                    Email Cart
+                </button>
                 </div>
                 @if (Model.CartItems != null && Model.CartItems.Count > 0)
                 {

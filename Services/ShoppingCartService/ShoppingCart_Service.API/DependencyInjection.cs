@@ -1,6 +1,7 @@
 ﻿using Carter;
 using FluentValidation;
 using GeneralUsing.Exceptions;
+using GeneralUsing.Extensions;
 using GeneralUsing.MediatorPipelineBehaviors;
 using Integration.AzureServiceBusSender;
 using Main.ShoppingCartService.ShoppingCart_Service.API.Data;
@@ -13,6 +14,10 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddShoppingCartServices(this IServiceCollection services, IConfiguration configuration)
     {
+
+        services.AddAppAuthentication(configuration);
+
+        services.AddAuthorization();
 
         services.AddCarter();
 
@@ -55,6 +60,9 @@ public static class DependencyInjection
         app.MapCarter();
 
         app.UseExceptionHandler(options => { });
+
+        app.UseAuthentication();
+        app.UseAuthorization();
 
         return app;
     }
