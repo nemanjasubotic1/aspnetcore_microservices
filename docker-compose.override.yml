@@ -1,14 +1,46 @@
 services:
-  basketecommerce.web:
+  productdb:
+    container_name: productdb
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=nemanja
+      - POSTGRES_DB=ProductCategoryDB
+    restart: always
+    ports:
+      - "5440:5432"
+    volumes:
+      - postgres_catalog:/var/lib/postgresql/data
+
+  distributedcache:
+    container_name: distributedcache
+    restart: always
+    ports:
+      - "6379:6379"
+
+  productcategory.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
     ports:
-      - "5051:8080"
-      - "5055:8081"
-    env_file:
-      - ./envs/.env.basketweb.txt
+      - "5000:8080"
+      - "5020:8081"
+    env_file: .env.productapi.txt
+    depends_on:
+      - productdb
+      - distributedcache
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+
+  ocelotgatewayapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+    ports:
+      - "7007:8080"
+      - "7008:8081"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro

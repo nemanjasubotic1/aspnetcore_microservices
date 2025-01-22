@@ -15,6 +15,6 @@
     </None>
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
-    <None Include="envs\.env.basketweb.txt" />
+    <None Include=".env.productapi.txt" />
   </ItemGroup>
 </Project>

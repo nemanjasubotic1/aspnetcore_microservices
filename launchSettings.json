@@ -5,7 +5,9 @@
       "commandVersion": "1.0",
       "serviceActions": {
         "productcategory.api": "StartDebugging",
-        "basketecommerce.web": "StartDebugging"
+        "basketecommerce.web": "StartDebugging",
+        "shoppingcart_service.api": "StartDebugging",
+        "ocelotgatewayapi": "StartDebugging"
       }
     }
   }

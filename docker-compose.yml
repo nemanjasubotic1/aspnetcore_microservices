@@ -1,6 +1,29 @@
 services:
-  basketecommerce.web:
-    image: ${DOCKER_REGISTRY-}basketecommerceweb
+  productdb:
+   image: postgres
+
+  distributedcache:
+    image: redis
+
+  productcategory.api:
+    image: ${DOCKER_REGISTRY-}productcategoryapi
     build:
       context: .
-      dockerfile: Services/WebProject/BasketECommerce.Web/Dockerfile
+      dockerfile: Services/productservice/Product.API/Dockerfile
+
+  ocelotgatewayapi:
+    image: ${DOCKER_REGISTRY-}ocelotgatewayapi
+    build:
+      context: .
+      dockerfile: OcelotGatewayAPI/Dockerfile
+
+volumes:
+  postgres_catalog:
+
+  
+
+
+
+
+
+
