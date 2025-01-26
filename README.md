@@ -41,6 +41,7 @@ The application follows a microservices architecture with the following key feat
 
 *   .NET 8
 *   ASP.NET Core Minimal APIs
+*   ASP.NET Core MVC
 *   Entity Framework Core 
 *   SQLite
 *   Marten
