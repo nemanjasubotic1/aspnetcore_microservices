@@ -82,16 +82,15 @@ Configuration for database connections, messaging services, Redis, and authentic
 **2. Running the Application:**
 
 *   **Directly (Outside Docker):**
-    1.  Install the .NET 8 SDK.
-    2.  Configure `appsettings.json`.
-    3.  Ensure `ocelot.json` is in use.
-    4.  Build and run the projects
+    1.  Configure `appsettings.json`.
+    2.  Ensure `ocelot.json` is in use.
+    3.  Build and run the projects
 
 *   **Using Docker Compose:**
-    1.  Install Docker and Docker Compose.
+    1.  Install Docker
     2.  Configure the `.env` files.
     3.  Ensure `ocelot_docker.json` is in use.
     4.  Navigate to the directory containing `docker-compose.yml`.
     5.  Build: `docker-compose build`
-    6.  Run: `docker-compose up -d` (detached mode)
+    6.  Run: `docker-compose up -d`
     7.  Stop: `docker-compose down`
