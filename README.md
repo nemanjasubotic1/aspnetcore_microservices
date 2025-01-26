@@ -77,18 +77,21 @@ Configuration for database connections, messaging services, Redis, and authentic
     *   `.env.webapp`
 
     Populate these files with your values for variables found in the `appsettings.json` file for each corresponding project. **Do not commit your `.env` files to version control.**
+    When running with Docker Compose, the Ocelot API Gateway uses `ocelot_docker.json`. You will need to manually switch between `ocelot.json` and `ocelot_docker.json` depending on your chosen running environment.
 
 **2. Running the Application:**
 
 *   **Directly (Outside Docker):**
     1.  Install the .NET 8 SDK.
     2.  Configure `appsettings.json`.
-    3.  Build and run the projects (e.g., `dotnet run`).
+    3.  Ensure `ocelot.json` is in use.
+    4.  Build and run the projects (e.g., `dotnet run`).
 
 *   **Using Docker Compose:**
     1.  Install Docker and Docker Compose.
-    2.  Configure `.env` files (copy `.env.example`).
-    3.  Navigate to the directory containing `docker-compose.yml`.
-    4.  Build: `docker-compose build`
-    5.  Run: `docker-compose up -d` (detached mode)
-    6.  Stop: `docker-compose down`
+    2.  Configure the `.env` files.
+    3.  Ensure `ocelot_docker.json` is in use.
+    4.  Navigate to the directory containing `docker-compose.yml`.
+    5.  Build: `docker-compose build`
+    6.  Run: `docker-compose up -d` (detached mode)
+    7.  Stop: `docker-compose down`
