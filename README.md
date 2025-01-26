@@ -4,7 +4,7 @@ This repository demonstrates a .NET 8 microservices architecture application sho
 
 ## Overview
 
-This project implements a simplified e-commerce-like scenario. It demonstrates how to build and integrate multiple microservices using .NET 8, communicating via HTTP and gRPC, and leveraging various architectural patterns and infrastructure components.
+This project implements a simplified e-commerce-like scenario. It demonstrates how to build and integrate multiple microservices using .NET 8, communicating via HTTP and gRPC, and leveraging various architectural patterns and infrastructure components. The project also includes Docker Compose configuration for easier deployment and development.
 
 ## Architecture
 
@@ -55,3 +55,39 @@ The application follows a microservices architecture with the following key feat
 *   Ocelot
 *   Microsoft Identity Library
 *   JWT
+
+
+## Getting Started
+
+This application can be run directly (outside Docker) or using Docker Compose.
+
+**1. Configuration:**
+
+Configuration for database connections, messaging services, Redis, and authentication is handled as follows:
+
+*   **Directly (Outside Docker):** Use `appsettings.json` files for configuration. Feature Management is also available via configuration.
+*   **Docker Compose:** Use `.env` files to set environment variables within the containers. Create the following `.env` files (matching the names used in `docker-compose.override.yml`) in the same directory as `docker-compose.yml`:
+    *   `.env.authapi`
+    *   `.env.couponapi`
+    *   `.env.emailapi`
+    *   `.env.orderingapi`
+    *   `.env.productapi`
+    *   `.env.shoppingcartapi`
+    *   `.env.webapp`
+
+    Populate these files with your values for variables found in the `appsettings.json` file for each corresponding project. **Do not commit your `.env` files to version control.**
+
+**2. Running the Application:**
+
+*   **Directly (Outside Docker):**
+    1.  Install the .NET 8 SDK.
+    2.  Configure `appsettings.json`.
+    3.  Build and run the projects (e.g., `dotnet run`).
+
+*   **Using Docker Compose:**
+    1.  Install Docker and Docker Compose.
+    2.  Configure `.env` files (copy `.env.example`).
+    3.  Navigate to the directory containing `docker-compose.yml`.
+    4.  Build: `docker-compose build`
+    5.  Run: `docker-compose up -d` (detached mode)
+    6.  Stop: `docker-compose down`
