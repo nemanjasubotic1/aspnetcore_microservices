@@ -21,7 +21,7 @@ The application follows a microservices architecture with the following key feat
     *   **Repository Pattern:** Abstraction layer for data access.
     *   **CQRS (Command Query Responsibility Segregation):** Separating read and write operations for improved performance and scalability.
     *   **MediatR:** Implementing CQRS and in-process messaging.
-    *   **Mediator Pipeline Behaviors:** Implementing cross-cutting concerns (e.g., validation, logging).
+    *   **Mediator Pipeline Behaviors:** Implementing cross-cutting concerns ("Fluent validation").
     *   **Decorator Pattern (with Scrutor):** Applying decorators for enhanced functionality.
 *   **Infrastructure:**
     *   **Caching (Redis):** Distributed caching for improved performance.
@@ -33,7 +33,7 @@ The application follows a microservices architecture with the following key feat
     *   **Authentication (Microsoft Identity Library):** Secure authentication using standard protocols.
     *   **JWT (JSON Web Tokens):** Token-based authentication for API access.
 *   **Frontend:**
-    *   **Simple MVC Application:** Demonstrates how to consume the microservices using Refit (for HTTP) and gRPC.
+    *   **Simple MVC Application:** Demonstrates how to consume the microservices using Refit (for HTTP) and gRPC. Uses Data Annotations for basic frontend validation and Fluent Validation implemented via MediatR pipeline behaviors for more complex validation scenarios.
 *   **Exception Handling:** Centralized and consistent exception handling across services.
 
 
