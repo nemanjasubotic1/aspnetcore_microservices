@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
 using System.Text;
 
@@ -11,9 +12,9 @@ public class RabbitMQMessageSender : IRabbitMQMessageSender
 
     private IConnection _connection;
 
-    public RabbitMQMessageSender()
+    public RabbitMQMessageSender(IConfiguration configuration)
     {
-        _hostname = "localhost";
+        _hostname = configuration["MessageBroker:Host"];
         _username = "guest";
         _password = "guest";
     }

@@ -1,0 +1,18 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "productcategory.api": "StartDebugging",
+        "basketecommerce.web": "StartDebugging",
+        "shoppingcart_service.api": "StartDebugging",
+        "ocelotgatewayapi": "StartDebugging",
+        "authservice.api": "StartDebugging",
+        "orderingservice.api": "StartDebugging",
+        "emailservice.api": "StartDebugging",
+        "couponservice.api": "StartDebugging"
+      }
+    }
+  }
+}

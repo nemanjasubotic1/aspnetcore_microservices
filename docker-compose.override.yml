@@ -1,0 +1,184 @@
+services:
+  productdb:
+    container_name: productdb
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=nemanja
+      - POSTGRES_DB=ProductCategoryDB
+    restart: always
+    ports:
+      - "5440:5432"
+    volumes:
+      - postgres_catalog:/var/lib/postgresql/data
+
+  shoppingcartdb:
+    container_name: shoppingcartdb
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=nemanja
+      - POSTGRES_DB=ShoppingCartDb
+    restart: always
+    ports:
+      - "5441:5432"
+    volumes:
+      - postgres_shoppingcart:/var/lib/postgresql/data 
+
+  authservicedb:
+    container_name: authservicedb
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=LkasoOIjksm!!sdsacsa
+    restart: always
+    ports:
+      - "1432:1433"
+    volumes:
+      - authservicedb_data:/var/opt/mssql
+       
+  orderingservicedb:
+    container_name: orderingservicedb
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=LkasoOIjksm!!sdsacsa
+    restart: always
+    ports:
+      - "1431:1433"
+    volumes:
+      - orderingservicedb_data:/var/opt/mssql
+
+  distributedcache:
+    container_name: distributedcache
+    restart: always
+    ports:
+      - "6379:6379"
+
+  messagebroker:
+    container_name: messagebroker
+    hostname: ecommerce-mq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  productcategory.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+    ports:
+      - "5000:8080"
+      - "5020:8081"
+    env_file: .env.productapi.txt
+    depends_on:
+      - productdb
+      - distributedcache
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+
+  ocelotgatewayapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+
+  shoppingcart_service.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+    ports:
+      - "5001:8080"
+      - "5021:8081"
+    env_file: .env.shoppingcart.txt
+    depends_on:
+      - productdb
+      - distributedcache
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+
+  authservice.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - MessageBroker__Host=messagebroker
+    ports:
+      - "5004:8080"
+      - "5024:8081"
+    env_file: .env.authapi.txt
+    depends_on:
+      - authservicedb
+      - messagebroker
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+
+  orderingservice.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+    ports:
+      - "5003:8080"
+      - "5023:8081"
+    env_file: .env.orderingapi.txt
+    depends_on:
+      - orderingservicedb
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+
+  emailservice.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - MessageBroker__Host=messagebroker
+    ports:
+      - "5005:8080"
+      - "5025:8081"
+    env_file: .env.emailapi.txt
+    depends_on:
+      - messagebroker
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+      - ./emailapi-data:/app/data
+
+ 
+  basketecommerce.web:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - ApiSettings__CouponServiceAddress=http://couponservice.api:50051
+      - ApiSettings__GatewayAddress=http://ocelotgatewayapi:8080
+    ports:
+      - "8080:8080"
+      - "8081:8081" 
+    depends_on:
+      - ocelotgatewayapi
+      - productcategory.api
+      - authservice.api
+      - couponservice.api
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+
+  couponservice.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+    env_file: .env.couponapi.txt
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+      - ./couponserviceapi-data:/app/data
