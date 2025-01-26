@@ -76,7 +76,7 @@ Configuration for database connections, messaging services, Redis, and authentic
     *   `.env.shoppingcartapi`
     *   `.env.webapp`
 
-    Populate these files with your values for variables found in the `appsettings.json` file for each corresponding project. **Do not commit your `.env` files to version control.**
+    Populate these files with your values for variables found in the `appsettings.json` file for each corresponding project.
     When running with Docker Compose, the Ocelot API Gateway uses `ocelot_docker.json`. You will need to manually switch between `ocelot.json` and `ocelot_docker.json` depending on your chosen running environment.
 
 **2. Running the Application:**
@@ -85,7 +85,7 @@ Configuration for database connections, messaging services, Redis, and authentic
     1.  Install the .NET 8 SDK.
     2.  Configure `appsettings.json`.
     3.  Ensure `ocelot.json` is in use.
-    4.  Build and run the projects (e.g., `dotnet run`).
+    4.  Build and run the projects
 
 *   **Using Docker Compose:**
     1.  Install Docker and Docker Compose.
