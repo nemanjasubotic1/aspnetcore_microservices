@@ -22,6 +22,7 @@ RUN dotnet build "./EmailService.API.csproj" -c $BUILD_CONFIGURATION -o /app/bui
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "./EmailService.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN mkdir /app/data && chown -R app:app /app/data
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final

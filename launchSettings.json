@@ -7,7 +7,11 @@
         "productcategory.api": "StartDebugging",
         "basketecommerce.web": "StartDebugging",
         "shoppingcart_service.api": "StartDebugging",
-        "ocelotgatewayapi": "StartDebugging"
+        "ocelotgatewayapi": "StartDebugging",
+        "authservice.api": "StartDebugging",
+        "orderingservice.api": "StartDebugging",
+        "emailservice.api": "StartDebugging",
+        "couponservice.api": "StartDebugging"
       }
     }
   }

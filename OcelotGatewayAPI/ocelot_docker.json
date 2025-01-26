@@ -132,11 +132,11 @@
 
     {
       "DownstreamPathTemplate": "/shoppingcart/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5011
+          "Host": "shoppingcart_service.api",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/shoppingcart/{id}",
@@ -144,11 +144,11 @@
     },
     {
       "DownstreamPathTemplate": "/shoppingcart/usercart/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5011
+          "Host": "shoppingcart_service.api",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/shoppingcart/usercart/{id}",
@@ -156,11 +156,11 @@
     },
     {
       "DownstreamPathTemplate": "/shoppingcart",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5011
+          "Host": "shoppingcart_service.api",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/shoppingcart",
@@ -169,11 +169,11 @@
 
     {
       "DownstreamPathTemplate": "/shoppingcart/discount",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5011
+          "Host": "shoppingcart_service.api",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/shoppingcart/discount",
@@ -181,11 +181,11 @@
     },
     {
       "DownstreamPathTemplate": "/shoppingcart/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5011
+          "Host": "shoppingcart_service.api",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/shoppingcart/{id}",
@@ -194,11 +194,11 @@
 
     {
       "DownstreamPathTemplate": "/shoppingcart/itemremove/",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5011
+          "Host": "shoppingcart_service.api",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/shoppingcart/itemremove/",
@@ -206,11 +206,11 @@
     },
     {
       "DownstreamPathTemplate": "/shoppingcart/emailnotification",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5011
+          "Host": "shoppingcart_service.api",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/shoppingcart/emailnotification",
@@ -222,11 +222,11 @@
 
     {
       "DownstreamPathTemplate": "/userauth/login",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5014
+          "Host": "authservice.api",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/userauth/login",
@@ -234,11 +234,11 @@
     },
     {
       "DownstreamPathTemplate": "/userauth/register",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5014
+          "Host": "authservice.api",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/userauth/register",
@@ -250,11 +250,11 @@
 
     {
       "DownstreamPathTemplate": "/customer",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5013
+          "Host": "orderingservice.api",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/customer",
@@ -262,11 +262,11 @@
     },
     {
       "DownstreamPathTemplate": "/customer/{Id}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5013
+          "Host": "orderingservice.api",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/customer/{Id}",
@@ -277,11 +277,11 @@
 
     {
       "DownstreamPathTemplate": "/order",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5013
+          "Host": "orderingservice.api",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/order",
@@ -289,11 +289,11 @@
     },
     {
       "DownstreamPathTemplate": "/order/status",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5013
+          "Host": "orderingservice.api",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/order/status",
@@ -301,11 +301,11 @@
     },
     {
       "DownstreamPathTemplate": "/order/{Id}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5013
+          "Host": "orderingservice.api",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/order/{Id}",
@@ -313,11 +313,11 @@
     },
     {
       "DownstreamPathTemplate": "/order/{CustomerId}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5013
+          "Host": "orderingservice.api",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/order/{CustomerId}",
@@ -325,11 +325,11 @@
     },
     {
       "DownstreamPathTemplate": "/getallorders/{CustomerId}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5013
+          "Host": "orderingservice.api",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/getallorders/{CustomerId}",
@@ -337,11 +337,11 @@
     },
     {
       "DownstreamPathTemplate": "/order/singleorder/{Id}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5013
+          "Host": "orderingservice.api",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/order/singleorder/{Id}",
@@ -350,7 +350,7 @@
 
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:7008"
+    "BaseUrl": "http://localhost:7007"
   },
   "HttpHandlerOptions": {
     "AllowInsecureConnections": true

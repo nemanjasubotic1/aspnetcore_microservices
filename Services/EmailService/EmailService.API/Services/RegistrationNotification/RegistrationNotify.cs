@@ -28,5 +28,6 @@ public class RegistrationNotify : IRegistrationNotify
 
         await context.EmailLoggers.AddAsync(emailLogger);
         await context.SaveChangesAsync();
+
     }
 }

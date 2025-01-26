@@ -34,10 +34,11 @@ public class UserRegisterCommandHandler(IAuthenticationService _authenticationSe
             return new CustomApiResponse(null, false, [new ValidationFailure("", errorMessage)]);
         }
 
+        // send message to rabbitmq
         var registrationData = new
         {
-            Email = request.RegistrationRequestDTO.Email,
-            Name = request.RegistrationRequestDTO.Name,
+            request.RegistrationRequestDTO.Email,
+            request.RegistrationRequestDTO.Name,
         };
 
         var queueName = "emailregistration";

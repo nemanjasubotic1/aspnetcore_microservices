@@ -12,30 +12,23 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
-# Copy project files
+# Copy project files and restore dependencies
 COPY ["Services/ProductService/Product.API/ProductCategory.API.csproj", "Services/ProductService/Product.API/"]
 COPY ["GeneralUsing/GeneralUsing/GeneralUsing.csproj", "GeneralUsing/GeneralUsing/"]
-
-# Restore dependencies for ProductCategory.API
-WORKDIR /src/Services/ProductService/Product.API
-RUN dotnet restore ProductCategory.API.csproj  # Corrected: Specify the project file
-
-# Restore dependencies for GeneralUsing
-WORKDIR /src/GeneralUsing/GeneralUsing
-RUN dotnet restore GeneralUsing.csproj # Corrected: Specify the project file
+WORKDIR /src/Services/ProductService/Product.API # Set WORKDIR before restore
+RUN dotnet restore
 
 # Copy the rest of the source code
-WORKDIR /src
 COPY . .
 
 # Build the application
-WORKDIR /src/Services/ProductService/Product.API
+WORKDIR /src/Services/ProductService/Product.API # Set WORKDIR before build
 RUN dotnet build -c $BUILD_CONFIGURATION -o /app/build
 
 # Publish stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-WORKDIR /src/Services/ProductService/Product.API
+WORKDIR /src/Services/ProductService/Product.API # Set WORKDIR before publish
 RUN dotnet publish -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # Final stage

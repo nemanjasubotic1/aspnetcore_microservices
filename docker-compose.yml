@@ -2,8 +2,20 @@ services:
   productdb:
    image: postgres
 
+  shoppingcartdb:
+   image: postgres
+
+  authservicedb:
+   image: mcr.microsoft.com/mssql/server
+
+  orderingservicedb:
+   image: mcr.microsoft.com/mssql/server
+
   distributedcache:
     image: redis
+
+  messagebroker:
+    image: rabbitmq:management
 
   productcategory.api:
     image: ${DOCKER_REGISTRY-}productcategoryapi
@@ -17,10 +29,61 @@ services:
       context: .
       dockerfile: OcelotGatewayAPI/Dockerfile
 
+  shoppingcart_service.api:
+    image: ${DOCKER_REGISTRY-}shoppingcartserviceapi
+    build:
+      context: .
+      dockerfile: Services/ShoppingCartService/ShoppingCart_Service.API/Dockerfile
+
+  authservice.api:
+    image: ${DOCKER_REGISTRY-}authserviceapi
+    build:
+      context: .
+      dockerfile: Services/AuthenticationService/AuthService.API/Dockerfile
+
+  orderingservice.api:
+    image: ${DOCKER_REGISTRY-}orderingserviceapi
+    build:
+      context: .
+      dockerfile: Services/OrderingService/OrderingService.API/Dockerfile
+
+  emailservice.api:
+    image: ${DOCKER_REGISTRY-}emailserviceapi
+    build:
+      context: .
+      dockerfile: Services/EmailService/EmailService.API/Dockerfile
+
+  basketecommerce.web:
+    image: ${DOCKER_REGISTRY-}basketecommerceweb
+    build:
+      context: .
+      dockerfile: Services/WebProject/BasketECommerce.Web/Dockerfile
+
+  couponservice.api:
+    image: ${DOCKER_REGISTRY-}couponserviceapi
+    build:
+      context: .
+      dockerfile: Services/CouponService/CouponService.API/Dockerfile
+
 volumes:
+  couponserviceapi-data:
+  emailapi-data:
   postgres_catalog:
+  postgres_shoppingcart:
+  authservicedb_data:
+  orderingservicedb_data:
 
   
+
+
+
+
+
+
+
+
+
+
 
 
 

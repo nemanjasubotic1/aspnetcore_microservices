@@ -9,6 +9,7 @@ namespace Services.EmailService.EmailService.API.Messaging.RabbitMQMessageConsum
 
 public class RabbitMQAuthConsumer : BackgroundService
 {
+    private readonly IConfiguration _configuration;
     private readonly IRegistrationNotify _registrationNotify;
 
     private IConnection _connection;
@@ -19,6 +20,7 @@ public class RabbitMQAuthConsumer : BackgroundService
 
     public RabbitMQAuthConsumer(IConfiguration configuration, IRegistrationNotify registrationNotify)
     {
+        _configuration = configuration;
         _registrationNotify = registrationNotify;
 
         queueName = configuration["TopicsAndQueueNames:EmailRegistrationQueue"]!;
@@ -28,7 +30,7 @@ public class RabbitMQAuthConsumer : BackgroundService
     {
         var factory = new ConnectionFactory
         {
-            HostName = "localhost",
+            HostName = _configuration["MessageBroker:Host"],
             UserName = "guest",
             Password = "guest",
         };
@@ -62,8 +64,5 @@ public class RabbitMQAuthConsumer : BackgroundService
         await _registrationNotify.NewRegistrationNotification(registrationNotify);
 
         await _channel.BasicAckAsync(e.DeliveryTag, false);
-
     }
-
-    
 }

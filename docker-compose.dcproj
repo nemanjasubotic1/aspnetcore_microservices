@@ -4,17 +4,23 @@
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
     <DockerPublishLocally>False</DockerPublishLocally>
-    <ProjectGuid>8b1a123b-6fe7-4d1f-a17c-3501ce20e1eb</ProjectGuid>
+    <ProjectGuid>f2da6b51-429b-4c1e-b2f8-ae8a9769809e</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
     <DockerServiceName>basketecommerce.web</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
+    <None Include=".env.authapi.txt" />
+    <None Include=".env.webapp.txt" />
+    <None Include=".env.emailapi.txt" />
+    <None Include=".env.couponapi.txt" />
+    <None Include=".env.orderingapi.txt" />
+    <None Include=".env.productapi.txt" />
+    <None Include=".env.shoppingcart.txt" />
     <None Include="docker-compose.override.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>
     </None>
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
-    <None Include=".env.productapi.txt" />
   </ItemGroup>
 </Project>

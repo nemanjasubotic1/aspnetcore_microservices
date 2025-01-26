@@ -46,11 +46,11 @@ builder.Services.AddRefitClient<IShoppingCartService>()
         config.BaseAddress = new Uri(builder.Configuration["ApiSettings:GatewayAddress"]!);
     }).AddHttpMessageHandler<AuthenticatedHttpClientHandler>();
 
-    builder.Services.AddRefitClient<IOrderingService>()
-    .ConfigureHttpClient(config =>
-    {
-        config.BaseAddress = new Uri(builder.Configuration["ApiSettings:GatewayAddress"]!);
-    }).AddHttpMessageHandler<AuthenticatedHttpClientHandler>();
+builder.Services.AddRefitClient<IOrderingService>()
+.ConfigureHttpClient(config =>
+{
+    config.BaseAddress = new Uri(builder.Configuration["ApiSettings:GatewayAddress"]!);
+}).AddHttpMessageHandler<AuthenticatedHttpClientHandler>();
 
 builder.Services.AddRefitClient<IAuthService>()
     .ConfigureHttpClient(config =>
@@ -102,9 +102,10 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+
+    app.UseHttpsRedirection();
 }
 
-app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();

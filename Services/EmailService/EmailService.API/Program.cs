@@ -1,3 +1,4 @@
+using EmailService.API.Utility;
 using Microsoft.EntityFrameworkCore;
 using Services.EmailService.EmailService.API.Data;
 using Services.EmailService.EmailService.API.Extensions;
@@ -30,15 +31,31 @@ builder.Services.AddSingleton<IServiceBusConsumer, ServiceBusConsumer>();
 builder.Services.AddSingleton<IShoppingCartEmailService, ShoppingCartEmailService>();
 builder.Services.AddSingleton<IRegistrationNotify, RegistrationNotify>();
 
+builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+
 builder.Services.AddHostedService<RabbitMQAuthConsumer>();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
-app.UseHttpsRedirection();
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseAzureServiceBusConsumer();
 
+InitDatabase();
+
 app.Run();
+
+void InitDatabase()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+        dbInitializer.Initialize();
+    }
+}
 

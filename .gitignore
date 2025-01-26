@@ -12,6 +12,12 @@
 .env
 *.env
 .env.productapi.txt
+.env.shoppingcart.txt
+.env.authapi.txt
+.env.orderingapi.txt
+.env.emailapi.txt
+.env.couponapi.txt
+.env.webapp.txt
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
